@@ -1,0 +1,18 @@
+Package: testpkg
+Title: Package for Testing docreview
+Version: 1.0.0
+Authors@R: 
+    person(given = "Nic",
+           family = "Crane",
+           role = c("aut", "cre"),
+           email = "thisisnic@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Basic package for testing docreview functions against.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1.9001
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

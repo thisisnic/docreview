@@ -1,2 +1,2 @@
 # docreview
-An opinionated package for enhacing your R package documentation.
+An opinionated package for enhancing your R package documentation.

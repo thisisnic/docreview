@@ -1,0 +1,17 @@
+Package: docreview
+Title: Opiniated Documentation Checking
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Nic",
+           family = "Crane",
+           role = c("aut", "cre"),
+           email = "thisisnic@gmail.com")
+Description: An opinionated package for enhancing your R package documentation.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1.9001
+Imports: 
+    purrr,
+    tools
