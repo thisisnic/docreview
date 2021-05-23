@@ -3,7 +3,7 @@
 #' @param path Path to package
 #'
 #' @export
-get_exports_without_examples <- function(path){
+get_exports_without_examples <- function(path) {
 
   examples <- get_examples(path)
 
@@ -22,7 +22,7 @@ get_exports_without_examples <- function(path){
 #' Get examples from a package
 #'
 #' @param pkg_path Path to package
-get_examples <- function(pkg_path){
+get_examples <- function(pkg_path) {
   man_path <- file.path(pkg_path, "man")
   rd_files <- list.files(man_path, ".Rd")
   rd_paths <- file.path(man_path, rd_files)
@@ -34,7 +34,7 @@ get_examples <- function(pkg_path){
 #' Get example from RD file
 #'
 #' @param rd_path Path to RD file
-get_example <- function(rd_path){
+get_example <- function(rd_path) {
   rd <- tools::parse_Rd(rd_path)
   tools:::.Rd_get_example_code(rd)
 }
@@ -44,7 +44,7 @@ get_example <- function(rd_path){
 #'
 #' @param path Package root
 #' @return Exported functions, character vector
-get_exports <- function(path){
+get_exports <- function(path) {
   ns_path <- file.path(path, "NAMESPACE")
   ns <- readLines(ns_path)
   exports <- ns[grep("export", ns)]
