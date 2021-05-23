@@ -1,4 +1,4 @@
 library(testthat)
-library(documentatest)
+library(testpkg)
 
-test_check("documentatest")
+test_check("testpkg")
