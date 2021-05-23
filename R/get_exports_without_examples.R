@@ -31,12 +31,14 @@ get_examples <- function(pkg_path) {
   purrr::map(rd_paths, ~get_example(.x))
 }
 
+get_example_code_from_rd <- utils::getFromNamespace (".Rd_get_example_code", "tools")
+
 #' Get example from RD file
 #'
 #' @param rd_path Path to RD file
 get_example <- function(rd_path) {
   rd <- tools::parse_Rd(rd_path)
-  tools:::.Rd_get_example_code(rd)
+  get_example_code_from_rd(rd)
 }
 
 
