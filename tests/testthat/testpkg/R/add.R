@@ -8,7 +8,7 @@
 #'
 #' @export
 add <- function(x, y, na.rm = FALSE) {
-  if (!na.rm || !any(is.na(c(x, y)))) {
+  if (na.rm || !any(is.na(c(x, y)))) {
     return(x + y)
   }
   else {
