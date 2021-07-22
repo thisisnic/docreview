@@ -26,6 +26,8 @@ detect_problem_words <- function(md, problem_words){
 #' Get number of words in a markdown chunk
 #'
 #' @param md Markdown chunk
+#'
+#' @importFrom quanteda tokens
 get_length <- function(md){
   token_counts <- lapply(md, function(x) length(tokens(x[[1]])[[1]]))
   list(overall = sum(unlist(token_counts)), sections = token_counts)
@@ -34,6 +36,8 @@ get_length <- function(md){
 #' Get Flesch-Kincaid readability score
 #'
 #' @param code List of code chunks
+#'
+#' @importFrom quanteda.textstats textstat_readability
 get_fk_score <- function(code){
 
   chunk_scores <- lapply(code, function(x){
@@ -85,7 +89,7 @@ parse_vignette <- function(vig_path){
   vig <- parsermd::parse_rmd(vig_path)
 
   # Extract all markdown sections
-  md_sections <- parsermd::rmd_select(vig, has_type("rmd_markdown"))
+  md_sections <- parsermd::rmd_select(vig, parsermd::has_type("rmd_markdown"))
   lapply(md_sections, extract_md_section)
 
 }
