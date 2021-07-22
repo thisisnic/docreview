@@ -14,7 +14,7 @@ review_errors <- function(path){
 
 parse_error_results <- function(out){
   cli({
-    cli_h2("Error Messages")
+    # cli_h2("Error Messages")
   })
 
 }

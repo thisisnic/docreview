@@ -6,11 +6,9 @@
 #' @export
 docreview <- function(path = "."){
 
-  cli({
-    cli_h1("docreview Results")
-    review_functions(path)
-    review_errors(path)
-    review_vignettes(path)
-  })
+  cli_h1("docreview Results")
+  review_functions(path)
+  review_errors(path)
+  review_vignettes(path)
 
 }

@@ -50,7 +50,9 @@ parse_vignette_results <- function(vignette_results){
 
 warn_length <- function(name, score, thresholds = c(3000, 2000)){
 
-  if (score > thresholds[1]) {
+  if (is.na(score)) {
+    return(cli_alert_danger(paste(name, " - could not be calculated")))
+  } else if (score > thresholds[1]) {
     alert <- cli_alert_danger
   } else if (score > thresholds[2]) {
     alert <- cli_alert_warning
@@ -64,7 +66,9 @@ warn_length <- function(name, score, thresholds = c(3000, 2000)){
 
 warn_complexity <- function(name, score, thresholds = c(30, 50)){
 
-  if (score < thresholds[1]) {
+  if (is.na(score)) {
+    return(cli_alert_danger(paste(name, " - could not be calculated")))
+  } else if (score < thresholds[1]) {
     alert <- cli_alert_danger
   } else if (score < thresholds[2]) {
     alert <- cli_alert_warning
@@ -109,12 +113,23 @@ warn_problem_section <- function(name, content){
 #' @param vig_path Path to directory where vignette is
 analyse_vignette <- function(vig_path){
 
-  vig_sects <- parse_vignette(vig_path)
-  cleaned_md <- lapply(vig_sects, clean_chunks)
-  fk <- get_fk_score(cleaned_md)
-  lengths <- get_length(cleaned_md)
-  pws <- detect_problem_words(cleaned_md)
-  list(flesch_kincaid = fk$overall, length = lengths$overall, problem_words = pws)
+  tryCatch({
+    vig_sects <- parse_vignette(vig_path)
+    cleaned_md <- lapply(vig_sects, clean_chunks)
+    fk <- get_fk_score(cleaned_md)
+    lengths <- get_length(cleaned_md)
+    pws <- detect_problem_words(cleaned_md)
+    list(flesch_kincaid = fk$overall, length = lengths$overall, problem_words = pws)
+  }, error = function(e){
+    rlang::warn(
+      c(
+        paste("Could not parse vignette at path:", vig_path),
+        x = e$message
+      )
+    )
+    list(flesch_kincaid = NA, length = NA, problem_words = list())
+  })
+
 }
 
 detect_problem_words <- function(md){
