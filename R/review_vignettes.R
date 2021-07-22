@@ -1,35 +1,51 @@
+#' Review vignettes
+#'
+#' @param path Path to package
+#'
+#' @export
+review_vignettes <- function(path){
+
+  vig_paths <- find_vignettes(path)
+  out <- lapply(vig_paths, analyse_vignette)
+  names(out) <- basename(vig_paths)
+  parse_vignette_results(out)
+
+}
 
 #' Parse Vignette Results
 parse_vignette_results <- function(vignette_results){
 
+  cli({
 
-  cli_h3("Reading complexity")
+    cli_h2("Vignettes")
 
-  rc <- lapply(vignette_results, function(x){
-    x$flesch_kincaid
-  })
+    cli_h3("Reading complexity")
 
-  iwalk(rc, ~warn_complexity(.y, round(.x,1)))
+    rc <- lapply(vignette_results, function(x){
+      x$flesch_kincaid
+    })
 
-  lengths <- lapply(vignette_results, function(x){
-    x$length
-  })
+    iwalk(rc, ~warn_complexity(.y, round(.x,1)))
 
-  cli_h3("Length")
-  iwalk(lengths, ~warn_length(.y, .x))
+    lengths <- lapply(vignette_results, function(x){
+      x$length
+    })
 
-    # This needs entirely refactoring and adding back in as a feature
+    cli_h3("Length")
+    iwalk(lengths, ~warn_length(.y, .x))
 
-
-  # pws <- lapply(vignette_results, function(x){
-  #   x$problem_words
-  # })
-  # pws_sections <- pws[lengths(pws) > 0]
-
-  # cli_h3("Problematic words")
-  # iwalk(pws_sections, ~warn_problem_section(.y, .x))
+      # This needs entirely refactoring and adding back in as a feature
 
 
+    # pws <- lapply(vignette_results, function(x){
+    #   x$problem_words
+    # })
+    # pws_sections <- pws[lengths(pws) > 0]
+
+    # cli_h3("Problematic words")
+    # iwalk(pws_sections, ~warn_problem_section(.y, .x))
+
+    })
 }
 
 warn_length <- function(name, score, thresholds = c(3000, 2000)){
@@ -84,19 +100,7 @@ warn_problem_section <- function(name, content){
   })
 }
 
-#' Review vignettes
-#'
-#' @param path Path to package
-#'
-#' @export
-review_vignettes <- function(path){
 
-  vig_paths <- find_vignettes(path)
-  out <- lapply(vig_paths, analyse_vignette)
-  names(out) <- basename(vig_paths)
-  parse_vignette_results(out)
-
-}
 
 
 

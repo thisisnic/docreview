@@ -8,8 +8,29 @@ review_functions <- function(path){
   # - do all exported functions have examples
  # - are all parameters covered by examples
  # - readability of "details" sections
-
+  out <- list()
+  out$exports_without_examples <- get_exports_without_examples(path)
+  parse_function_results(out)
 }
+
+
+parse_function_results <- function(function_results){
+
+  no_examples <- function_results$exports_without_examples
+
+  cli({
+        cli_h2("Function Documentation")
+        if (length(no_examples) > 0) {
+          cli_alert_warning("The following exported functions do not contain examples in their documentation:")
+          names(no_examples) <- rep("*", length(no_examples))
+          cli_bullets(no_examples)
+        } else {
+          cli_alert_success("All exported functions contain examples in their documentation")
+        }
+  })
+}
+
+
 
 #' Get exports which don't have any examples
 #'
