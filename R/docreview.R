@@ -1,10 +1,6 @@
-#' @description
-#' docreview: reviewing package documentation
 #' @keywords internal
-#' @import cli
-#' @import purrr
-#'
-"_PACKAGE"
+#' @import cli purrr
+NULL
 
 #' Review package documentation
 #'
@@ -60,3 +56,6 @@ review_vignettes <- function(path){
   parse_vignette_results(out)
 
 }
+
+
+
