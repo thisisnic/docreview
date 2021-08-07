@@ -39,13 +39,15 @@ get_function_args <- function(rd_path){
   rd_get_argument_name(rd)
 }
 
+rd_tags <- utils::getFromNamespace("RdTags", "tools")
+
 #' Get all alias tags from RD file
 #'
 #' @param rd_path Path to RD file
 #' @keywords internal
 get_aliases <- function(rd_path){
   rd <- tools::parse_Rd(rd_path)
-  alias_tags <- rd[tools:::RdTags(rd) == "\\alias"]
+  alias_tags <- rd[rd_tags(rd) == "\\alias"]
   vapply(alias_tags, function(x){
     x[[1]][1]
   }, character(1))
