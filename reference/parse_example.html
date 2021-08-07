@@ -131,18 +131,19 @@ Apparently bracket matching can't be done using regex so this manual approach is
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># First param is func call</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># First param is func call</span>
 <span class='fu'>parse_example</span><span class='op'>(</span><span class='st'>"match_arrow(Scalar$create(\"Mazda RX4 Wag\"), cars_tbl$name)"</span>, <span class='st'>"match_arrow"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in parse_example("match_arrow(Scalar$create(\"Mazda RX4 Wag\"), cars_tbl$name)",     "match_arrow"): could not find function "parse_example"</span></div><div class='input'>
+
 <span class='co'># Can handle inline comments</span>
 <span class='fu'>parse_example</span><span class='op'>(</span><span class='st'>"match_arrow(Scalar$create(4), cars_tbl$cyl) # 0-indexed"</span>, <span class='st'>"match_arrow"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in parse_example("match_arrow(Scalar$create(4), cars_tbl$cyl) # 0-indexed",     "match_arrow"): could not find function "parse_example"</span></div><div class='input'>
+
 <span class='co'># First param is func call containing vector</span>
 <span class='fu'>parse_example</span><span class='op'>(</span><span class='st'>"match_arrow(Array$create(c(4, 6, 8)), cars_tbl$cyl)"</span>, <span class='st'>"match_arrow"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in parse_example("match_arrow(Array$create(c(4, 6, 8)), cars_tbl$cyl)",     "match_arrow"): could not find function "parse_example"</span></div><div class='input'>
+
 <span class='co'># Second param is func call containing vector</span>
 <span class='fu'>parse_example</span><span class='op'>(</span><span class='st'>"match_arrow(cars_tbl$cyl, Array$create(c(4, 6, 8)))"</span>, <span class='st'>"match_arrow"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in parse_example("match_arrow(cars_tbl$cyl, Array$create(c(4, 6, 8)))",     "match_arrow"): could not find function "parse_example"</span></div><div class='input'>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
