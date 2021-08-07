@@ -6,7 +6,7 @@
 get_exports_without_examples <- function(path = ".") {
   examples <- find_examples(path)
 
-  has_examples <- purrr::map_lgl(examples, ~ length(.x) > 0)
+  has_examples <- map_lgl(examples, ~ length(.x) > 0)
 
   no_examples <- names(has_examples[has_examples == FALSE])
 
@@ -46,7 +46,7 @@ find_exported_functions <- function(path = ".") {
 #' @export
 find_examples <- function(path = ".") {
   rd_paths <- find_rd_files(path)
-  purrr::map(rd_paths, ~ get_example(.x))
+  map(rd_paths, ~ get_example(.x))
 }
 
 #' Get RD files from a package
