@@ -7,11 +7,15 @@
 package_review(
   path = ".",
   error_on_failure = FALSE,
-  review = c("functions", "vignettes")
+  doc_types = c("functions", "vignettes")
 )
 }
 \arguments{
 \item{path}{Path to package}
+
+\item{error_on_failure}{Raise an error on any negative reviews}
+
+\item{doc_types}{Types of documentation to review}
 }
 \description{
 Review package documentation

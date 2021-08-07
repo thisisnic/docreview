@@ -8,6 +8,8 @@ vignette_results_parse(vignette_results, error_on_failure)
 }
 \arguments{
 \item{vignette_results}{Output of calling vignette analysis function}
+
+\item{error_on_failure}{Raise an error on any negative reviews}
 }
 \description{
 Parse Vignette Results

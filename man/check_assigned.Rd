@@ -15,10 +15,12 @@ check_assigned(code, func_args)
 Check if code contains assignment
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # returns TRUE
 check_assigned("x <- Array$create(c(2, 4, 6))")
 
 # returns FALSE
 check_assigned("Array$create(c(1,2), type = int8())")
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

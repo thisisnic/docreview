@@ -52,6 +52,7 @@ no_examples_error <- function(no_examples){
 #' Parse Vignette Results
 #'
 #' @param vignette_results Output of calling vignette analysis function
+#' @param error_on_failure Raise an error on any negative reviews
 vignette_results_parse <- function(vignette_results, error_on_failure) {
   cli({
     cli_h2("Vignettes")

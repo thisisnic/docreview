@@ -5,17 +5,19 @@ NULL
 #' Review package documentation
 #'
 #' @param path Path to package
+#' @param error_on_failure Raise an error on any negative reviews
+#' @param doc_types Types of documentation to review
 #' @export
-package_review <- function(path = ".", error_on_failure = FALSE, review = c("functions", "vignettes")){
+package_review <- function(path = ".", error_on_failure = FALSE, doc_types = c("functions", "vignettes")){
 
   cli_h1("docreview Results")
 
-  if ("functions" %in% review) {
+  if ("functions" %in% doc_types) {
     func_results <- function_review(path)
     function_results_parse(func_results, error_on_failure)
   }
 
-  if ("vignettes" %in% review) {
+  if ("vignettes" %in% doc_types) {
     vig_results <- vignette_review(path)
     vignette_results_parse(vig_results, error_on_failure)
   }
