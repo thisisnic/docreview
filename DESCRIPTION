@@ -8,6 +8,8 @@ Authors@R:
            email = "thisisnic@gmail.com")
 Description: An opinionated package for enhancing R package documentation.
 License: MIT + file LICENSE
+BugReports: https://github.com/thisisnic/docreview/issues
+URL: http://thisisnic.github.io/docreview
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
