@@ -20,6 +20,8 @@ Imports:
     parsermd,
     quanteda,
     quanteda.textstats,
-    cli
+    cli,
+    stringr,
+    rlang
 Suggests:
     testthat
