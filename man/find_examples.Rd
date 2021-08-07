@@ -7,7 +7,7 @@
 find_examples(path = ".")
 }
 \arguments{
-\item{pkg_path}{Path to package}
+\item{path}{Path to package}
 }
 \description{
 Get examples from a package

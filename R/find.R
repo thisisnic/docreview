@@ -44,7 +44,7 @@ find_exported_functions <- function(path = ".") {
 
 #' Get examples from a package
 #'
-#' @param pkg_path Path to package
+#' @param path Path to package
 #' @export
 find_examples <- function(path = ".") {
   rd_paths <- find_rd_files(path)
