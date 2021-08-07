@@ -19,6 +19,7 @@ Imports:
     utils,
     parsermd,
     quanteda,
-    quanteda.textstats
+    quanteda.textstats,
+    cli
 Suggests:
     testthat
