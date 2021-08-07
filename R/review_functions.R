@@ -81,6 +81,11 @@ name_args <- function(args_used, func_args) {
   }
 }
 
+#' Check if code contains assignment
+#'
+#' @param code Code to check
+#' @param func_args Function argument to look for
+#'
 #' @examples
 #' # returns TRUE
 #' check_assigned("x <- Array$create(c(2, 4, 6))")
