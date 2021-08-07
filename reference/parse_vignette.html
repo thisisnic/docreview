@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get exports which don't have any examples — get_exports_without_examples • docreview</title>
+<title>Parse a vignette — parse_vignette • docreview</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get exports which don't have any examples — get_exports_without_examples" />
-<meta property="og:description" content="Get exports which don't have any examples" />
+<meta property="og:title" content="Parse a vignette — parse_vignette" />
+<meta property="og:description" content="Parse a vignette" />
 
 
 
@@ -103,26 +103,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get exports which don't have any examples</h1>
+    <h1>Parse a vignette</h1>
     
-    <div class="hidden name"><code>get_exports_without_examples.Rd</code></div>
+    <div class="hidden name"><code>parse_vignette.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get exports which don't have any examples</p>
+    <p>Parse a vignette</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_exports_without_examples</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"."</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>parse_vignette</span><span class='op'>(</span><span class='va'>vig_path</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>Path to package</p></td>
+      <th>vig_path</th>
+      <td><p>Path to vignette</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>List of length 1 character vectors containing contents of each markdown section</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
