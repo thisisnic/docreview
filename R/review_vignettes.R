@@ -4,7 +4,6 @@
 #'
 #' @param vig_path Path to directory where vignette is
 #'
-#' @export
 analyse_vignette <- function(vig_path) {
   tryCatch(
     {
