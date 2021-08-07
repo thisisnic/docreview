@@ -6,11 +6,18 @@ NULL
 #'
 #' @param path Path to package
 #' @export
-package_review <- function(path = ".", error_on_fail = FALSE){
+package_review <- function(path = ".", error_on_failure = FALSE, review = c("functions", "vignettes")){
+
   cli_h1("docreview Results")
-  function_review(path)
-  error_review(path)
-  vignette_review(path)
+
+  if ("functions" %in% review) {
+    function_review(path)
+  }
+
+  if ("vignettes" %in% review) {
+    vignette_review(path)
+  }
+
 }
 
 #' Review functions

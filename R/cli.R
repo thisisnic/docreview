@@ -1,9 +1,3 @@
-parse_error_results <- function(out) {
-  cli({
-    # cli_h2("Error Messages")
-  })
-}
-
 parse_function_results <- function(function_results) {
   no_examples <- function_results$exports_without_examples
 
