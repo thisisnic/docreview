@@ -7,7 +7,7 @@
 find_rd_files(path = ".")
 }
 \arguments{
-\item{pkg_path}{Path to package}
+\item{path}{Path to package}
 }
 \description{
 Get RD files from a package

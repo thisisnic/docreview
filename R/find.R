@@ -53,7 +53,7 @@ find_examples <- function(path = ".") {
 
 #' Get RD files from a package
 #'
-#' @param pkg_path Path to package
+#' @param path Path to package
 #' @export
 find_rd_files <- function(path = "."){
   man_path <- file.path(path, "man")

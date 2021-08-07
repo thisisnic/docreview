@@ -6,6 +6,9 @@
 \usage{
 parse_vignette_results(vignette_results)
 }
+\arguments{
+\item{vignette_results}{Output of calling vignette analysis function}
+}
 \description{
 Parse Vignette Results
 }

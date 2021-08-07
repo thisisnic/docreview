@@ -23,6 +23,8 @@ parse_function_results <- function(function_results){
 
 
 #' Parse Vignette Results
+#'
+#' @param vignette_results Output of calling vignette analysis function
 parse_vignette_results <- function(vignette_results){
 
   cli({
