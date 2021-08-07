@@ -11,11 +11,13 @@ package_review <- function(path = ".", error_on_failure = FALSE, review = c("fun
   cli_h1("docreview Results")
 
   if ("functions" %in% review) {
-    function_review(path)
+    func_results <- function_review(path)
+    parse_function_results(func_results)
   }
 
   if ("vignettes" %in% review) {
-    vignette_review(path)
+    vig_results <- vignette_review(path)
+    parse_vignette_results(vig_results)
   }
 
 }
@@ -27,25 +29,8 @@ package_review <- function(path = ".", error_on_failure = FALSE, review = c("fun
 #' @export
 function_review <- function(path) {
 
-  # - do all exported functions have examples
-  # - are all parameters covered by examples
-  # - readability of "details" sections
-  out <- list()
-  out$exports_without_examples <- get_exports_without_examples(path)
-  parse_function_results(out)
-}
+  list("exports_without_examples" = get_exports_without_examples(path))
 
-#' Review error messages
-#'
-#' @param path Path to package
-#'
-#' @export
-error_review <- function(path) {
-
-  # - encourage use of "must", "should", etc
-  # - readability
-  out <- NULL
-  parse_error_results(out)
 }
 
 #' Review vignettes
@@ -57,5 +42,5 @@ vignette_review <- function(path) {
   vig_paths <- find_vignettes(path)
   out <- lapply(vig_paths, analyse_vignette)
   names(out) <- basename(vig_paths)
-  parse_vignette_results(out)
+  out
 }
