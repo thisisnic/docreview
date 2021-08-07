@@ -1,10 +1,10 @@
+#' @description
 #' docreview: reviewing package documentation
-#'
-"_PACKAGE"
-
+#' @keywords internal
 #' @import cli
 #' @import purrr
-NULL
+#'
+"_PACKAGE"
 
 #' Review package documentation
 #'

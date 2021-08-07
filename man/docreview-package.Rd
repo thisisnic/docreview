@@ -4,11 +4,12 @@
 \name{docreview-package}
 \alias{docreview}
 \alias{docreview-package}
-\title{docreview: reviewing package documentation}
+\title{docreview: Opiniated Documentation Checking}
 \description{
-An opinionated package for enhancing your R package documentation.
+docreview: reviewing package documentation
 }
 \author{
 \strong{Maintainer}: Nic Crane \email{thisisnic@gmail.com}
 
 }
+\keyword{internal}
