@@ -15,7 +15,6 @@ RoxygenNote: 7.1.1.9001
 Imports: 
     assertthat,
     purrr,
-    tools,
     utils,
     parsermd,
     quanteda,

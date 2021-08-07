@@ -1,5 +1,5 @@
 #' @keywords internal
-#' @import cli purrr
+#' @import cli purrr rlang stringr
 NULL
 
 #' Review package documentation
