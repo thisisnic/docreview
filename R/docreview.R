@@ -8,9 +8,9 @@ NULL
 #' @export
 docreview <- function(path = ".") {
   cli_h1("docreview Results")
-  review_functions(path)
-  review_errors(path)
-  review_vignettes(path)
+  function_review(path)
+  error_review(path)
+  vignette_review(path)
 }
 
 #' Review functions
@@ -18,7 +18,7 @@ docreview <- function(path = ".") {
 #' @param path Path to package
 #'
 #' @export
-review_functions <- function(path) {
+function_review <- function(path) {
 
   # - do all exported functions have examples
   # - are all parameters covered by examples
@@ -33,7 +33,7 @@ review_functions <- function(path) {
 #' @param path Path to package
 #'
 #' @export
-review_errors <- function(path) {
+error_review <- function(path) {
 
   # - encourage use of "must", "should", etc
   # - readability
@@ -46,7 +46,7 @@ review_errors <- function(path) {
 #' @param path Path to package
 #'
 #' @export
-review_vignettes <- function(path) {
+vignette_review <- function(path) {
   vig_paths <- find_vignettes(path)
   out <- lapply(vig_paths, analyse_vignette)
   names(out) <- basename(vig_paths)
