@@ -1,5 +1,5 @@
 #' @keywords internal
-#' @import cli purrr
+#' @import cli purrr quanteda quanteda.textstats
 NULL
 
 #' Review package documentation

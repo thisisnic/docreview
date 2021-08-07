@@ -43,7 +43,6 @@ detect_problem_words <- function(md) {
 #'
 #' @param md Markdown chunk
 #'
-#' @importFrom quanteda tokens
 get_length <- function(md) {
   token_counts <- lapply(md, function(x) length(tokens(x[[1]])[[1]]))
   list(overall = sum(unlist(token_counts)), sections = token_counts)
@@ -53,7 +52,6 @@ get_length <- function(md) {
 #'
 #' @param code List of code chunks
 #'
-#' @importFrom quanteda.textstats textstat_readability
 get_fk_score <- function(code) {
   chunk_scores <- lapply(code, function(x) {
     textstat_readability(x)$Flesch
