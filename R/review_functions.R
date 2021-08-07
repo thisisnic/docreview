@@ -1,4 +1,5 @@
 #' Get the RD file containing documentation for a function
+#'
 #' @param path Path to package
 #' @keywords internal
 get_rd_filename_for_function <- function(path = ".", function_name){
@@ -19,7 +20,7 @@ get_rd_filename_for_function <- function(path = ".", function_name){
 #' @param expr_text Function call expression text
 #' @param func_name Function name
 #'
-#' @examples
+#' @examplesIf FALSE
 #' # First param is func call
 #' parse_example("match_arrow(Scalar$create(\"Mazda RX4 Wag\"), cars_tbl$name)", "match_arrow")
 #'
@@ -65,10 +66,6 @@ parse_example <- function(expr_text, func_name) {
   }
   return(stringr::str_trim(params))
 }
-#
-# rd_path <- "../arrow/r/man/match_arrow.Rd"
-# func_args <- get_function_args(rd_path)
-# args_used <- parse_example("match_arrow(cars_tbl$cyl, Array$create(c(4, 6, 8)))", "match_arrow")
 
 name_args <- function(args_used, func_args){
 
@@ -84,6 +81,8 @@ name_args <- function(args_used, func_args){
     }
   }
 }
+
+#' @examples
 #' # returns TRUE
 #' check_assigned("x <- Array$create(c(2, 4, 6))")
 #'

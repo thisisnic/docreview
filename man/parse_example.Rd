@@ -16,6 +16,7 @@ Take a function call and split it up so we have each parameter expression separa
 Apparently bracket matching can't be done using regex so this manual approach is needed
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # First param is func call
 parse_example("match_arrow(Scalar$create(\"Mazda RX4 Wag\"), cars_tbl$name)", "match_arrow")
 
@@ -27,4 +28,5 @@ parse_example("match_arrow(Array$create(c(4, 6, 8)), cars_tbl$cyl)", "match_arro
 
 # Second param is func call containing vector
 parse_example("match_arrow(cars_tbl$cyl, Array$create(c(4, 6, 8)))", "match_arrow")
+\dontshow{\}) # examplesIf}
 }
