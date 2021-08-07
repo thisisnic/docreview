@@ -27,6 +27,4 @@ parse_example("match_arrow(Array$create(c(4, 6, 8)), cars_tbl$cyl)", "match_arro
 
 # Second param is func call containing vector
 parse_example("match_arrow(cars_tbl$cyl, Array$create(c(4, 6, 8)))", "match_arrow")
-
 }
-\keyword{internal}
