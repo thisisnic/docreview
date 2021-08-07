@@ -22,7 +22,7 @@ rd_get_argument_name <- utils::getFromNamespace(".Rd_get_argument_names", "tools
 #'
 #' @param rd_path Path to RD file
 #' @keywords internal
-get_function_names <- function(rd_path){
+get_function_names <- function(rd_path) {
   rd <- tools::parse_Rd(rd_path)
 
 
@@ -34,7 +34,7 @@ get_function_names <- function(rd_path){
 #' @param rd_path Path to RD file
 #'
 #' @keywords internal
-get_function_args <- function(rd_path){
+get_function_args <- function(rd_path) {
   rd <- tools::parse_Rd(rd_path)
   rd_get_argument_name(rd)
 }
@@ -45,10 +45,10 @@ rd_tags <- utils::getFromNamespace("RdTags", "tools")
 #'
 #' @param rd_path Path to RD file
 #' @keywords internal
-get_aliases <- function(rd_path){
+get_aliases <- function(rd_path) {
   rd <- tools::parse_Rd(rd_path)
   alias_tags <- rd[rd_tags(rd) == "\\alias"]
-  vapply(alias_tags, function(x){
+  vapply(alias_tags, function(x) {
     x[[1]][1]
   }, character(1))
 }

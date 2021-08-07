@@ -4,10 +4,9 @@
 #'
 #' @export
 get_exports_without_examples <- function(path = ".") {
-
   examples <- find_examples(path)
 
-  has_examples <- purrr::map_lgl(examples, ~length(.x) > 0)
+  has_examples <- purrr::map_lgl(examples, ~ length(.x) > 0)
 
   no_examples <- names(has_examples[has_examples == FALSE])
 
@@ -16,7 +15,6 @@ get_exports_without_examples <- function(path = ".") {
   exports <- find_exported_functions(path)
 
   raw_names[raw_names %in% exports]
-
 }
 
 #' Find vignettes
@@ -25,7 +23,7 @@ get_exports_without_examples <- function(path = ".") {
 #'
 #' @param path Path to package
 #' @export
-find_vignettes <- function(path = "."){
+find_vignettes <- function(path = ".") {
   vig_path <- file.path(path, "vignettes")
   list.files(vig_path, ".Rmd", full.names = TRUE)
 }
@@ -48,14 +46,14 @@ find_exported_functions <- function(path = ".") {
 #' @export
 find_examples <- function(path = ".") {
   rd_paths <- find_rd_files(path)
-  purrr::map(rd_paths, ~get_example(.x))
+  purrr::map(rd_paths, ~ get_example(.x))
 }
 
 #' Get RD files from a package
 #'
 #' @param path Path to package
 #' @export
-find_rd_files <- function(path = "."){
+find_rd_files <- function(path = ".") {
   man_path <- file.path(path, "man")
   rd_files <- list.files(man_path, ".Rd")
   rd_paths <- file.path(man_path, rd_files)

@@ -2,9 +2,9 @@
 #'
 #' @param path Path to package
 #' @keywords internal
-get_rd_filename_for_function <- function(path = ".", function_name){
+get_rd_filename_for_function <- function(path = ".", function_name) {
   rd_files <- find_rd_files(path)
-  matches <- lapply(rd_files, function(x){
+  matches <- lapply(rd_files, function(x) {
     fns <- get_function_names(x)
     aliases <- get_aliases(x)
     function_name %in% fns || function_name %in% aliases
@@ -45,19 +45,19 @@ parse_example <- function(expr_text, func_name) {
   text <- stringr::str_remove(text, "\\)$")
 
   # Extract parameters
-  params = list()
-  pos = 1
-  curr_start = 1
-  bracket_count = 0
+  params <- list()
+  pos <- 1
+  curr_start <- 1
+  bracket_count <- 0
   while (pos < nchar(text)) {
     curr_char <- stringr::str_sub(text, start = pos, end = pos)
     if (curr_char == "," && bracket_count == 0) {
       params <- append(params, stringr::str_sub(text, start = curr_start, end = pos - 1))
       curr_start <- pos + 1
     } else if (curr_char == "(") {
-      bracket_count = bracket_count + 1
+      bracket_count <- bracket_count + 1
     } else if (curr_char == ")") {
-      bracket_count = bracket_count - 1
+      bracket_count <- bracket_count - 1
     }
     pos <- pos + 1
   }
@@ -67,8 +67,7 @@ parse_example <- function(expr_text, func_name) {
   return(stringr::str_trim(params))
 }
 
-name_args <- function(args_used, func_args){
-
+name_args <- function(args_used, func_args) {
   remaining_args <- func_args
   arg_names <- vector("character")
 
@@ -88,9 +87,8 @@ name_args <- function(args_used, func_args){
 #'
 #' # returns FALSE
 #' check_assigned("Array$create(c(1,2), type = int8())")
-#'
 #' @keywords internal
-check_assigned <- function(code, func_args){
+check_assigned <- function(code, func_args) {
 
   # check if it's a named argument that's been assigned
   named_args_detected <- detect_named_args(code, func_args)
@@ -98,11 +96,10 @@ check_assigned <- function(code, func_args){
   if (!named_args_detected) {
     detect_unnamed_args(code)
   }
-
 }
 
 
-detect_named_args <- function(code, func_args){
+detect_named_args <- function(code, func_args) {
   assignment_regex <- "(=|<-)"
 
   stringr::str_detect(
@@ -119,6 +116,6 @@ detect_named_args <- function(code, func_args){
   )
 }
 
-detect_unnamed_args <- function(code){
+detect_unnamed_args <- function(code) {
   stringr::str_detect(code, "[[:alnum:][:blank:]\\.\\_]*(=|<-)")
 }

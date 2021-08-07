@@ -10,7 +10,6 @@ score_length <- function(name, score, thresholds = c(3000, 2000)) {
   }
 
   alert(paste(name, "has length:", score, "words."))
-
 }
 
 score_complexity <- function(name, score, thresholds = c(30, 50)) {
@@ -25,7 +24,6 @@ score_complexity <- function(name, score, thresholds = c(30, 50)) {
   }
 
   alert(paste(name, "has Flesch-Kincaid reading ability score:", score))
-
 }
 
 score_problem_section <- function(name, content) {
