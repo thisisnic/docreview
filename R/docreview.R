@@ -6,7 +6,7 @@ NULL
 #'
 #' @param path Path to package
 #' @export
-package_review <- function(path = "."){
+package_review <- function(path = ".", error_on_fail = FALSE){
   cli_h1("docreview Results")
   function_review(path)
   error_review(path)
