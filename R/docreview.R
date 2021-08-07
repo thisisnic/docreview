@@ -12,12 +12,12 @@ package_review <- function(path = ".", error_on_failure = FALSE, review = c("fun
 
   if ("functions" %in% review) {
     func_results <- function_review(path)
-    parse_function_results(func_results)
+    function_results_parse(func_results, error_on_failure)
   }
 
   if ("vignettes" %in% review) {
     vig_results <- vignette_review(path)
-    parse_vignette_results(vig_results)
+    vignette_results_parse(vig_results, error_on_failure)
   }
 
 }
