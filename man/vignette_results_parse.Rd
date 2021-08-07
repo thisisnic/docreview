@@ -14,3 +14,4 @@ vignette_results_parse(vignette_results, error_on_failure)
 \description{
 Parse Vignette Results
 }
+\keyword{internal}

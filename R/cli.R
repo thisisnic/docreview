@@ -26,7 +26,6 @@ function_results_parse <- function(results, error_on_failure) {
   })
 }
 
-#' @keywords internal
 no_examples_output <- function(no_examples) {
 
   names(no_examples) <- rep("*", length(no_examples))
@@ -53,7 +52,10 @@ no_examples_error <- function(no_examples){
 #'
 #' @param vignette_results Output of calling vignette analysis function
 #' @param error_on_failure Raise an error on any negative reviews
+#'
+#' @keywords internal
 vignette_results_parse <- function(vignette_results, error_on_failure) {
+
   cli({
     cli_h2("Vignettes")
 
@@ -63,24 +65,14 @@ vignette_results_parse <- function(vignette_results, error_on_failure) {
       x$flesch_kincaid
     })
 
-    iwalk(rc, ~ score_complexity(.y, round(.x, 1)))
+    iwalk(rc, ~ score_complexity(.y, round(.x, 1), error_on_failure = error_on_failure))
 
     lengths <- lapply(vignette_results, function(x) {
       x$length
     })
 
     cli_h3("Length")
-    iwalk(lengths, ~ score_length(.y, .x))
+    iwalk(lengths, ~ score_length(.y, .x, error_on_failure = error_on_failure))
 
-    # This needs entirely refactoring and adding back in as a feature
-
-
-    # pws <- lapply(vignette_results, function(x){
-    #   x$problem_words
-    # })
-    # pws_sections <- pws[lengths(pws) > 0]
-
-    # cli_h3("Problematic words")
-    # iwalk(pws_sections, ~score_problem_section(.y, .x))
   })
 }
