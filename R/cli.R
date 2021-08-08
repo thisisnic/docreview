@@ -1,10 +1,10 @@
 #' Parse function documentation analysis results
 #'
 #' @param results Results of function documentation analysis
-#' @param error_on_failure Raise an error on any negative reviews
 #' @keywords internal
-function_results_parse <- function(results, error_on_failure) {
-  no_examples <- results$exports_without_examples
+function_results_display <- function(results) {
+
+  no_examples <- results$details$need_examples
 
   cli({
     cli_h2("Function Documentation")
@@ -13,34 +13,13 @@ function_results_parse <- function(results, error_on_failure) {
         "All exported functions contain examples in their documentation"
       )
     } else {
-      if (error_on_failure) {
-        no_examples_error(no_examples)
-      } else {
-        no_examples_output(no_examples)
-      }
+      names(no_examples) <- rep("*", length(no_examples))
+      cli_alert_danger(
+        "Exported functions without examples in their documentation:"
+      )
+      cli_bullets(no_examples)
     }
   })
-}
-
-no_examples_output <- function(no_examples) {
-  names(no_examples) <- rep("*", length(no_examples))
-
-  cli_alert_warning(
-    "Exported functions without examples in their documentation:"
-  )
-  cli_bullets(no_examples)
-}
-
-no_examples_error <- function(no_examples) {
-  rlang::abort(
-    message = c(
-      x = "All exported functions must contain examples in their documentation.",
-      i = paste(
-        "Exported functions without examples in their documentation:",
-        paste(no_examples, collapse = ", ")
-      )
-    )
-  )
 }
 
 #' Parse Vignette Results
@@ -49,7 +28,7 @@ no_examples_error <- function(no_examples) {
 #' @param error_on_failure Raise an error on any negative reviews
 #'
 #' @keywords internal
-vignette_results_parse <- function(vignette_results, error_on_failure) {
+vignette_results_parse <- function(vignette_results) {
   cli({
     cli_h2("Vignettes")
 
