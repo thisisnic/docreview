@@ -66,6 +66,7 @@ jobs:
 
       - name: Run docreview
         run: |
+          install.packages("devtools")
           devtools::load_all()
           docreview::package_review(error_on_warning = TRUE)
         shell: Rscript {0}
