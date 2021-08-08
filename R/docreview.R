@@ -105,7 +105,7 @@ function_get_comments <- function(results, thresholds) {
 #' @param path Path to package
 #'
 #' @export
-vignette_review <- function(path, thresholds) {
+vignette_review <- function(path, thresholds = default_thresholds()) {
 
   vignette_thresholds <- thresholds$vignettes
 
