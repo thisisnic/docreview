@@ -17,6 +17,5 @@ add(x, y, na.rm = FALSE)
 Add two numbers together
 }
 \examples{
-add(1,2)
-
+add(1, 2)
 }

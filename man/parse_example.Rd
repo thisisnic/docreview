@@ -12,8 +12,9 @@ parse_example(expr_text, func_name)
 \item{func_name}{Function name}
 }
 \description{
-Take a function call and split it up so we have each parameter expression separate
-Apparently bracket matching can't be done using regex so this manual approach is needed
+Take a function call & split it up so each parameter expression is separate
+Apparently bracket matching can't be done using regex so this manual
+approach is needed
 }
 \examples{
 \dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -30,3 +31,4 @@ parse_example("match_arrow(Array$create(c(4, 6, 8)), cars_tbl$cyl)", "match_arro
 parse_example("match_arrow(cars_tbl$cyl, Array$create(c(4, 6, 8)))", "match_arrow")
 \dontshow{\}) # examplesIf}
 }
+\keyword{internal}

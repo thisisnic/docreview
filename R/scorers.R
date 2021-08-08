@@ -1,4 +1,12 @@
-score_length <- function(name, score, thresholds = c(3000, 2000)) {
+score_length <- function(name, score, thresholds, error_on_failure) {
+  length_output(name, score, thresholds)
+
+  if (error_on_failure) {
+    length_error(name, score, thresholds)
+  }
+}
+
+length_output <- function(name, score, thresholds) {
   if (is.na(score)) {
     return(cli_alert_danger(paste(name, " - could not be calculated")))
   } else if (score > thresholds[1]) {
@@ -8,11 +16,26 @@ score_length <- function(name, score, thresholds = c(3000, 2000)) {
   } else {
     alert <- cli_alert_success
   }
-
   alert(paste(name, "has length:", score, "words."))
 }
 
-score_complexity <- function(name, score, thresholds = c(30, 50)) {
+length_error <- function(name, score, thresholds) {
+  if (is.na(score)) {
+    rlang::abort(paste(name, " - could not be calculated"))
+  } else if (score > thresholds[1]) {
+    rlang::abort(paste(name, "has length:", score, "words."))
+  }
+}
+
+score_complexity <- function(name, score, thresholds = c(30, 50), error_on_failure) {
+  complexity_output(name, score, thresholds)
+
+  if (error_on_failure) {
+    complexity_error(name, score, thresholds)
+  }
+}
+
+complexity_output <- function(name, score, thresholds) {
   if (is.na(score)) {
     return(cli_alert_danger(paste(name, " - could not be calculated")))
   } else if (score < thresholds[1]) {
@@ -26,21 +49,10 @@ score_complexity <- function(name, score, thresholds = c(30, 50)) {
   alert(paste(name, "has Flesch-Kincaid reading ability score:", score))
 }
 
-score_problem_section <- function(name, content) {
-  cli({
-    cli_alert_warning(
-      paste(
-        'Possible problem word ("simply", "naturally", "mere", "obvious", or "trivial") in vignette:',
-        name
-      )
-    )
-    lapply(content, function(problematic_section) {
-      cli_alert(paste(
-        "Detected in the following section:",
-        "\n",
-        problematic_section,
-        "\n"
-      ))
-    })
-  })
+complexity_error <- function(name, score, thresholds) {
+  if (is.na(score)) {
+    rlang::abort(paste(name, " - could not be calculated"))
+  } else if (score < thresholds[1]) {
+    rlang::abort(paste(name, "has Flesch-Kincaid reading ability score:", score))
+  }
 }

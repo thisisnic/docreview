@@ -7,7 +7,7 @@
 #' add(1, 2)
 #' @export
 add <- function(x, y, na.rm = FALSE) {
-  if (na.rm || !any(is.na(c(x, y)))) {
+  if (na.rm || !any_nas(x,y)) {
     return(x + y)
   } else {
     return(NA)

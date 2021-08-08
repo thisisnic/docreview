@@ -12,3 +12,4 @@ extract_md_section(md)
 \description{
 Extract the content from the markdown section and collapse it into one string
 }
+\keyword{internal}

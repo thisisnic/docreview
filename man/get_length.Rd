@@ -12,3 +12,4 @@ get_length(md)
 \description{
 Get number of words in a markdown chunk
 }
+\keyword{internal}

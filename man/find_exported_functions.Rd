@@ -15,3 +15,4 @@ Exported functions, character vector
 \description{
 Get exports
 }
+\keyword{internal}

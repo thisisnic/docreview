@@ -12,3 +12,4 @@ find_vignettes(path = ".")
 \description{
 Find all vignettes in a package
 }
+\keyword{internal}

@@ -12,3 +12,4 @@ remove_backticks(chunk)
 \description{
 Remove any code in backticks from a chunk
 }
+\keyword{internal}

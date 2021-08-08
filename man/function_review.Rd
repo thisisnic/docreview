@@ -4,10 +4,12 @@
 \alias{function_review}
 \title{Review functions}
 \usage{
-function_review(path)
+function_review(path, thresholds = default_thresholds()$functions)
 }
 \arguments{
 \item{path}{Path to package}
+
+\item{thresholds}{List of thresholds that result in fails or warnings}
 }
 \description{
 Review functions
