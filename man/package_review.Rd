@@ -26,3 +26,7 @@ package_review(
 \description{
 Review package documentation
 }
+\examples{
+pkg_path <- system.file("testpkg", package = "docreview")
+package_review(pkg_path)
+}
