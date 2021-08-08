@@ -18,6 +18,8 @@ package_review(
 \item{error_on_failure}{Raise an error on any negative reviews}
 
 \item{doc_types}{Types of documentation to review}
+
+\item{thresholds}{List of thresholds that result in fails or warnings}
 }
 \description{
 Review package documentation

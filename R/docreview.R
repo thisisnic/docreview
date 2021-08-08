@@ -7,6 +7,7 @@ NULL
 #' @param path Path to package
 #' @param error_on_failure Raise an error on any negative reviews
 #' @param doc_types Types of documentation to review
+#' @param thresholds List of thresholds that result in fails or warnings
 #' @export
 package_review <- function(path = ".", error_on_failure = FALSE,
                            error_on_warning = FALSE,
