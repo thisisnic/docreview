@@ -1,0 +1,41 @@
+---
+title: "Introduction to docreview"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{docreview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = ""
+)
+```
+
+```{r setup, include=FALSE}
+devtools::load_all()
+```
+
+When writing R packages, high quality documentation can make for a great experience for your users.  
+
+You can use docreview to check that your R package documentation follows a number of rules:
+
+* all exported functions have documented examples of how to use them
+* vignettes should not be too long
+* vignettes should not be too complex
+
+You can use docreview within your package's CI builds to ensure that these standards are still met as your package evolves.
+
+## Basic usage
+```{r}
+docreview::package_review(path = system.file("testpkg", package = "docreview"))
+```
+ 
+## Choose what to review
+
+## Set custom thresholds for review check failures and warnings
+
+## Raise an error when review checks produce failures or warnings
+

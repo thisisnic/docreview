@@ -26,4 +26,7 @@ Imports:
     stringr,
     rlang
 Suggests:
+    rmarkdown,
+    knitr,
     testthat
+VignetteBuilder: knitr
