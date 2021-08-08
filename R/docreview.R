@@ -10,6 +10,9 @@ NULL
 #' @param doc_types Types of documentation to review
 #' @param thresholds List of thresholds that result in fails or warnings
 #' @export
+#' @examples
+#' pkg_path <- system.file("testpkg", package = "docreview")
+#' package_review(pkg_path)
 package_review <- function(path = ".", error_on_failure = FALSE,
                            error_on_warning = FALSE,
                            doc_types = c("functions", "vignettes"),
@@ -67,8 +70,10 @@ check_results <- function(results, error_on_failure, error_on_warning) {
 #'
 #' @param path Path to package
 #' @param thresholds List of thresholds that result in fails or warnings
-#'
 #' @export
+#' @examples
+#' pkg_path <- system.file("testpkg", package = "docreview")
+#' function_review(pkg_path)
 function_review <- function(path, thresholds = default_thresholds()$functions) {
   detailed_results <- list(
     exports_examples = get_exports_without_examples(path)
@@ -88,7 +93,7 @@ function_get_comments <- function(results, thresholds) {
   comments <- list(fail = 0, warn = 0)
 
   # Count failures and warnings for exports without examples
-  need_examples <- sum(results$exports_examples)
+  need_examples <- sum(!results$exports_examples)
 
   if (need_examples > 0) {
     if (thresholds$exports_without_examples == "fail") {
@@ -107,6 +112,9 @@ function_get_comments <- function(results, thresholds) {
 #' @param thresholds List of thresholds that result in fails or warnings
 #'
 #' @export
+#' @examples
+#' pkg_path <- system.file("testpkg", package = "docreview")
+#' vignette_review(pkg_path)
 vignette_review <- function(path, thresholds = default_thresholds()$vignettes) {
   vig_paths <- find_vignettes(path)
   detailed_results <- lapply(vig_paths, analyse_vignette)

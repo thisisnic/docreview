@@ -14,3 +14,7 @@ function_review(path, thresholds = default_thresholds()$functions)
 \description{
 Review functions
 }
+\examples{
+pkg_path <- system.file("testpkg", package = "docreview")
+function_review(pkg_path)
+}

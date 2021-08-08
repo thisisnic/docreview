@@ -14,3 +14,7 @@ vignette_review(path, thresholds = default_thresholds()$vignettes)
 \description{
 Review vignettes
 }
+\examples{
+pkg_path <- system.file("testpkg", package = "docreview")
+vignette_review(pkg_path)
+}
