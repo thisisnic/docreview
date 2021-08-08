@@ -125,12 +125,12 @@ vignettes_get_comments <- function(results, thresholds){
   # Count failures and warnings for Flesch Kincaid scores
   fk_scores <- map(results, "flesch_kincaid")
   fk_fails <- length(fk_scores[fk_scores <= thresholds$fk$fail])
-  fk_warns <- length(fk_scores[(fk_scores > thresholds$fk$fail) && (fk_scores <= thresholds$fk$warn)])
+  fk_warns <- length(fk_scores[fk_scores > thresholds$fk$fail & fk_scores <= thresholds$fk$warn])
 
   # Count failures and warnings for lengths
   length_scores <- map(results, "length")
   length_fails <- length(length_scores[length_scores >= thresholds$length$fail])
-  length_warns <- length(length_scores[length_scores < thresholds$length$fail && length_scores >= thresholds$length$warn])
+  length_warns <- length(length_scores[length_scores < thresholds$length$fail & length_scores >= thresholds$length$warn])
 
 
   comments$fail <- comments$fail + fk_fails + length_fails
