@@ -15,7 +15,9 @@ package_review(
 \arguments{
 \item{path}{Path to package}
 
-\item{error_on_failure}{Raise an error on any negative reviews}
+\item{error_on_failure}{Raise an error on any review check failures}
+
+\item{error_on_warning}{Raise an error on any review check warnings}
 
 \item{doc_types}{Types of documentation to review}
 
