@@ -2,20 +2,22 @@
 #'
 #' @param path Path to package
 #' @keywords internal
-get_rd_filename_for_function <- function(path = ".", function_name) {
-  rd_files <- find_rd_files(path)
-  matches <- lapply(rd_files, function(x) {
-    fns <- get_function_names(x)
-    aliases <- get_aliases(x)
-    function_name %in% fns || function_name %in% aliases
-  })
-  return(names(matches[matches == TRUE]))
-}
+get_rd_filename_for_function <-
+  function(path = ".", function_name) {
+    rd_files <- find_rd_files(path)
+    matches <- lapply(rd_files, function(x) {
+      fns <- get_function_names(x)
+      aliases <- get_aliases(x)
+      function_name %in% fns || function_name %in% aliases
+    })
+    return(names(matches[matches == TRUE]))
+  }
 
 #' Parse a function call and divide up by parameters
 #'
-#' Take a function call and split it up so we have each parameter expression separate
-#' Apparently bracket matching can't be done using regex so this manual approach is needed
+#' Take a function call & split it up so each parameter expression is separate
+#' Apparently bracket matching can't be done using regex so this manual
+#' approach is needed
 #'
 #' @param expr_text Function call expression text
 #' @param func_name Function name
@@ -34,9 +36,9 @@ get_rd_filename_for_function <- function(path = ".", function_name) {
 #' parse_example("match_arrow(cars_tbl$cyl, Array$create(c(4, 6, 8)))", "match_arrow")
 #' @keywords internal
 parse_example <- function(expr_text, func_name) {
-
   # strip out any inline comments
-  expr_text <- stringr::str_extract_all(expr_text, paste0(func_name, "\\(.*\\)"))
+  expr_text <-
+    stringr::str_extract_all(expr_text, paste0(func_name, "\\(.*\\)"))
 
   # remove actual function name
   text <- stringr::str_remove(expr_text, func_name)
@@ -53,7 +55,8 @@ parse_example <- function(expr_text, func_name) {
   while (pos < nchar(text)) {
     curr_char <- stringr::str_sub(text, start = pos, end = pos)
     if (curr_char == "," && bracket_count == 0) {
-      params <- append(params, stringr::str_sub(text, start = curr_start, end = pos - 1))
+      params <- append(params,
+                       stringr::str_sub(text, start = curr_start, end = pos - 1))
       curr_start <- pos + 1
     } else if (curr_char == "(") {
       bracket_count <- bracket_count + 1
@@ -63,7 +66,8 @@ parse_example <- function(expr_text, func_name) {
     pos <- pos + 1
   }
   if (pos == nchar(text)) {
-    params <- append(params, stringr::str_sub(text, start = curr_start, end = pos))
+    params <-
+      append(params, stringr::str_sub(text, start = curr_start, end = pos))
   }
   return(stringr::str_trim(params))
 }
@@ -95,7 +99,6 @@ name_args <- function(args_used, func_args) {
 #' check_assigned("Array$create(c(1,2), type = int8())")
 #' @keywords internal
 check_assigned <- function(code, func_args) {
-
   # check if it's a named argument that's been assigned
   named_args_detected <- detect_named_args(code, func_args)
 
@@ -108,18 +111,16 @@ check_assigned <- function(code, func_args) {
 detect_named_args <- function(code, func_args) {
   assignment_regex <- "(=|<-)"
 
-  stringr::str_detect(
-    code,
-    paste0(
-      "(",
-      # function arguments other than dots
-      paste0(func_args[func_args != "..."], collapse = "|"),
-      ")",
-      # 0 or more whitespace characters
-      "[:blank:]*",
-      assignment_regex
-    )
-  )
+  stringr::str_detect(code,
+                      paste0(
+                        "(",
+                        # function arguments other than dots
+                        paste0(func_args[func_args != "..."], collapse = "|"),
+                        ")",
+                        # 0 or more whitespace characters
+                        "[:blank:]*",
+                        assignment_regex
+                      ))
 }
 
 detect_unnamed_args <- function(code) {
