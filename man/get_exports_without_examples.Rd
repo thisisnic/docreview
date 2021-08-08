@@ -9,6 +9,9 @@ get_exports_without_examples(path = ".")
 \arguments{
 \item{path}{Path to package}
 }
+\value{
+Logical vector of whether exported functions have examples
+}
 \description{
 Get exports which don't have any examples
 }

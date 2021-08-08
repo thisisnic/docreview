@@ -4,7 +4,7 @@
 \alias{function_review}
 \title{Review functions}
 \usage{
-function_review(path)
+function_review(path, thresholds = default_thresholds()$functions)
 }
 \arguments{
 \item{path}{Path to package}
