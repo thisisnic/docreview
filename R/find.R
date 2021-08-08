@@ -1,19 +1,19 @@
 #' Get exports which don't have any examples
 #'
 #' @param path Path to package
+#' @return Logical vector of whether exported functions have examples
 #' @keywords internal
 get_exports_without_examples <- function(path = ".") {
   examples <- find_examples(path)
 
+  # TODO: refactor so we're not assuming every Rd filename matches given that some .Rds contain multiple functions
+  names(examples) <- gsub(".Rd", "", names(examples))
+
   has_examples <- map_lgl(examples, ~ length(.x) > 0)
-
-  no_examples <- names(has_examples[has_examples == FALSE])
-
-  raw_names <- gsub(".Rd", "", no_examples)
 
   exports <- find_exported_functions(path)
 
-  raw_names[raw_names %in% exports]
+  has_examples[names(has_examples) %in% exports]
 }
 
 #' Find vignettes
