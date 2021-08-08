@@ -3,7 +3,6 @@
 #' @param results Results of function documentation analysis
 #' @keywords internal
 function_results_display <- function(results, thresholds) {
-
   examples <- as.character(results$exports_examples)
   names(examples) <- names(results$exports_examples)
 
@@ -16,20 +15,18 @@ function_results_display <- function(results, thresholds) {
       cli_h3("Exported functions containing examples in their documentation: ")
 
       if (no_example_action == "fail") {
-        examples[examples == "FALSE"] = "x"
+        examples[examples == "FALSE"] <- "x"
       } else if (no_example_action == "warn") {
-        examples[examples == "FALSE"] = "!"
+        examples[examples == "FALSE"] <- "!"
       }
 
-      examples[examples == "TRUE"] = "v"
+      examples[examples == "TRUE"] <- "v"
 
       exports <- names(examples)
       names(exports) <- examples
 
       cli_bullets(exports)
-
     }
-
   })
 }
 
@@ -50,9 +47,9 @@ vignette_results_display <- function(results, thresholds) {
     bullet_vals <- paste0(names(fk_scores), ": ", round(fk_scores, 2))
 
     bullet_names <- rep(" ", length(fk_scores))
-    bullet_names[fk_scores <= thresholds$fk$fail] = "x"
-    bullet_names[fk_scores > thresholds$fk$fail && fk_scores <= thresholds$fk$warn] = "!"
-    bullet_names[fk_scores > thresholds$fk$warn] = "v"
+    bullet_names[fk_scores <= thresholds$fk$fail] <- "x"
+    bullet_names[fk_scores > thresholds$fk$fail && fk_scores <= thresholds$fk$warn] <- "!"
+    bullet_names[fk_scores > thresholds$fk$warn] <- "v"
 
     names(bullet_vals) <- bullet_names
 
@@ -64,14 +61,12 @@ vignette_results_display <- function(results, thresholds) {
     bullet_vals <- paste0(names(length_scores), ": ", length_scores, " words.")
 
     bullet_names <- rep(" ", length(length_scores))
-    bullet_names[length_scores >= thresholds$length$fail] = "x"
-    bullet_names[length_scores < thresholds$length$fail && length_scores >= thresholds$length$warn] = "!"
-    bullet_names[length_scores < thresholds$length$warn] = "v"
+    bullet_names[length_scores >= thresholds$length$fail] <- "x"
+    bullet_names[length_scores < thresholds$length$fail && length_scores >= thresholds$length$warn] <- "!"
+    bullet_names[length_scores < thresholds$length$warn] <- "v"
 
     names(bullet_vals) <- bullet_names
 
     cli_bullets(bullet_vals)
-
-
   })
 }

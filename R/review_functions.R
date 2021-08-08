@@ -55,8 +55,10 @@ parse_example <- function(expr_text, func_name) {
   while (pos < nchar(text)) {
     curr_char <- stringr::str_sub(text, start = pos, end = pos)
     if (curr_char == "," && bracket_count == 0) {
-      params <- append(params,
-                       stringr::str_sub(text, start = curr_start, end = pos - 1))
+      params <- append(
+        params,
+        stringr::str_sub(text, start = curr_start, end = pos - 1)
+      )
       curr_start <- pos + 1
     } else if (curr_char == "(") {
       bracket_count <- bracket_count + 1
@@ -111,16 +113,18 @@ check_assigned <- function(code, func_args) {
 detect_named_args <- function(code, func_args) {
   assignment_regex <- "(=|<-)"
 
-  stringr::str_detect(code,
-                      paste0(
-                        "(",
-                        # function arguments other than dots
-                        paste0(func_args[func_args != "..."], collapse = "|"),
-                        ")",
-                        # 0 or more whitespace characters
-                        "[:blank:]*",
-                        assignment_regex
-                      ))
+  stringr::str_detect(
+    code,
+    paste0(
+      "(",
+      # function arguments other than dots
+      paste0(func_args[func_args != "..."], collapse = "|"),
+      ")",
+      # 0 or more whitespace characters
+      "[:blank:]*",
+      assignment_regex
+    )
+  )
 }
 
 detect_unnamed_args <- function(code) {

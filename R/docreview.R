@@ -70,7 +70,6 @@ check_results <- function(results, error_on_failure, error_on_warning) {
 #'
 #' @export
 function_review <- function(path, thresholds = default_thresholds()$functions) {
-
   detailed_results <- list(
     exports_examples = get_exports_without_examples(path)
   )
@@ -86,7 +85,6 @@ function_review <- function(path, thresholds = default_thresholds()$functions) {
 #' @param thresholds List of thresholds that result in fails or warnings
 #' @keywords internal
 function_get_comments <- function(results, thresholds) {
-
   comments <- list(fail = 0, warn = 0)
 
   # Count failures and warnings for exports without examples
@@ -117,11 +115,9 @@ vignette_review <- function(path, thresholds = default_thresholds()$vignettes) {
   comments <- vignettes_get_comments(detailed_results, thresholds)
 
   list(failures = comments$fail, warnings = comments$warn, details = detailed_results)
-
 }
 
-vignettes_get_comments <- function(results, thresholds){
-
+vignettes_get_comments <- function(results, thresholds) {
   comments <- list(fail = 0, warn = 0)
 
   # Count failures and warnings for Flesch Kincaid scores
@@ -139,10 +135,9 @@ vignettes_get_comments <- function(results, thresholds){
   comments$warn <- comments$warn + fk_warns + length_warns
 
   comments
-
 }
 
-default_thresholds <- function(){
+default_thresholds <- function() {
   list(
     functions = list(
       exports_without_examples = "fail"
