@@ -5,3 +5,5 @@
 [![R-CMD-check](https://github.com/thisisnic/docreview/workflows/R-CMD-check/badge.svg)](https://github.com/thisisnic/docreview/actions?query=workflow%3AR-CMD-check)
 
 An opinionated package for enhancing your R package documentation.
+
+docreview.thisisnic.github.io
