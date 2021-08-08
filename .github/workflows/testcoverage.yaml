@@ -40,5 +40,6 @@ jobs:
         shell: Rscript {0}
 
       - name: Test coverage
-        run: covr::codecov()
+        # Exclude R/cli.R as its functions all output to CLI only
+        run: covr::codecov(line_exclusions = list("R/cli.R" = 1:100000))
         shell: Rscript {0}
