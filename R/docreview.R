@@ -5,7 +5,8 @@ NULL
 #' Review package documentation
 #'
 #' @param path Path to package
-#' @param error_on_failure Raise an error on any negative reviews
+#' @param error_on_failure Raise an error on any review check failures
+#' @param error_on_warning Raise an error on any review check warnings
 #' @param doc_types Types of documentation to review
 #' @param thresholds List of thresholds that result in fails or warnings
 #' @export
