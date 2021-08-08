@@ -1,0 +1,37 @@
+---
+title: "testpkg"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{testpkg}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, include=FALSE}
+devtools::load_all(".")
+```
+
+```{r setup}
+library(testpkg)
+```
+
+Addition (usually signified by the plus symbol +) is one of the four basic operations of arithmetic, the other three being subtraction, multiplication and division. The addition of two whole numbers results in the total amount or sum of those values combined. The example in the adjacent image shows a combination of three apples and two apples, making a total of five apples. This observation is equivalent to the mathematical expression "3 + 2 = 5" (that is, "3 plus 2 is equal to 5").
+
+```{r}
+add(1, 2)
+```
+
+```{r}
+add(1, NA, na.rm = TRUE)
+```
+
+
+
+Besides counting items, addition can also be defined and executed without referring to concrete objects, using abstractions called numbers instead, such as integers, real numbers and complex numbers. Addition belongs to arithmetic, a branch of mathematics. In algebra, another area of mathematics, addition can also be performed on abstract objects such as vectors, matrices, subspaces and subgroups.
