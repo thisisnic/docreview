@@ -51,7 +51,7 @@ vignette_results_display <- function(results, thresholds) {
 
       bullet_names <- rep(" ", length(fk_scores))
       bullet_names[fk_scores <= thresholds$fk$fail] <- "x"
-      bullet_names[fk_scores > thresholds$fk$fail && fk_scores <= thresholds$fk$warn] <- "!"
+      bullet_names[fk_scores > thresholds$fk$fail & fk_scores <= thresholds$fk$warn] <- "!"
       bullet_names[fk_scores > thresholds$fk$warn] <- "v"
 
       names(bullet_vals) <- bullet_names
@@ -65,7 +65,7 @@ vignette_results_display <- function(results, thresholds) {
 
       bullet_names <- rep(" ", length(length_scores))
       bullet_names[length_scores >= thresholds$length$fail] <- "x"
-      bullet_names[length_scores < thresholds$length$fail && length_scores >= thresholds$length$warn] <- "!"
+      bullet_names[length_scores < thresholds$length$fail & length_scores >= thresholds$length$warn] <- "!"
       bullet_names[length_scores < thresholds$length$warn] <- "v"
 
       names(bullet_vals) <- bullet_names
