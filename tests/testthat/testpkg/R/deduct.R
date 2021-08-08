@@ -5,7 +5,7 @@
 #' @param na.rm Drop NAs?
 #' @export
 deduct <- function(x, y, na.rm = FALSE) {
-  if (!na.rm || !any(is.na(c(x, y)))) {
+  if (!na.rm || !any_nas(x,y)) {
     return(x - y)
   } else {
     return(NA)
