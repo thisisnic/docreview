@@ -117,7 +117,7 @@
     <p>Review functions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>function_review</span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>function_review</span><span class='op'>(</span><span class='va'>path</span>, thresholds <span class='op'>=</span> <span class='fu'>default_thresholds</span><span class='op'>(</span><span class='op'>)</span><span class='op'>$</span><span class='va'>functions</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -125,6 +125,10 @@
     <tr>
       <th>path</th>
       <td><p>Path to package</p></td>
+    </tr>
+    <tr>
+      <th>thresholds</th>
+      <td><p>List of thresholds that result in fails or warnings</p></td>
     </tr>
     </table>
 
