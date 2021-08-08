@@ -64,6 +64,7 @@ check_results <- function(results, error_on_failure, error_on_warning) {
 #' Review functions
 #'
 #' @param path Path to package
+#' @param thresholds List of thresholds that result in fails or warnings
 #'
 #' @export
 function_review <- function(path, thresholds = default_thresholds()$functions) {
@@ -103,10 +104,10 @@ function_get_comments <- function(results, thresholds) {
 #' Review vignettes
 #'
 #' @param path Path to package
+#' @param thresholds List of thresholds that result in fails or warnings
 #'
 #' @export
 vignette_review <- function(path, thresholds = default_thresholds()$vignettes) {
-
   vig_paths <- find_vignettes(path)
   detailed_results <- lapply(vig_paths, analyse_vignette)
   names(detailed_results) <- basename(vig_paths)
@@ -124,7 +125,7 @@ vignettes_get_comments <- function(results, thresholds){
   # Count failures and warnings for Flesch Kincaid scores
   fk_scores <- map(results, "flesch_kincaid")
   fk_fails <- length(fk_scores[fk_scores <= thresholds$fk$fail])
-  fk_warns <- length(fk_scores[fk_scores > thresholds$fk$fail && fk_scores <= thresholds$fk$warn])
+  fk_warns <- length(fk_scores[(fk_scores > thresholds$fk$fail) && (fk_scores <= thresholds$fk$warn)])
 
   # Count failures and warnings for lengths
   length_scores <- map(results, "length")
