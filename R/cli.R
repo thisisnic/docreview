@@ -4,31 +4,25 @@
 #' @param error_on_failure Raise an error on any negative reviews
 #' @keywords internal
 function_results_parse <- function(results, error_on_failure) {
-
   no_examples <- results$exports_without_examples
 
   cli({
     cli_h2("Function Documentation")
     if (length(no_examples) == 0) {
-
       cli_alert_success(
         "All exported functions contain examples in their documentation"
       )
-
     } else {
-
       if (error_on_failure) {
         no_examples_error(no_examples)
       } else {
         no_examples_output(no_examples)
       }
-
     }
   })
 }
 
 no_examples_output <- function(no_examples) {
-
   names(no_examples) <- rep("*", length(no_examples))
 
   cli_alert_warning(
@@ -37,7 +31,7 @@ no_examples_output <- function(no_examples) {
   cli_bullets(no_examples)
 }
 
-no_examples_error <- function(no_examples){
+no_examples_error <- function(no_examples) {
   rlang::abort(
     message = c(
       x = "All exported functions must contain examples in their documentation.",
@@ -56,7 +50,6 @@ no_examples_error <- function(no_examples){
 #'
 #' @keywords internal
 vignette_results_parse <- function(vignette_results, error_on_failure) {
-
   cli({
     cli_h2("Vignettes")
 
@@ -74,6 +67,5 @@ vignette_results_parse <- function(vignette_results, error_on_failure) {
 
     cli_h3("Length")
     iwalk(lengths, ~ score_length(.y, .x, error_on_failure = error_on_failure))
-
   })
 }
