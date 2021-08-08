@@ -32,6 +32,7 @@ get_rd_filename_for_function <- function(path = ".", function_name) {
 #'
 #' # Second param is func call containing vector
 #' parse_example("match_arrow(cars_tbl$cyl, Array$create(c(4, 6, 8)))", "match_arrow")
+#' @keywords internal
 parse_example <- function(expr_text, func_name) {
 
   # strip out any inline comments

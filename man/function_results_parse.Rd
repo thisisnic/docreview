@@ -14,3 +14,4 @@ function_results_parse(results, error_on_failure)
 \description{
 Parse function documentation analysis results
 }
+\keyword{internal}

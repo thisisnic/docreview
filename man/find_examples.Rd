@@ -12,3 +12,4 @@ find_examples(path = ".")
 \description{
 Get examples from a package
 }
+\keyword{internal}

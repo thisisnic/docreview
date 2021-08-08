@@ -12,3 +12,4 @@ find_rd_files(path = ".")
 \description{
 Get RD files from a package
 }
+\keyword{internal}

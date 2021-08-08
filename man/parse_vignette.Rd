@@ -15,3 +15,4 @@ List of length 1 character vectors containing contents of each markdown section
 \description{
 Parse a vignette
 }
+\keyword{internal}

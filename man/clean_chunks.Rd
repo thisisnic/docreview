@@ -12,3 +12,4 @@ clean_chunks(chunk)
 \description{
 Remove text in links and backticks from chunks
 }
+\keyword{internal}

@@ -12,3 +12,4 @@ remove_links(chunk)
 \description{
 Remove any links in markdown format
 }
+\keyword{internal}

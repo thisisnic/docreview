@@ -12,3 +12,4 @@ analyse_vignette(vig_path)
 \description{
 Analyse a single vignette
 }
+\keyword{internal}

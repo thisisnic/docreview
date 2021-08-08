@@ -12,3 +12,4 @@ get_fk_score(code)
 \description{
 Get Flesch-Kincaid readability score
 }
+\keyword{internal}

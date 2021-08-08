@@ -30,3 +30,4 @@ parse_example("match_arrow(Array$create(c(4, 6, 8)), cars_tbl$cyl)", "match_arro
 parse_example("match_arrow(cars_tbl$cyl, Array$create(c(4, 6, 8)))", "match_arrow")
 \dontshow{\}) # examplesIf}
 }
+\keyword{internal}

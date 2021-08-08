@@ -2,6 +2,7 @@
 #'
 #' @param results Results of function documentation analysis
 #' @param error_on_failure Raise an error on any negative reviews
+#' @keywords internal
 function_results_parse <- function(results, error_on_failure) {
 
   no_examples <- results$exports_without_examples

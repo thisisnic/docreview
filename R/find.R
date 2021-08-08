@@ -1,7 +1,7 @@
 #' Get exports which don't have any examples
 #'
 #' @param path Path to package
-#'
+#' @keywords internal
 get_exports_without_examples <- function(path = ".") {
   examples <- find_examples(path)
 
@@ -21,6 +21,7 @@ get_exports_without_examples <- function(path = ".") {
 #' Find all vignettes in a package
 #'
 #' @param path Path to package
+#' @keywords internal
 find_vignettes <- function(path = ".") {
   vig_path <- file.path(path, "vignettes")
   list.files(vig_path, ".Rmd", full.names = TRUE)
@@ -29,6 +30,7 @@ find_vignettes <- function(path = ".") {
 #' Get exports
 #'
 #' @param path Package root
+#' @keywords internal
 #' @return Exported functions, character vector
 find_exported_functions <- function(path = ".") {
   ns_path <- file.path(path, "NAMESPACE")
@@ -40,6 +42,7 @@ find_exported_functions <- function(path = ".") {
 #' Get examples from a package
 #'
 #' @param path Path to package
+#' @keywords internal
 find_examples <- function(path = ".") {
   rd_paths <- find_rd_files(path)
   map(rd_paths, ~ get_example(.x))
@@ -48,6 +51,7 @@ find_examples <- function(path = ".") {
 #' Get RD files from a package
 #'
 #' @param path Path to package
+#' @keywords internal
 find_rd_files <- function(path = ".") {
   man_path <- file.path(path, "man")
   rd_files <- list.files(man_path, ".Rd")

@@ -7,6 +7,7 @@
 package_review(
   path = ".",
   error_on_failure = FALSE,
+  error_on_warning = FALSE,
   doc_types = c("functions", "vignettes")
 )
 }

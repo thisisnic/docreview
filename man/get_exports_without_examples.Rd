@@ -12,3 +12,4 @@ get_exports_without_examples(path = ".")
 \description{
 Get exports which don't have any examples
 }
+\keyword{internal}
