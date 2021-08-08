@@ -1,5 +1,4 @@
 test_that("vignette_review works as expected", {
-
   vr <- vignette_review(system.file("testpkg", package = "docreview"))
   expect_equal(vr$failures, 0)
   expect_equal(vr$warnings, 2)
@@ -11,5 +10,4 @@ test_that("vignette_review works as expected", {
 
   expect_equal(vr$details$testpkg2.Rmd$flesch_kincaid, 33.7, tolerance = 0.1)
   expect_equal(vr$details$testpkg2.Rmd$length, 170)
-
 })
