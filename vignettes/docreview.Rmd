@@ -35,7 +35,13 @@ docreview::package_review(path = system.file("testpkg", package = "docreview"))
  
 ## Choose what to review
 
+You can choose which components of documentation to review.
+
 ## Set custom thresholds for review check failures and warnings
 
+You might not agree with the thresholds set for review checks resulting in failures or warnings.  That's OK!  You can set your own custom thresholds.
+
 ## Raise an error when review checks produce failures or warnings
+
+If you're using docreview as part of your CI, you may want to raise an error when the review checks produce a failure or warning.
 
