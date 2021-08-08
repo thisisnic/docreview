@@ -8,6 +8,8 @@ vignette_review(path, thresholds = default_thresholds()$vignettes)
 }
 \arguments{
 \item{path}{Path to package}
+
+\item{thresholds}{List of thresholds that result in fails or warnings}
 }
 \description{
 Review vignettes
