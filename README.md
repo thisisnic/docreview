@@ -6,4 +6,4 @@
 
 An opinionated package for enhancing your R package documentation.
 
-docreview.thisisnic.github.io
+https://thisisnic.github.io/docreview/
