@@ -1,4 +1,4 @@
-score_length <- function(name, score, thresholds = c(3000, 2000), error_on_failure) {
+score_length <- function(name, score, thresholds, error_on_failure) {
   length_output(name, score, thresholds)
 
   if (error_on_failure) {

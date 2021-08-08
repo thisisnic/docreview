@@ -17,13 +17,15 @@ package_review <- function(path = ".", error_on_failure = FALSE,
   results <- list()
 
   if ("functions" %in% doc_types) {
-    results$functions <- function_review(path, thresholds)
-    function_results_display(results$functions)
+    function_thresholds <- thresholds$functions
+    results$functions <- function_review(path, function_thresholds)
+    function_results_display(results$functions$details, function_thresholds)
   }
 
   if ("vignettes" %in% doc_types) {
-    results$vignettes <- vignette_review(path)
-    vignette_results_parse(results$vignettes)
+    vignette_thresholds <- thresholds$vignette
+    results$vignettes <- vignette_review(path, vignette_thresholds)
+    vignette_results_display(results$vignettes$details, vignette_thresholds)
   }
 
   check_results(results, error_on_failure, error_on_warning)
@@ -64,15 +66,13 @@ check_results <- function(results, error_on_failure, error_on_warning) {
 #' @param path Path to package
 #'
 #' @export
-function_review <- function(path, thresholds = default_thresholds()) {
-
-  function_thresholds <- thresholds$functions
+function_review <- function(path, thresholds = default_thresholds()$functions) {
 
   detailed_results <- list(
     exports_examples = get_exports_without_examples(path)
   )
 
-  comments <- function_get_comments(detailed_results, function_thresholds)
+  comments <- function_get_comments(detailed_results, thresholds)
 
   list(failures = comments$fail, warnings = comments$warn, details = detailed_results)
 }
@@ -107,13 +107,11 @@ function_get_comments <- function(results, thresholds) {
 #' @export
 vignette_review <- function(path, thresholds = default_thresholds()) {
 
-  vignette_thresholds <- thresholds$vignettes
-
   vig_paths <- find_vignettes(path)
   detailed_results <- lapply(vig_paths, analyse_vignette)
   names(detailed_results) <- basename(vig_paths)
 
-  comments <- vignettes_get_comments(detailed_results, vignette_thresholds)
+  comments <- vignettes_get_comments(detailed_results, thresholds)
 
   list(failures = comments$fail, warnings = comments$warn, details = detailed_results)
 
@@ -125,13 +123,13 @@ vignettes_get_comments <- function(results, thresholds){
 
   # Count failures and warnings for Flesch Kincaid scores
   fk_scores <- map(results, "flesch_kincaid")
-  fk_fails <- length(fk_scores[fk_scores < thresholds$fk$fail])
-  fk_warns <- length(fk_scores[fk_scores >= thresholds$fk$fail && fk_scores < thresholds$fk$warn])
+  fk_fails <- length(fk_scores[fk_scores <= thresholds$fk$fail])
+  fk_warns <- length(fk_scores[fk_scores > thresholds$fk$fail && fk_scores <= thresholds$fk$warn])
 
   # Count failures and warnings for lengths
   length_scores <- map(results, "length")
-  length_fails <- length(length_scores[length_scores > thresholds$length$fail])
-  length_warns <- length(length_scores[length_scores <= thresholds$length$fail && length_scores > thresholds$length$warn])
+  length_fails <- length(length_scores[length_scores >= thresholds$length$fail])
+  length_warns <- length(length_scores[length_scores < thresholds$length$fail && length_scores >= thresholds$length$warn])
 
 
   comments$fail <- comments$fail + fk_fails + length_fails
