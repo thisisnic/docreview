@@ -70,10 +70,20 @@ default_thresholds <- function() {
 #'
 #' @param exports_without_examples Action to take when exports without examples
 #' are identified. Possible values are "fail", "warn", or "none".
+#' @param fk_fail Vignette Flesch-Kincaid scores lower than this will result in
+#' a review check failure
+#' @param fk_warn Vignette Flesch-Kincaid scores lower than this but higher than
+#'  `fk_fail` will results in a review check warning
+#' @param length_fail Vignette word count longer than this will result in a
+#' review check failure
+#' @param length_warn Vignette word count longer than this but shorter than
+#' `length_fail` will result in a review check warning
+#'
+#' @examples
+#' set_thresholds(exports_without_examples = "warn")
 set_thresholds <- function(exports_without_examples = "fail", fk_fail = 30,
                            fk_warn = 50, length_fail = 3000,
                            length_warn = 2000) {
-
   list(
     functions = list(
       exports_without_examples = match.arg(

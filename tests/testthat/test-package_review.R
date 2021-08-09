@@ -43,8 +43,5 @@ test_that("package_review can set custom thresholds", {
 test_that("set_thresholds invalid threshold value", {
   expect_error(
     set_thresholds(exports_without_examples = "irrelevant"),
-    "'arg' should be one of “fail”, “warn”, “none”"
-    )
-
-
+  )
 })
