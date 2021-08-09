@@ -68,6 +68,10 @@ default_thresholds <- function() {
 
 #' Set thresholds at which review checks should fail
 #'
+#' lifecycle::badge('experimental')
+#' This function is experimental and as the key package metrics evolve,
+#' parameters may be subject to change.
+#'
 #' @param exports_without_examples Action to take when exports without examples
 #' are identified. Possible values are "fail", "warn", or "none".
 #' @param fk_fail Vignette Flesch-Kincaid scores lower than this will result in
@@ -79,6 +83,7 @@ default_thresholds <- function() {
 #' @param length_warn Vignette word count longer than this but shorter than
 #' `length_fail` will result in a review check warning
 #'
+#' @export
 #' @examples
 #' set_thresholds(exports_without_examples = "warn")
 set_thresholds <- function(exports_without_examples = "fail", fk_fail = 30,

@@ -2,6 +2,7 @@
 
 export(function_review)
 export(package_review)
+export(set_thresholds)
 export(vignette_review)
 import(cli)
 import(purrr)

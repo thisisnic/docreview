@@ -5,20 +5,34 @@
 \title{Set thresholds at which review checks should fail}
 \usage{
 set_thresholds(
-  values = list(exports_without_examples = "fail", fk_fail = 30, fk_warn = 50,
-    length_fail = 3000, length_warn = 2000)
+  exports_without_examples = "fail",
+  fk_fail = 30,
+  fk_warn = 50,
+  length_fail = 3000,
+  length_warn = 2000
 )
 }
 \arguments{
-\item{values}{List of values:
-\itemize{
-\item{exports_without_examples} - {Action to take when exports without
-examples are identified. Possible values are "fail", "warn", or "none".}
-}}
+\item{exports_without_examples}{Action to take when exports without examples
+are identified. Possible values are "fail", "warn", or "none".}
+
+\item{fk_fail}{Vignette Flesch-Kincaid scores lower than this will result in
+a review check failure}
+
+\item{fk_warn}{Vignette Flesch-Kincaid scores lower than this but higher than
+\code{fk_fail} will results in a review check warning}
+
+\item{length_fail}{Vignette word count longer than this will result in a
+review check failure}
+
+\item{length_warn}{Vignette word count longer than this but shorter than
+\code{length_fail} will result in a review check warning}
 }
 \description{
-Set thresholds at which review checks should fail
+lifecycle::badge('experimental')
+This function is experimental and as the key package metrics evolve,
+parameters may be subject to change.
 }
 \examples{
-set_thresholds()
+set_thresholds(exports_without_examples = "warn")
 }
