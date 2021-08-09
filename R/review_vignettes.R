@@ -9,6 +9,8 @@ analyse_vignette <- function(vig_path) {
     {
       vig_sects <- parse_vignette(vig_path)
       cleaned_md <- lapply(vig_sects, clean_chunks)
+      # remove empty chunks so we don't get any errors
+      cleaned_md <- cleaned_md[cleaned_md != ""]
       fk <- get_fk_score(cleaned_md)
       lengths <- get_length(cleaned_md)
       pws <- detect_problem_words(cleaned_md)
@@ -76,7 +78,7 @@ get_fk_score <- function(code) {
 clean_chunks <- function(chunk) {
   no_links <- remove_links(chunk)
   no_backticks <- remove_backticks(no_links)
-  no_backticks
+  stringr::str_trim(no_backticks)
 }
 
 #' Remove links from a chunk
