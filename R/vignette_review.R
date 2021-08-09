@@ -1,4 +1,41 @@
+#' Review vignettes
+#'
+#' @param path Path to package
+#' @param thresholds List of thresholds that result in fails or warnings
+#'
+#' @export
+#' @examples
+#' pkg_path <- system.file("testpkg", package = "docreview")
+#' vignette_review(pkg_path)
+vignette_review <- function(path, thresholds = default_thresholds()$vignettes) {
+  vig_paths <- find_vignettes(path)
+  detailed_results <- lapply(vig_paths, analyse_vignette)
+  names(detailed_results) <- basename(vig_paths)
 
+  comments <- vignettes_get_comments(detailed_results, thresholds)
+
+  list(failures = comments$fail, warnings = comments$warn, details = detailed_results)
+}
+
+vignettes_get_comments <- function(results, thresholds) {
+  comments <- list(fail = 0, warn = 0)
+
+  # Count failures and warnings for Flesch Kincaid scores
+  fk_scores <- map(results, "flesch_kincaid")
+  fk_fails <- length(fk_scores[fk_scores <= thresholds$fk$fail])
+  fk_warns <- length(fk_scores[fk_scores > thresholds$fk$fail & fk_scores <= thresholds$fk$warn])
+
+  # Count failures and warnings for lengths
+  length_scores <- map(results, "length")
+  length_fails <- length(length_scores[length_scores >= thresholds$length$fail])
+  length_warns <- length(length_scores[length_scores < thresholds$length$fail & length_scores >= thresholds$length$warn])
+
+
+  comments$fail <- comments$fail + fk_fails + length_fails
+  comments$warn <- comments$warn + fk_warns + length_warns
+
+  comments
+}
 
 #' Analyse a single vignette
 #'
@@ -9,6 +46,8 @@ analyse_vignette <- function(vig_path) {
     {
       vig_sects <- parse_vignette(vig_path)
       cleaned_md <- lapply(vig_sects, clean_chunks)
+      # remove empty chunks so we don't get any errors
+      cleaned_md <- cleaned_md[cleaned_md != ""]
       fk <- get_fk_score(cleaned_md)
       lengths <- get_length(cleaned_md)
       pws <- detect_problem_words(cleaned_md)
@@ -76,7 +115,7 @@ get_fk_score <- function(code) {
 clean_chunks <- function(chunk) {
   no_links <- remove_links(chunk)
   no_backticks <- remove_backticks(no_links)
-  no_backticks
+  stringr::str_trim(no_backticks)
 }
 
 #' Remove links from a chunk

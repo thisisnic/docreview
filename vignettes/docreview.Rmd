@@ -1,0 +1,65 @@
+---
+title: "Introduction to docreview"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{docreview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "",
+  prompt = TRUE
+)
+
+library(docreview)
+```
+
+When writing R packages, high quality documentation can make for a great experience for your users.  
+
+You can use docreview to check that your R package documentation passes a number of checks:
+
+* all exported functions should have documented examples of how to use them
+* vignettes should not be too long
+* vignettes should not be too complex
+
+This list of checks, as well as the metrics used to assess them, is likely to grow as docreview changes over time, until stabilising after the version 1.0.0 release.
+
+You can use docreview to check your documentation locally, and also on your CI - see below for how to raise an error when a documentation review check fails.
+
+## Basic usage
+```{r}
+library(docreview)
+pkg_path <- system.file("testpkg", package = "docreview")
+package_review(path = pkg_path)
+```
+ 
+## Choose what to review
+
+You can choose which components of documentation to review.
+
+```{r}
+package_review(path = pkg_path, doc_types = "functions")
+```
+
+
+## Set custom thresholds for review check failures and warnings
+
+You might not agree with the thresholds set for review checks resulting in failures or warnings.  That's OK!  You can set your own custom thresholds.
+
+```{r}
+strict_readbility <- set_thresholds(fk_fail = 40, fk_warn = 60)
+package_review(path = pkg_path, thresholds = strict_readbility)
+```
+
+## Raise an error when review checks produce failures or warnings
+
+If you're using docreview as part of your CI, you may want to raise an error when the review checks produce a failure or warning.
+
+```{r, eval = FALSE}
+docreview::package_review(path = pkg_path, error_on_failure = TRUE)
+```
+
+

@@ -3,7 +3,7 @@
 #' @param path Path to package
 #' @return Logical vector of whether exported functions have examples
 #' @keywords internal
-get_exports_without_examples <- function(path = ".") {
+find_exports_without_examples <- function(path = ".") {
   examples <- find_examples(path)
 
   # TODO: refactor so we're not assuming every Rd filename matches given that some .Rds contain multiple functions
