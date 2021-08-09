@@ -29,9 +29,8 @@ review check failure}
 \code{length_fail} will result in a review check warning}
 }
 \description{
-lifecycle::badge('experimental')
-This function is experimental and as the key package metrics evolve,
-parameters may be subject to change.
+This function is experimental and as the key package metrics
+evolve, parameters may be subject to change.
 }
 \examples{
 set_thresholds(exports_without_examples = "warn")

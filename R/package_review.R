@@ -68,9 +68,8 @@ default_thresholds <- function() {
 
 #' Set thresholds at which review checks should fail
 #'
-#' lifecycle::badge('experimental')
-#' This function is experimental and as the key package metrics evolve,
-#' parameters may be subject to change.
+#' @description This function is experimental and as the key package metrics
+#' evolve, parameters may be subject to change.
 #'
 #' @param exports_without_examples Action to take when exports without examples
 #' are identified. Possible values are "fail", "warn", or "none".

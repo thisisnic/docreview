@@ -24,8 +24,7 @@ Imports:
     quanteda.textstats,
     cli,
     stringr,
-    rlang,
-    lifecycle
+    rlang
 Suggests:
     rmarkdown,
     knitr,
