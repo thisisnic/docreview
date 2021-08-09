@@ -1,35 +1,3 @@
-#' Parse function documentation analysis results
-#'
-#' @param results Results of function documentation analysis
-#' @keywords internal
-function_results_display <- function(results, thresholds) {
-  examples <- as.character(results$exports_examples)
-  names(examples) <- names(results$exports_examples)
-
-  cli({
-    cli_h2("Function Documentation")
-
-    no_example_action <- thresholds$exports_without_examples
-
-    if (no_example_action %in% c("fail", "warn")) {
-      cli_h3("Exported functions containing examples in their documentation: ")
-
-      if (no_example_action == "fail") {
-        examples[examples == "FALSE"] <- "x"
-      } else if (no_example_action == "warn") {
-        examples[examples == "FALSE"] <- "!"
-      }
-
-      examples[examples == "TRUE"] <- "v"
-
-      exports <- names(examples)
-      names(exports) <- examples
-
-      cli_bullets(exports)
-    }
-  })
-}
-
 #' Parse Vignette Results
 #'
 #' @param vignette_results Output of calling vignette analysis function
@@ -74,5 +42,37 @@ vignette_results_display <- function(results, thresholds) {
     }
 
 
+  })
+}
+
+#' Parse function documentation analysis results
+#'
+#' @param results Results of function documentation analysis
+#' @keywords internal
+function_results_display <- function(results, thresholds) {
+  examples <- as.character(results$exports_examples)
+  names(examples) <- names(results$exports_examples)
+
+  cli({
+    cli_h2("Function Documentation")
+
+    no_example_action <- thresholds$exports_without_examples
+
+    if (no_example_action %in% c("fail", "warn")) {
+      cli_h3("Exported functions containing examples in their documentation: ")
+
+      if (no_example_action == "fail") {
+        examples[examples == "FALSE"] <- "x"
+      } else if (no_example_action == "warn") {
+        examples[examples == "FALSE"] <- "!"
+      }
+
+      examples[examples == "TRUE"] <- "v"
+
+      exports <- names(examples)
+      names(exports) <- examples
+
+      cli_bullets(exports)
+    }
   })
 }
