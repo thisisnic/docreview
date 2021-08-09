@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse Vignette Results — vignette_results_display • docreview</title>
+<title>Get exports which don't have any examples — find_exports_without_examples • docreview</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Parse Vignette Results — vignette_results_display" />
-<meta property="og:description" content="Parse Vignette Results" />
+<meta property="og:title" content="Get exports which don't have any examples — find_exports_without_examples" />
+<meta property="og:description" content="Get exports which don't have any examples" />
 
 
 
@@ -111,30 +111,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse Vignette Results</h1>
-    <small class="dont-index">Source: <a href='https://github.com/thisisnic/docreview/blob/master/R/cli.R'><code>R/cli.R</code></a></small>
-    <div class="hidden name"><code>vignette_results_display.Rd</code></div>
+    <h1>Get exports which don't have any examples</h1>
+    <small class="dont-index">Source: <a href='https://github.com/thisisnic/docreview/blob/master/R/find.R'><code>R/find.R</code></a></small>
+    <div class="hidden name"><code>find_exports_without_examples.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Parse Vignette Results</p>
+    <p>Get exports which don't have any examples</p>
     </div>
 
-    <pre class="usage"><span class='fu'>vignette_results_display</span><span class='op'>(</span><span class='va'>results</span>, <span class='va'>thresholds</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>find_exports_without_examples</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"."</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>vignette_results</th>
-      <td><p>Output of calling vignette analysis function</p></td>
-    </tr>
-    <tr>
-      <th>error_on_failure</th>
-      <td><p>Raise an error on any negative reviews</p></td>
+      <th>path</th>
+      <td><p>Path to package</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Logical vector of whether exported functions have examples</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

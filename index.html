@@ -44,6 +44,9 @@
   </a>
 </li>
 <li>
+  <a href="articles/docreview.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
@@ -70,8 +73,27 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#docreview" class="anchor"></a>docreview</h1></div>
 
-<p>An opinionated package for enhancing your R package documentation.</p>
-<p><a href="https://thisisnic.github.io/docreview/" class="uri">https://thisisnic.github.io/docreview/</a></p>
+<p><em>An opinionated package for enhancing your R package documentation.</em></p>
+<p>When writing R packages, high quality documentation can make for a great experience for your users.</p>
+<p>You can use docreview to check that your R package documentation passes a number of checks:</p>
+<ul>
+<li>all exported functions should have documented examples of how to use them</li>
+<li>vignettes should not be too long</li>
+<li>vignettes should not be too complex</li>
+</ul>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<pre class="{r}"><code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github("thisisnic/docreview")</a></code></pre>
+</div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<pre class="{r}"><code><a href="http://thisisnic.github.io/docreview">library(docreview)
+pkg_path &lt;- system.file("testpkg", package = "docreview")
+package_review(path = pkg_path)</a></code></pre>
+<p>See <a href="https://thisisnic.github.io/docreview/articles/docreview.html">the vignette</a> for more detailed usage guides.</p>
+</div>
 </div>
   </div>
 

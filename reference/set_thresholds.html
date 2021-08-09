@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse Vignette Results — vignette_results_display • docreview</title>
+<title>Set thresholds at which review checks should fail — set_thresholds • docreview</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Parse Vignette Results — vignette_results_display" />
-<meta property="og:description" content="Parse Vignette Results" />
+<meta property="og:title" content="Set thresholds at which review checks should fail — set_thresholds" />
+<meta property="og:description" content="This function is experimental and as the key package metrics
+evolve, parameters may be subject to change." />
 
 
 
@@ -111,31 +112,80 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse Vignette Results</h1>
-    <small class="dont-index">Source: <a href='https://github.com/thisisnic/docreview/blob/master/R/cli.R'><code>R/cli.R</code></a></small>
-    <div class="hidden name"><code>vignette_results_display.Rd</code></div>
+    <h1>Set thresholds at which review checks should fail</h1>
+    <small class="dont-index">Source: <a href='https://github.com/thisisnic/docreview/blob/master/R/package_review.R'><code>R/package_review.R</code></a></small>
+    <div class="hidden name"><code>set_thresholds.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Parse Vignette Results</p>
+    <p>This function is experimental and as the key package metrics
+evolve, parameters may be subject to change.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>vignette_results_display</span><span class='op'>(</span><span class='va'>results</span>, <span class='va'>thresholds</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>set_thresholds</span><span class='op'>(</span>
+  exports_without_examples <span class='op'>=</span> <span class='st'>"fail"</span>,
+  fk_fail <span class='op'>=</span> <span class='fl'>30</span>,
+  fk_warn <span class='op'>=</span> <span class='fl'>50</span>,
+  length_fail <span class='op'>=</span> <span class='fl'>3000</span>,
+  length_warn <span class='op'>=</span> <span class='fl'>2000</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>vignette_results</th>
-      <td><p>Output of calling vignette analysis function</p></td>
+      <th>exports_without_examples</th>
+      <td><p>Action to take when exports without examples
+are identified. Possible values are "fail", "warn", or "none".</p></td>
     </tr>
     <tr>
-      <th>error_on_failure</th>
-      <td><p>Raise an error on any negative reviews</p></td>
+      <th>fk_fail</th>
+      <td><p>Vignette Flesch-Kincaid scores lower than this will result in
+a review check failure</p></td>
+    </tr>
+    <tr>
+      <th>fk_warn</th>
+      <td><p>Vignette Flesch-Kincaid scores lower than this but higher than
+<code>fk_fail</code> will results in a review check warning</p></td>
+    </tr>
+    <tr>
+      <th>length_fail</th>
+      <td><p>Vignette word count longer than this will result in a
+review check failure</p></td>
+    </tr>
+    <tr>
+      <th>length_warn</th>
+      <td><p>Vignette word count longer than this but shorter than
+<code>length_fail</code> will result in a review check warning</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>set_thresholds</span><span class='op'>(</span>exports_without_examples <span class='op'>=</span> <span class='st'>"warn"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $functions
+#&gt; $functions$exports_without_examples
+#&gt; [1] "warn"
+#&gt; 
+#&gt; 
+#&gt; $vignettes
+#&gt; $vignettes$fk
+#&gt; $vignettes$fk$fail
+#&gt; [1] 30
+#&gt; 
+#&gt; $vignettes$fk$warn
+#&gt; [1] 50
+#&gt; 
+#&gt; 
+#&gt; $vignettes$length
+#&gt; $vignettes$length$fail
+#&gt; [1] 3000
+#&gt; 
+#&gt; $vignettes$length$warn
+#&gt; [1] 2000
+#&gt; 
+#&gt; 
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
