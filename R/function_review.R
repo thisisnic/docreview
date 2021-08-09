@@ -55,4 +55,3 @@ get_example_code_from_rd <- utils::getFromNamespace(".Rd_get_example_code", "too
 rd_get_name <- utils::getFromNamespace(".Rd_get_name", "tools")
 
 rd_get_argument_name <- utils::getFromNamespace(".Rd_get_argument_names", "tools")
-

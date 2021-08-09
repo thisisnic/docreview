@@ -40,8 +40,6 @@ vignette_results_display <- function(results, thresholds) {
 
       cli_bullets(bullet_vals)
     }
-
-
   })
 }
 
