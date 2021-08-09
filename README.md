@@ -5,7 +5,7 @@
 [![R-CMD-check](https://github.com/thisisnic/docreview/workflows/R-CMD-check/badge.svg)](https://github.com/thisisnic/docreview/actions?query=workflow%3AR-CMD-check)
 [![codecov](https://codecov.io/gh/thisisnic/docreview/branch/main/graph/badge.svg)](https://codecov.io/gh/thisisnic/docreview)
 
-An opinionated package for enhancing your R package documentation.
+_An opinionated package for enhancing your R package documentation._
 
 When writing R packages, high quality documentation can make for a great experience for your users.  
 
@@ -17,7 +17,7 @@ You can use docreview to check that your R package documentation passes a number
 
 ## Installation
 
-```
+```{r}
 remotes::install_github("thisisnic/docreview")
 ```
 
@@ -30,6 +30,3 @@ package_review(path = pkg_path)
 ```
 
 See [the vignette](https://thisisnic.github.io/docreview/articles/docreview.html) for more detailed usage guides.
-
-## Similar packages 
-
