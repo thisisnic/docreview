@@ -2,3 +2,4 @@
 *.Rproj
 docs/*
 inst/doc
+..Rcheck/*
