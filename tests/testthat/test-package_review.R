@@ -26,15 +26,10 @@ test_that("package_review can exclude sections from review", {
 })
 
 test_that("package_review can set custom thresholds", {
-  custom_thresholds <- list(
-    functions = list(exports_without_examples = "warn"),
-    vignettes = list(
-      fk = list(fail = 40, warn = 50),
-      length = list(
-        fail = 200,
-        warn = 100
-      )
-    )
+  custom_thresholds <- set_thresholds(
+    exports_without_examples = "warn",
+    fk_fail = 40, fk_warn = 50,
+    length_fail = 200, length_warn = 100
   )
 
   res <- suppressMessages(package_review(pkg_path, thresholds = custom_thresholds))
@@ -43,4 +38,13 @@ test_that("package_review can set custom thresholds", {
   expect_equal(res$functions$warnings, 1)
   expect_equal(res$vignettes$failures, 3)
   expect_equal(res$vignettes$warnings, 1)
+})
+
+test_that("set_thresholds invalid threshold value", {
+  expect_error(
+    set_thresholds(exports_without_examples = "irrelevant"),
+    "'arg' should be one of “fail”, “warn”, “none”"
+    )
+
+
 })

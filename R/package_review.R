@@ -63,19 +63,27 @@ check_results <- function(results, error_on_failure, error_on_warning) {
 }
 
 default_thresholds <- function() {
+  set_thresholds()
+}
+
+#' Set thresholds at which review checks should fail
+#'
+#' @param exports_without_examples Action to take when exports without examples
+#' are identified. Possible values are "fail", "warn", or "none".
+set_thresholds <- function(exports_without_examples = "fail", fk_fail = 30,
+                           fk_warn = 50, length_fail = 3000,
+                           length_warn = 2000) {
+
   list(
     functions = list(
-      exports_without_examples = "fail"
+      exports_without_examples = match.arg(
+        exports_without_examples,
+        c("fail", "warn", "none")
+      )
     ),
     vignettes = list(
-      fk = list(
-        fail = 30,
-        warn = 50
-      ),
-      length = list(
-        fail = 3000,
-        warn = 2000
-      )
+      fk = list(fail = fk_fail, warn = fk_warn),
+      length = list(fail = length_fail, warn = length_warn)
     )
   )
 }
