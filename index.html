@@ -94,6 +94,15 @@ pkg_path &lt;- system.file("testpkg", package = "docreview")
 package_review(path = pkg_path)</a></code></pre>
 <p>See <a href="https://thisisnic.github.io/docreview/articles/docreview.html">the vignette</a> for more detailed usage guides.</p>
 </div>
+<div id="current-default-review-checks" class="section level2">
+<h2 class="hasAnchor">
+<a href="#current-default-review-checks" class="anchor"></a>Current default review checks</h2>
+<ul>
+<li>Vignettes are no more than 2000 words (warn) or 3000 words (fail)</li>
+<li>Vignettes have a Flesch Kincaid readability score higher than 50 (warn) or 30 (fail)</li>
+<li>All exported functions have examples in their documentation</li>
+</ul>
+</div>
 </div>
   </div>
 
