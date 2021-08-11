@@ -62,42 +62,10 @@ check_results <- function(results, error_on_failure, error_on_warning) {
   invisible(results)
 }
 
-default_thresholds <- function() {
-  set_thresholds()
-}
-
-#' Set thresholds at which review checks should fail
+#' Set config for docreview checks
 #'
-#' @description This function is experimental and as the key package metrics
-#' evolve, parameters may be subject to change.
-#'
-#' @param exports_without_examples Action to take when exports without examples
-#' are identified. Possible values are "fail", "warn", or "none".
-#' @param fk_fail Vignette Flesch-Kincaid scores lower than this will result in
-#' a review check failure
-#' @param fk_warn Vignette Flesch-Kincaid scores lower than this but higher than
-#'  `fk_fail` will results in a review check warning
-#' @param length_fail Vignette word count longer than this will result in a
-#' review check failure
-#' @param length_warn Vignette word count longer than this but shorter than
-#' `length_fail` will result in a review check warning
-#'
+#' @importFrom yaml read_yaml
 #' @export
-#' @examples
-#' set_thresholds(exports_without_examples = "warn")
-set_thresholds <- function(exports_without_examples = "fail", fk_fail = 30,
-                           fk_warn = 50, length_fail = 3000,
-                           length_warn = 2000) {
-  list(
-    functions = list(
-      exports_without_examples = match.arg(
-        exports_without_examples,
-        c("fail", "warn", "none")
-      )
-    ),
-    vignettes = list(
-      fk = list(fail = fk_fail, warn = fk_warn),
-      length = list(fail = length_fail, warn = length_warn)
-    )
-  )
+set_thresholds <- function(config_path = system.file("docreview.yml", package = "docreview")) {
+  read_yaml(config_path)
 }
