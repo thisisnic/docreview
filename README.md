@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# docreview <img src="man/figures/logo.svg" align="right" />
+# docreview <img src="man/figures/logo.svg" align="right" width="100px" />
 
 <!-- badges: start -->
 
