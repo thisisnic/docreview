@@ -16,9 +16,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001
 Imports: 
-    assertthat,
     purrr,
-    utils,
     parsermd,
     quanteda,
     quanteda.textstats,
