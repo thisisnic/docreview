@@ -1,38 +1,47 @@
 #' Review vignettes
 #'
 #' @param path Path to package
-#' @param thresholds List of thresholds that result in fails or warnings
-#'
-#' @export
-#' @examples
-#' pkg_path <- system.file("testpkg", package = "docreview")
-#' vignette_review(pkg_path)
-vignette_review <- function(path, thresholds = default_thresholds()$vignettes) {
+#' @param checks Checks to run
+vignette_review <- function(path, checks = get_config()$vignettes) {
   vig_paths <- find_vignettes(path)
-  detailed_results <- lapply(vig_paths, analyse_vignette)
+  detailed_results <- lapply(vig_paths, analyse_vignette, checks = checks)
   names(detailed_results) <- basename(vig_paths)
 
-  comments <- vignettes_get_comments(detailed_results, thresholds)
+  comments <- vignettes_get_comments(detailed_results, checks)
 
   list(failures = comments$fail, warnings = comments$warn, details = detailed_results)
 }
 
-vignettes_get_comments <- function(results, thresholds) {
+vignettes_get_comments <- function(results, checks = get_config()$vignettes) {
   comments <- list(fail = 0, warn = 0)
 
-  # Count failures and warnings for Flesch Kincaid scores
-  fk_scores <- map(results, "flesch_kincaid")
-  fk_fails <- length(fk_scores[fk_scores <= thresholds$fk$fail])
-  fk_warns <- length(fk_scores[fk_scores > thresholds$fk$fail & fk_scores <= thresholds$fk$warn])
+  if (checks$`flesch-kincaid`$active) {
+    # Count failures and warnings for Flesch Kincaid scores
+    fk_scores <- map(results, "flesch_kincaid")
+    fk_thresholds <- checks$`flesch-kincaid`$thresholds$poor_readbility
 
-  # Count failures and warnings for lengths
-  length_scores <- map(results, "length")
-  length_fails <- length(length_scores[length_scores >= thresholds$length$fail])
-  length_warns <- length(length_scores[length_scores < thresholds$length$fail & length_scores >= thresholds$length$warn])
+    fk_fails <- length(fk_scores[fk_scores <= fk_thresholds$fail])
+    fk_warns <- length(fk_scores[fk_scores > fk_thresholds$fail & fk_scores <= fk_thresholds$warn])
 
+    comments$fail <- comments$fail + fk_fails
+    comments$warn <- comments$warn + fk_warns
+  }
 
-  comments$fail <- comments$fail + fk_fails + length_fails
-  comments$warn <- comments$warn + fk_warns + length_warns
+  if (checks$length$active) {
+    # Count failures and warnings for lengths
+    length_scores <- map(results, "length")
+    long_thresholds <- checks$length$thresholds$too_long
+    short_thresholds <- checks$length$thresholds$too_short
+
+    long_fails <- length(length_scores[length_scores >= long_thresholds$fail])
+    long_warns <- length(length_scores[length_scores < long_thresholds$fail & length_scores >= long_thresholds$warn])
+
+    short_fails <- length(length_scores[length_scores <= short_thresholds$fail])
+    short_warns <- length(length_scores[length_scores > short_thresholds$fail & length_scores <= short_thresholds$warn])
+
+    comments$fail <- comments$fail + long_fails + short_fails
+    comments$warn <- comments$warn + long_warns + short_warns
+  }
 
   comments
 }
@@ -41,17 +50,32 @@ vignettes_get_comments <- function(results, thresholds) {
 #'
 #' @param vig_path Path to directory where vignette is
 #' @keywords internal
-analyse_vignette <- function(vig_path) {
+analyse_vignette <- function(vig_path, checks = get_config()$vignettes) {
   tryCatch(
     {
       vig_sects <- parse_vignette(vig_path)
       cleaned_md <- lapply(vig_sects, clean_chunks)
       # remove empty chunks so we don't get any errors
       cleaned_md <- cleaned_md[cleaned_md != ""]
-      fk <- get_fk_score(cleaned_md)
-      lengths <- get_length(cleaned_md)
-      pws <- detect_problem_words(cleaned_md)
-      list(flesch_kincaid = fk$overall, length = lengths$overall, problem_words = pws)
+
+      out <- list()
+
+      if (checks$`flesch-kincaid`$active) {
+        fk <- get_fk_score(cleaned_md)
+        out$flesch_kincaid <- fk$overall
+      }
+
+      if (checks$`length`$active) {
+        lengths <- get_length(cleaned_md)
+        out$length <- lengths$overall
+      }
+
+      if (checks$`problem_words`$active) {
+        pws <- detect_problem_words(cleaned_md)
+        out$problem_words <- pws
+      }
+
+      out
     },
     error = function(e) {
       rlang::warn(
@@ -60,7 +84,7 @@ analyse_vignette <- function(vig_path) {
           x = e$message
         )
       )
-      list(flesch_kincaid = NA, length = NA, problem_words = list())
+      list()
     }
   )
 }

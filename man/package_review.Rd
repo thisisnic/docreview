@@ -4,24 +4,12 @@
 \alias{package_review}
 \title{Review package documentation}
 \usage{
-package_review(
-  path = ".",
-  error_on_failure = FALSE,
-  error_on_warning = FALSE,
-  doc_types = c("functions", "vignettes"),
-  thresholds = default_thresholds()
-)
+package_review(path = ".", config = get_config())
 }
 \arguments{
 \item{path}{Path to package}
 
-\item{error_on_failure}{Raise an error on any review check failures}
-
-\item{error_on_warning}{Raise an error on any review check warnings}
-
-\item{doc_types}{Types of documentation to review}
-
-\item{thresholds}{List of thresholds that result in fails or warnings}
+\item{config}{Review check configuration}
 }
 \description{
 Review package documentation

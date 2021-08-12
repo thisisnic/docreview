@@ -4,7 +4,7 @@
 \alias{function_get_comments}
 \title{Count failures and warnings for function review}
 \usage{
-function_get_comments(results, thresholds)
+function_get_comments(results, checks)
 }
 \arguments{
 \item{results}{Results of function review}

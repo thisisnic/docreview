@@ -4,17 +4,13 @@
 \alias{function_review}
 \title{Review functions}
 \usage{
-function_review(path, thresholds = default_thresholds()$functions)
+function_review(path, checks = get_config()$functions)
 }
 \arguments{
 \item{path}{Path to package}
 
-\item{thresholds}{List of thresholds that result in fails or warnings}
+\item{checks}{Checks to run}
 }
 \description{
 Review functions
-}
-\examples{
-pkg_path <- system.file("testpkg", package = "docreview")
-function_review(pkg_path)
 }

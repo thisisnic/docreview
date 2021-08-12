@@ -4,7 +4,7 @@
 \alias{function_results_display}
 \title{Parse function documentation analysis results}
 \usage{
-function_results_display(results, thresholds)
+function_results_display(results, config)
 }
 \arguments{
 \item{results}{Results of function documentation analysis}

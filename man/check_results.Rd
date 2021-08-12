@@ -4,7 +4,7 @@
 \alias{check_results}
 \title{Check results and raise error if necessary}
 \usage{
-check_results(results, error_on_failure, error_on_warning)
+check_results(results, config)
 }
 \arguments{
 \item{results}{List of docreview results}
