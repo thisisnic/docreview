@@ -4,17 +4,13 @@
 \alias{vignette_review}
 \title{Review vignettes}
 \usage{
-vignette_review(path, thresholds = default_thresholds()$vignettes)
+vignette_review(path, checks = get_config()$vignettes)
 }
 \arguments{
 \item{path}{Path to package}
 
-\item{thresholds}{List of thresholds that result in fails or warnings}
+\item{checks}{Checks to run}
 }
 \description{
 Review vignettes
-}
-\examples{
-pkg_path <- system.file("testpkg", package = "docreview")
-vignette_review(pkg_path)
 }

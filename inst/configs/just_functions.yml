@@ -1,0 +1,16 @@
+error_on_failure: false
+
+error_on_warning: false
+
+vignettes:
+  active: false
+
+functions:
+  active: true
+  exports_without_examples:
+    active: true
+    missing_examples:
+      active: true
+      warn: 1
+      fail: 1
+      approval: "low"

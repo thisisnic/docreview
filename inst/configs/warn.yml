@@ -1,0 +1,39 @@
+error_on_failure: true
+
+error_on_warning: true
+
+vignettes:
+  active: true
+  flesch-kincaid:
+    active: true
+    thresholds:
+      poor_readbility:
+        active: true
+        warn: 50
+        fail: 30
+        approval: "high"
+  length:
+    active: true
+    thresholds:
+      too_long:
+        active: true
+        warn: 2000
+        fail: 3000
+        approval: "low"
+      too_short:
+        active: true
+        warn: 100
+        fail: 0
+        approval: "high"
+  problem_words:
+    active: false
+
+functions:
+  active: true
+  exports_without_examples:
+    active: true
+    missing_examples:
+      active: true
+      warn: 1
+      fail: 1
+      approval: "low"

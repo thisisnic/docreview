@@ -4,7 +4,7 @@
 \alias{analyse_vignette}
 \title{Analyse a single vignette}
 \usage{
-analyse_vignette(vig_path)
+analyse_vignette(vig_path, checks = get_config()$vignettes)
 }
 \arguments{
 \item{vig_path}{Path to directory where vignette is}

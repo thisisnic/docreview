@@ -1,38 +1,36 @@
 pkg_path <- system.file("testpkg", package = "docreview")
 
-test_that("package_review works as expected", {
-  pr <- suppressMessages(package_review(pkg_path))
-  expect_named(pr, c("functions", "vignettes"))
-})
-
 test_that("package_review can exclude sections from review", {
-  pr1 <- suppressMessages(package_review(pkg_path, doc_types = "functions"))
+  just_func <- get_config(system.file(package="docreview", "configs/just_functions.yml"))
+  pr1 <- suppressMessages(package_review(pkg_path, just_func))
   expect_named(pr1, "functions")
 
-  pr2 <- suppressMessages(package_review(pkg_path, doc_types = "vignettes"))
+  just_vignettes <- get_config(system.file(package="docreview", "configs/just_vignettes.yml"))
+  pr2 <- suppressMessages(package_review(pkg_path, just_vignettes))
   expect_named(pr2, "vignettes")
 })
 
-test_that("package_review can exclude sections from review", {
+test_that("package_review can raise errors", {
+
+  error <- get_config(system.file(package="docreview", "configs/error.yml"))
+  warn <- get_config(system.file(package="docreview", "configs/warn.yml"))
+
   expect_error(
-    suppressMessages(package_review(pkg_path, error_on_failure = TRUE)),
+    suppressMessages(package_review(pkg_path, error)),
     regexp = "Failures found by docreview: 1"
   )
 
   expect_error(
-    suppressMessages(package_review(pkg_path, error_on_warning = TRUE)),
+    suppressMessages(package_review(pkg_path, warn)),
     regexp = "Warnings found by docreview: 2"
   )
 })
 
 test_that("package_review can set custom thresholds", {
-  custom_thresholds <- set_thresholds(
-    exports_without_examples = "warn",
-    fk_fail = 40, fk_warn = 50,
-    length_fail = 200, length_warn = 100
-  )
 
-  res <- suppressMessages(package_review(pkg_path, thresholds = custom_thresholds))
+  thresholds <- get_config(system.file(package="docreview", "configs/thresholds.yml"))
+
+  res <- suppressMessages(package_review(pkg_path, thresholds))
 
   expect_equal(res$functions$failures, 0)
   expect_equal(res$functions$warnings, 1)
@@ -40,8 +38,3 @@ test_that("package_review can set custom thresholds", {
   expect_equal(res$vignettes$warnings, 1)
 })
 
-test_that("set_thresholds invalid threshold value", {
-  expect_error(
-    set_thresholds(exports_without_examples = "irrelevant"),
-  )
-})

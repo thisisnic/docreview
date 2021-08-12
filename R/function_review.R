@@ -1,17 +1,15 @@
 #' Review functions
 #'
 #' @param path Path to package
-#' @param thresholds List of thresholds that result in fails or warnings
-#' @export
-#' @examples
-#' pkg_path <- system.file("testpkg", package = "docreview")
-#' function_review(pkg_path)
-function_review <- function(path, thresholds = default_thresholds()$functions) {
-  detailed_results <- list(
-    exports_examples = find_exports_without_examples(path)
-  )
+#' @param checks Checks to run
+function_review <- function(path, checks = get_config()$functions) {
+  detailed_results <- list()
 
-  comments <- function_get_comments(detailed_results, thresholds)
+  if (checks$exports_without_examples$active) {
+    detailed_results$exports_examples <- find_exports_without_examples(path)
+  }
+
+  comments <- function_get_comments(detailed_results, checks)
 
   list(failures = comments$fail, warnings = comments$warn, details = detailed_results)
 }
@@ -21,16 +19,16 @@ function_review <- function(path, thresholds = default_thresholds()$functions) {
 #' @param results Results of function review
 #' @param thresholds List of thresholds that result in fails or warnings
 #' @keywords internal
-function_get_comments <- function(results, thresholds) {
+function_get_comments <- function(results, checks) {
   comments <- list(fail = 0, warn = 0)
 
-  # Count failures and warnings for exports without examples
-  need_examples <- sum(!results$exports_examples)
+  if (checks$exports_without_examples$active) {
+    # Count failures and warnings for exports without examples
+    need_examples <- sum(!results$exports_examples)
 
-  if (need_examples > 0) {
-    if (thresholds$exports_without_examples == "fail") {
+    if (need_examples >= checks$exports_without_examples$missing_examples$fail) {
       comments$fail <- comments$fail + need_examples
-    } else if (thresholds$exports_without_examples == "warn") {
+    } else if (need_examples >= checks$exports_without_examples$missing_examples$warn) {
       comments$warn <- comments$warn + need_examples
     }
   }

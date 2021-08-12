@@ -4,7 +4,7 @@
 \alias{vignette_results_display}
 \title{Parse Vignette Results}
 \usage{
-vignette_results_display(results, thresholds)
+vignette_results_display(results, config = get_config()$vignettes)
 }
 \arguments{
 \item{vignette_results}{Output of calling vignette analysis function}

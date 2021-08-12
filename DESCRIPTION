@@ -1,6 +1,6 @@
 Package: docreview
-Title: Opiniated Documentation Checking
-Version: 0.0.0.9000
+Title: Opinionated Documentation Checking
+Version: 0.0.1
 Authors@R: 
     person(given = "Nic",
            family = "Crane",
@@ -8,25 +8,27 @@ Authors@R:
            email = "thisisnic@gmail.com")
 Description: An opinionated package for enhancing R package documentation.
 License: MIT + file LICENSE
+URL: https://thisisnic.github.io/docreview
 BugReports: https://github.com/thisisnic/docreview/issues
-URL: http://thisisnic.github.io/docreview
-Encoding: UTF-8
+Imports: 
+    cli,
+    parsermd,
+    purrr,
+    quanteda,
+    quanteda.textstats,
+    rlang,
+    stringr,
+    tools,
+    utils,
+    yaml
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: 
+    knitr
 Config/testthat/edition: 3
+Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001
-Imports: 
-    assertthat,
-    purrr,
-    utils,
-    parsermd,
-    quanteda,
-    quanteda.textstats,
-    cli,
-    stringr,
-    rlang
-Suggests:
-    rmarkdown,
-    knitr,
-    testthat
-VignetteBuilder: knitr
