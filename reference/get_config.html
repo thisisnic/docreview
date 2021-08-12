@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get example code from parsed RD — get_example_code_from_rd • docreview</title>
+<title>Set config for docreview checks — get_config • docreview</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get example code from parsed RD — get_example_code_from_rd" />
-<meta property="og:description" content="Get example code from parsed RD" />
+<meta property="og:title" content="Set config for docreview checks — get_config" />
+<meta property="og:description" content="Set config for docreview checks" />
 
 
 
@@ -111,17 +111,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get example code from parsed RD</h1>
-    <small class="dont-index">Source: <a href='https://github.com/thisisnic/docreview/blob/master/R/function_review.R'><code>R/function_review.R</code></a></small>
-    <div class="hidden name"><code>get_example_code_from_rd.Rd</code></div>
+    <h1>Set config for docreview checks</h1>
+    <small class="dont-index">Source: <a href='https://github.com/thisisnic/docreview/blob/master/R/package_review.R'><code>R/package_review.R</code></a></small>
+    <div class="hidden name"><code>get_config.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get example code from parsed RD</p>
+    <p>Set config for docreview checks</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_example_code_from_rd</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_config</span><span class='op'>(</span>
+  config_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"configs/docreview.yml"</span>, package <span class='op'>=</span> <span class='st'>"docreview"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>config_path</th>
+      <td><p>Path to config file</p></td>
+    </tr>
+    </table>
 
 
   </div>

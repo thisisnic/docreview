@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">docreview</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@
     <p>Review vignettes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>vignette_review</span><span class='op'>(</span><span class='va'>path</span>, thresholds <span class='op'>=</span> <span class='fu'>default_thresholds</span><span class='op'>(</span><span class='op'>)</span><span class='op'>$</span><span class='va'>vignettes</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>vignette_review</span><span class='op'>(</span><span class='va'>path</span>, checks <span class='op'>=</span> <span class='fu'><a href='get_config.html'>get_config</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>$</span><span class='va'>vignettes</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -130,45 +130,12 @@
       <td><p>Path to package</p></td>
     </tr>
     <tr>
-      <th>thresholds</th>
-      <td><p>List of thresholds that result in fails or warnings</p></td>
+      <th>checks</th>
+      <td><p>Checks to run</p></td>
     </tr>
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>pkg_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"testpkg"</span>, package <span class='op'>=</span> <span class='st'>"docreview"</span><span class='op'>)</span>
-<span class='fu'>vignette_review</span><span class='op'>(</span><span class='va'>pkg_path</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $failures
-#&gt; [1] 0
-#&gt; 
-#&gt; $warnings
-#&gt; [1] 2
-#&gt; 
-#&gt; $details
-#&gt; $details$testpkg.Rmd
-#&gt; $details$testpkg.Rmd$flesch_kincaid
-#&gt; [1] 36.09856
-#&gt; 
-#&gt; $details$testpkg.Rmd$length
-#&gt; [1] 351
-#&gt; 
-#&gt; $details$testpkg.Rmd$problem_words
-#&gt; list()
-#&gt; 
-#&gt; 
-#&gt; $details$testpkg2.Rmd
-#&gt; $details$testpkg2.Rmd$flesch_kincaid
-#&gt; [1] 33.72669
-#&gt; 
-#&gt; $details$testpkg2.Rmd$length
-#&gt; [1] 170
-#&gt; 
-#&gt; $details$testpkg2.Rmd$problem_words
-#&gt; list()
-#&gt; 
-#&gt; 
-#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
