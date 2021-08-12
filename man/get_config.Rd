@@ -8,6 +8,9 @@ get_config(
   config_path = system.file("configs/docreview.yml", package = "docreview")
 )
 }
+\arguments{
+\item{config_path}{Path to config file}
+}
 \description{
 Set config for docreview checks
 }

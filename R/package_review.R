@@ -61,6 +61,7 @@ check_results <- function(results, config) {
 
 #' Set config for docreview checks
 #'
+#' @param config_path Path to config file
 #' @importFrom yaml read_yaml
 #' @export
 get_config <- function(config_path = system.file("configs/docreview.yml", package = "docreview")) {
