@@ -3,3 +3,4 @@
 ^LICENSE\.md$
 ^\.github$
 inst/tstpkg/*
+^cran-comments\.md$
