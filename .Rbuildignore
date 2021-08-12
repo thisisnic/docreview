@@ -4,3 +4,4 @@
 ^\.github$
 inst/tstpkg/*
 ^cran-comments\.md$
+^CRAN-RELEASE$
