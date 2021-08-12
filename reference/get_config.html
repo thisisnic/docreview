@@ -134,6 +134,105 @@
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Get default configuration</span>
+<span class='fu'>get_config</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $error_on_failure
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $error_on_warning
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $vignettes
+#&gt; $vignettes$active
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $vignettes$`flesch-kincaid`
+#&gt; $vignettes$`flesch-kincaid`$active
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $vignettes$`flesch-kincaid`$thresholds
+#&gt; $vignettes$`flesch-kincaid`$thresholds$poor_readbility
+#&gt; $vignettes$`flesch-kincaid`$thresholds$poor_readbility$active
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $vignettes$`flesch-kincaid`$thresholds$poor_readbility$warn
+#&gt; [1] 50
+#&gt; 
+#&gt; $vignettes$`flesch-kincaid`$thresholds$poor_readbility$fail
+#&gt; [1] 30
+#&gt; 
+#&gt; $vignettes$`flesch-kincaid`$thresholds$poor_readbility$approval
+#&gt; [1] "high"
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; $vignettes$length
+#&gt; $vignettes$length$active
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $vignettes$length$thresholds
+#&gt; $vignettes$length$thresholds$too_long
+#&gt; $vignettes$length$thresholds$too_long$active
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $vignettes$length$thresholds$too_long$warn
+#&gt; [1] 2000
+#&gt; 
+#&gt; $vignettes$length$thresholds$too_long$fail
+#&gt; [1] 3000
+#&gt; 
+#&gt; $vignettes$length$thresholds$too_long$approval
+#&gt; [1] "low"
+#&gt; 
+#&gt; 
+#&gt; $vignettes$length$thresholds$too_short
+#&gt; $vignettes$length$thresholds$too_short$active
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $vignettes$length$thresholds$too_short$warn
+#&gt; [1] 100
+#&gt; 
+#&gt; $vignettes$length$thresholds$too_short$fail
+#&gt; [1] 0
+#&gt; 
+#&gt; $vignettes$length$thresholds$too_short$approval
+#&gt; [1] "high"
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; $vignettes$problem_words
+#&gt; $vignettes$problem_words$active
+#&gt; [1] FALSE
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; $functions
+#&gt; $functions$active
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $functions$exports_without_examples
+#&gt; $functions$exports_without_examples$active
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $functions$exports_without_examples$missing_examples
+#&gt; $functions$exports_without_examples$missing_examples$active
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $functions$exports_without_examples$missing_examples$warn
+#&gt; [1] 1
+#&gt; 
+#&gt; $functions$exports_without_examples$missing_examples$fail
+#&gt; [1] 1
+#&gt; 
+#&gt; $functions$exports_without_examples$missing_examples$approval
+#&gt; [1] "low"
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
