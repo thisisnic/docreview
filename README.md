@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# docreview <img src="man/figures/logo.png" align="right" />
+# docreview <img src="man/figures/logo.svg" align="right" />
 
 <!-- badges: start -->
 
@@ -43,3 +43,10 @@ package_review(path = pkg_path)
 See [the
 vignette](https://thisisnic.github.io/docreview/articles/docreview.html)
 for more detailed usage guides.
+
+## Current default review checks
+
+-   Vignettes are no more than 2000 words (warn) or 3000 words (fail)
+-   Vignettes have a Flesch Kincaid readability score lower than 50
+    (warn) or 30 (fail)
+-   All exported functions have examples in their documentation
