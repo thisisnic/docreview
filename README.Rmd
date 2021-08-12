@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# docreview <img src="man/figures/logo.svg" align="right" width="100px" />
+# docreview 
 
 <!-- badges: start -->
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/docreview)](https://cran.r-project.org/package=docreview)
