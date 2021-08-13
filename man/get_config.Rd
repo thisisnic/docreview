@@ -5,7 +5,8 @@
 \title{Set config for docreview checks}
 \usage{
 get_config(
-  config_path = system.file("configs/docreview.yml", package = "docreview")
+  config_path = system.file("configs/docreview.yml", package = "docreview", mustWork =
+    TRUE)
 )
 }
 \arguments{

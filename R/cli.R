@@ -40,8 +40,8 @@ vignette_results_display <- function(results, config = get_config()$vignettes) {
         bullet_names <- rep(" ", length(length_scores))
         bullet_names[length_scores >= length_thresholds$too_long$fail | length_scores <= length_thresholds$too_short$fail] <- "x"
 
-        bullet_names[(length_scores < length_thresholds$too_long$fail & length_scores >= length_thresholds$too_long$warn)|
-                       (length_scores > length_thresholds$too_short$fail & length_scores <= length_thresholds$too_short$warn)] <- "!"
+        bullet_names[(length_scores < length_thresholds$too_long$fail & length_scores >= length_thresholds$too_long$warn) |
+          (length_scores > length_thresholds$too_short$fail & length_scores <= length_thresholds$too_short$warn)] <- "!"
 
         bullet_names[length_scores < length_thresholds$too_long$warn | length_scores > length_thresholds$too_short$warn] <- "v"
 
