@@ -8,8 +8,8 @@ Authors@R:
            email = "thisisnic@gmail.com")
 Description: An opinionated package for enhancing R package documentation.
 License: MIT + file LICENSE
-URL: https://thisisnic.github.io/docreview
-BugReports: https://github.com/thisisnic/docreview/issues
+URL: https://thisisnic.github.io/docreview/
+BugReports: https://github.com/thisisnic/docreview/issues/
 Imports: 
     cli,
     parsermd,
