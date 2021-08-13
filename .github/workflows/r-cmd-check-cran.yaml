@@ -68,7 +68,7 @@ jobs:
         run: |
           install.packages("devtools")
           devtools::load_all()
-          docreview::package_review(config = system.file(package="docreview", "configs/error.yml")
+          docreview::package_review(config = get_config(system.file(package="docreview", "configs/error.yml")))
         shell: Rscript {0}
 
       - name: Check

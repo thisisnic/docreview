@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/docreview)](https://cran.r-project.org/package=docreview)
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![R-CMD-check](https://github.com/thisisnic/docreview/workflows/R-CMD-check/badge.svg)](https://github.com/thisisnic/docreview/actions?query=workflow%3AR-CMD-check)
 [![codecov](https://codecov.io/gh/thisisnic/docreview/branch/main/graph/badge.svg)](https://codecov.io/gh/thisisnic/docreview)
 <!-- badges: end -->
@@ -46,7 +46,8 @@ for more detailed usage guides.
 
 ## Current default review checks
 
--   Vignettes are no more than 2000 words (warn) or 3000 words (fail)
--   Vignettes have a Flesch Kincaid readability score lower than 50
+-   Vignettes have no more than 2000 words (warn) or 3000 words (fail)
+-   Vignettes have no fewer than 100 words (warn) or 0 words (fail)
+-   Vignettes have a Flesch-Kincaid readability score lower than 50
     (warn) or 30 (fail)
 -   All exported functions have examples in their documentation

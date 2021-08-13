@@ -48,6 +48,7 @@ get_example <- function(rd_path) {
 #' Get example code from parsed RD
 #'
 #' @keywords internal
+#' @import utils
 get_example_code_from_rd <- utils::getFromNamespace(".Rd_get_example_code", "tools")
 
 rd_get_name <- utils::getFromNamespace(".Rd_get_name", "tools")

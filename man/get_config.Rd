@@ -14,3 +14,7 @@ get_config(
 \description{
 Set config for docreview checks
 }
+\examples{
+# Get default configuration
+get_config()
+}
