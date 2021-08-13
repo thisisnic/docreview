@@ -1,3 +1,4 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # docreview
@@ -45,7 +46,8 @@ for more detailed usage guides.
 
 ## Current default review checks
 
--   Vignettes are no more than 2000 words (warn) or 3000 words (fail)
--   Vignettes have a Flesch Kincaid readability score lower than 50
+-   Vignettes have no more than 2000 words (warn) or 3000 words (fail)
+-   Vignettes have no fewer than 100 words (warn) or 0 words (fail)
+-   Vignettes have a Flesch-Kincaid readability score lower than 50
     (warn) or 30 (fail)
 -   All exported functions have examples in their documentation
