@@ -43,7 +43,7 @@ vignette_results_display <- function(results, config = get_config()$vignettes) {
         bullet_names[(length_scores < length_thresholds$too_long$fail & length_scores >= length_thresholds$too_long$warn) |
           (length_scores > length_thresholds$too_short$fail & length_scores <= length_thresholds$too_short$warn)] <- "!"
 
-        bullet_names[length_scores < length_thresholds$too_long$warn | length_scores > length_thresholds$too_short$warn] <- "v"
+        bullet_names[bullet_names == " "] <- "v"
 
         names(bullet_vals) <- bullet_names
 
