@@ -8,3 +8,4 @@
 0 errors | 0 warnings | 1 note
 
 * This is a new release.
+* The unexported function with an example (`./inst/testpkg/R/add.Rd `) is for use by the package in running tests and in its example code
