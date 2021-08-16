@@ -53,10 +53,7 @@ vignettes_get_comments <- function(results, checks = get_config()$vignettes) {
 analyse_vignette <- function(vig_path, checks = get_config()$vignettes) {
   tryCatch(
     {
-      vig_sects <- parse_vignette(vig_path)
-      cleaned_md <- lapply(vig_sects, clean_chunks)
-      # remove empty chunks so we don't get any errors
-      cleaned_md <- cleaned_md[cleaned_md != ""]
+      cleaned_md <- parse_vignette(vig_path)
 
       out <- list()
 
@@ -138,8 +135,30 @@ get_fk_score <- function(code) {
 #' @keywords internal
 clean_chunks <- function(chunk) {
   no_links <- remove_links(chunk)
-  no_backticks <- remove_backticks(no_links)
-  stringr::str_trim(no_backticks)
+  no_code <- remove_code(no_links)
+  no_bullets <- remove_bullets(no_code)
+  no_pipe_tables <- remove_pipe_tables(no_bullets)
+  stringr::str_trim(no_pipe_tables)
+}
+
+#' Remove pipe table from a chunk
+#'
+#' Remove any pipe tables in markdown code
+#'
+#' @param chunk Code chunk
+#' @keywords internal
+remove_pipe_tables <- function(chunk) {
+  stringr::str_replace_all(chunk, "\\|(.*)\\|", "<TABLE>")
+}
+
+#' Remove bullet points from a chunk
+#'
+#' Remove any bullet points in markdown format
+#'
+#' @param chunk Code chunk
+#' @keywords internal
+remove_bullets <- function(chunk) {
+  stringr::str_remove_all(chunk, "\\*")
 }
 
 #' Remove links from a chunk
@@ -149,15 +168,15 @@ clean_chunks <- function(chunk) {
 #' @param chunk Code chunk
 #' @keywords internal
 remove_links <- function(chunk) {
-  stringr::str_remove_all(chunk, "\\[([^\\[]+)\\]\\(.*?\\)")
+  stringr::str_replace_all(chunk, "\\[([^\\[]+)\\]\\(.*?\\)", "<HYPERLINK>")
 }
 
 #' Remove any code in backticks from a chunk
 #'
 #' @param chunk Code chunk
 #' @keywords internal
-remove_backticks <- function(chunk) {
-  stringr::str_remove_all(chunk, "`.*?`")
+remove_code <- function(chunk) {
+  stringr::str_replace_all(chunk, "`{1,3}[^`]+`{1,3}", "<CODE>")
 }
 
 #' Parse a vignette
@@ -166,20 +185,25 @@ remove_backticks <- function(chunk) {
 #' @return List of length 1 character vectors containing contents of each markdown section
 #' @keywords internal
 parse_vignette <- function(vig_path) {
-  vig <- parsermd::parse_rmd(vig_path)
 
-  # Extract all markdown sections
-  md_sections <- parsermd::rmd_select(vig, parsermd::has_type("rmd_markdown"))
-  lapply(md_sections, extract_md_section)
-}
+  vig_lines <- readLines(vig_path)
 
-#' Extract markdown section
-#'
-#' Extract the content from the markdown section and collapse it into one string
-#'
-#' @param md Markdown
-#' @keywords internal
-extract_md_section <- function(md) {
-  doc <- parsermd::as_document(md)
-  paste(doc, collapse = " ")
+  no_headers <- stringr::str_replace_all(
+    vig_lines,
+    "^#.*",
+    "<SECTION>"
+  )
+
+  one_chunk <- paste(no_headers, collapse = " ")
+
+  no_code <- remove_code(one_chunk)
+  no_vignette_headers <- stringr::str_remove_all(no_code, "---.*?---")
+
+  no_links <- remove_links(no_vignette_headers)
+  no_bullets <- remove_bullets(no_links)
+  no_pipe_tables <- remove_pipe_tables(no_bullets)
+  sections <- stringr::str_split(no_pipe_tables, "<SECTION>")
+
+  purrr::map(sections, stringr::str_trim)[[1]]
+
 }

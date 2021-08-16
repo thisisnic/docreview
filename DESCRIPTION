@@ -12,7 +12,6 @@ URL: https://thisisnic.github.io/docreview/
 BugReports: https://github.com/thisisnic/docreview/issues/
 Imports: 
     cli,
-    parsermd,
     purrr,
     quanteda,
     quanteda.textstats,
