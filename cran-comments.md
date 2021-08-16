@@ -8,4 +8,6 @@
 0 errors | 0 warnings | 1 note
 
 * This is a new release.
-* The unexported function with an example (`./inst/testpkg/R/add.Rd `) is for use by docreview for running unit tests and code examples against.
+
+## Unexported function with an example
+* The function which might show up as an unexported function with an example (`./inst/testpkg/R/add.Rd `) is intentional - it's inside a "dummy package" for use by docreview to run unit tests and code examples against, as one of the things that docreview does is check whether package functions have examples or not
