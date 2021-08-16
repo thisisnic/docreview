@@ -117,7 +117,7 @@ get_length <- function(md) {
 #' @keywords internal
 get_fk_score <- function(code) {
   chunk_scores <- lapply(code, function(x) {
-    textstat_readability(x)$Flesch
+    suppressWarnings(textstat_readability(x)$Flesch)
   })
 
   # if fk < 0, something's probably gone a bit wrong
