@@ -33,8 +33,15 @@ You can use __docreview__ to check that your R package documentation passes a nu
 
 ## Installation
 
+You can install docreview from CRAN
+
 ```{r, eval=FALSE}
-# Install the development version from GitHub:
+install.packages("docreview")
+```
+
+If you'd like access to the most up-to-date features, you can install the development version from GitHhub.
+
+```{r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("thisisnic/docreview")
 ```

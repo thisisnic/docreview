@@ -4,6 +4,7 @@
 # docreview
 
 <!-- badges: start -->
+
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/docreview)](https://cran.r-project.org/package=docreview)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![R-CMD-check](https://github.com/thisisnic/docreview/workflows/R-CMD-check/badge.svg)](https://github.com/thisisnic/docreview/actions?query=workflow%3AR-CMD-check)
@@ -25,8 +26,16 @@ passes a number of checks:
 
 ## Installation
 
+You can install docreview from CRAN
+
 ``` r
-# Install the development version from GitHub:
+install.packages("docreview")
+```
+
+If you’d like access to the most up-to-date features, you can install
+the development version from GitHhub.
+
+``` r
 # install.packages("devtools")
 devtools::install_github("thisisnic/docreview")
 ```
