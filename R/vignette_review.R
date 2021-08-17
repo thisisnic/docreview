@@ -53,22 +53,22 @@ vignettes_get_comments <- function(results, checks = get_config()$vignettes) {
 analyse_vignette <- function(vig_path, checks = get_config()$vignettes) {
   tryCatch(
     {
-      cleaned_md <- parse_vignette(vig_path)
+      parsed_vig <- parse_vignette(vig_path)
 
       out <- list()
 
       if (checks$`flesch-kincaid`$active) {
-        fk <- get_fk_score(cleaned_md)
+        fk <- get_fk_score(parsed_vig$cleaned)
         out$flesch_kincaid <- fk$overall
       }
 
       if (checks$`length`$active) {
-        lengths <- get_length(cleaned_md)
+        lengths <- get_length(parsed_vig$cleaned)
         out$length <- lengths$overall
       }
 
       if (checks$`problem_words`$active) {
-        pws <- detect_problem_words(cleaned_md)
+        pws <- detect_problem_words(parsed_vig$cleaned)
         out$problem_words <- pws
       }
 
@@ -185,7 +185,6 @@ remove_code <- function(chunk) {
 #' @return List of length 1 character vectors containing contents of each markdown section
 #' @keywords internal
 parse_vignette <- function(vig_path) {
-
   vig_lines <- readLines(vig_path)
 
   no_headers <- stringr::str_replace_all(
@@ -196,14 +195,28 @@ parse_vignette <- function(vig_path) {
 
   one_chunk <- paste(no_headers, collapse = " ")
 
+  not_cleaned <- divide_by_section(one_chunk)
+
   no_code <- remove_code(one_chunk)
   no_vignette_headers <- stringr::str_remove_all(no_code, "---.*?---")
 
   no_links <- remove_links(no_vignette_headers)
   no_bullets <- remove_bullets(no_links)
   no_pipe_tables <- remove_pipe_tables(no_bullets)
-  sections <- stringr::str_split(no_pipe_tables, "<SECTION>")
+  sections <- divide_by_section(no_pipe_tables)
 
-  purrr::map(sections, stringr::str_trim)[[1]]
+  cleaned <- purrr::map(sections, stringr::str_trim)
 
+  out <- list(raw = not_cleaned, cleaned = cleaned)
+
+  out
+
+}
+
+divide_by_section <- function(md_text){
+  no_vignette_headers <- stringr::str_remove_all(md_text, "---.*?---")
+  divided <- stringr::str_split(no_vignette_headers, "<SECTION>")[[1]]
+
+  trimmed <- stringr::str_trim(divided)
+  trimmed[trimmed != ""]
 }
