@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r, include=FALSE}
 devtools::load_all(".")
+library(ggplot2)
 ```
 
 ```{r setup}
@@ -32,10 +33,26 @@ add(1, 2)
 add(1, NA, na.rm = TRUE)
 ```
 
-
+![](add.png)
 
 Besides counting items, addition can also be defined and executed without referring to concrete objects, using abstractions called numbers instead, such as integers, real numbers and complex numbers. Addition belongs to arithmetic, a branch of mathematics. In algebra, another area of mathematics, addition can also be performed on abstract objects such as vectors, matrices, subspaces and subgroups.
 
+```{r}
+ggplot(iris, aes(x = Species, y = Sepal.Length)) + geom_col()
+```
+
 Addition has several important properties. It is commutative, meaning that order does not matter, and it is associative, meaning that when one adds more than two numbers, the order in which addition is performed does not matter (see Summation). Repeated addition of 1 is the same as counting; addition of 0 does not change a number. Addition also obeys predictable rules concerning related operations such as subtraction and multiplication.
 
+```{r, fig.alt = "This figure does have alt text and so it's better"}
+ggplot(iris, aes(x = Species, y = Sepal.Length)) + geom_col()
+```
+
 Performing addition is one of the simplest numerical tasks. Addition of very small numbers is accessible to toddlers; the most basic task, 1 + 1, can be performed by infants as young as five months, and even some members of other animal species. In primary education, students are taught to add numbers in the decimal system, starting with single digits and progressively tackling more difficult problems. Mechanical aids range from the ancient abacus to the modern computer, where research on the most efficient implementations of addition continues to this day. 
+
+# The same image, twice
+
+![Is a caption alt text? Well, not really!](addition.png)
+
+```{r, fig.alt = "The trick is to include the alt text up here", out.width="25%"}
+knitr::include_graphics("plus_sign.png")
+```
