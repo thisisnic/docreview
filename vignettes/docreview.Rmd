@@ -2,7 +2,7 @@
 title: "Introduction to docreview"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{docreview}
+  %\VignetteIndexEntry{Introduction to docreview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
