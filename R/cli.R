@@ -4,7 +4,7 @@
 #' @param error_on_failure Raise an error on any negative reviews
 #'
 #' @keywords internal
-vignette_results_display <- function(results, config = get_config()$vignettes) {
+vignette_results_display <- function(results, config) {
   cli({
     cli_h2("Vignettes")
 
