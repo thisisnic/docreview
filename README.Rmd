@@ -48,8 +48,19 @@ devtools::install_github("thisisnic/docreview")
 
 ## Usage
 
-```{r, eval=FALSE}
+```{r, include = FALSE}
+devtools::load_all()
+
+```
+
+
+```{r, eval = FALSE}
 library(docreview)
+pkg_path <- system.file("testpkg", package = "docreview")
+package_review(path = pkg_path)
+```
+```{r, eval = FALSE}
+devtools::load_all()
 pkg_path <- system.file("testpkg", package = "docreview")
 package_review(path = pkg_path)
 ```
@@ -61,3 +72,4 @@ See [the vignette](https://thisisnic.github.io/docreview/articles/docreview.html
 * Vignettes have no fewer than 100 words (warn) or 0 words (fail)
 * Vignettes have a Flesch-Kincaid readability score lower than 50 (warn) or 30 (fail)
 * All exported functions have examples in their documentation
+* All images in vignettes contain alt text
