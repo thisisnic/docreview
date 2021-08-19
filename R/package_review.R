@@ -23,6 +23,7 @@ package_review <- function(path = ".", config = get_config()) {
     vignette_results_display(results$vignettes$details, vignette_checks)
   }
 
+
   check_results(results, config)
 }
 
