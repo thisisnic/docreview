@@ -105,7 +105,7 @@ check_image_alt_text <- function(vig_path) {
   dir.create(td)
 
   withr::with_options(list(knitr.duplicate.label = "allow"), {
-    rmarkdown::render(input = vig_path, output_dir = td)
+    rmarkdown::render(input = vig_path, output_dir = td, quiet = TRUE)
   })
 
   # Get path to it
