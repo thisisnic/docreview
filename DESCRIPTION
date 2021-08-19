@@ -16,6 +16,7 @@ Imports:
     quanteda,
     quanteda.textstats,
     rlang,
+    rvest,
     stringr,
     tools,
     utils,
