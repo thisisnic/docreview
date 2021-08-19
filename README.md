@@ -17,12 +17,8 @@ When writing R packages, high quality documentation can make for a great
 experience for your users.
 
 You can use **docreview** to check that your R package documentation
-passes a number of checks:
-
--   all exported functions should have documented examples of how to use
-    them
--   vignettes should not be too long
--   vignettes should not be too complex
+passes a number of checks relating to function documentation and
+vignette quality.
 
 ## Installation
 
@@ -45,6 +41,11 @@ devtools::install_github("thisisnic/docreview")
 ``` r
 library(docreview)
 pkg_path <- system.file("testpkg", package = "docreview")
+
+# ensure you have rebuilt your vignettes if you want to run checks requiring the HTML files
+tools::buildVignettes(dir = pkg_path, quiet = TRUE)
+
+# Review docs in the package
 package_review(path = pkg_path)
 ```
 
@@ -59,3 +60,4 @@ for more detailed usage guides.
 -   Vignettes have a Flesch-Kincaid readability score lower than 50
     (warn) or 30 (fail)
 -   All exported functions have examples in their documentation
+-   All images in vignettes contain alt text

@@ -16,13 +16,15 @@ Imports:
     quanteda,
     quanteda.textstats,
     rlang,
+    rmarkdown,
+    rvest,
     stringr,
     tools,
     utils,
+    withr,
     yaml
 Suggests:
     knitr,
-    rmarkdown,
     testthat
 VignetteBuilder: 
     knitr

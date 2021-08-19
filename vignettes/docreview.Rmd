@@ -2,7 +2,7 @@
 title: "Introduction to docreview"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{docreview}
+  %\VignetteIndexEntry{Introduction to docreview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -30,6 +30,14 @@ This list of checks, as well as the metrics used to assess them, is likely to gr
 
 You can use docreview to check your documentation locally, and also on your CI - see below for how to raise an error when a documentation review check fails.
 
+Note that some vignette checks require you to have compiled the HTML versions.  You can use `tools::buildVignettes()` to do this.
+
+```{r, eval = FALSE}
+# ensure you have rebuilt your vignettes if you want to run checks requiring the HTML files
+tools::buildVignettes(dir = "./path_to_package/")
+```
+
+
 ## Basic usage
 ```{r}
 library(docreview)
@@ -51,7 +59,7 @@ package_review(path = pkg_path, config = get_config(func_only_config))
 
 You might not agree with the thresholds set for review checks resulting in failures or warnings.  That's OK!  You can set your own custom thresholds.
 
-```{r}
+```{r, basic}
 stricter_thresholds <- system.file("configs/thresholds.yml", package = "docreview")
 package_review(path = pkg_path, config = get_config(stricter_thresholds))
 ```

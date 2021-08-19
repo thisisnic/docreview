@@ -24,7 +24,11 @@ find_exports_without_examples <- function(path = ".") {
 #' @keywords internal
 find_vignettes <- function(path = ".") {
   vig_path <- file.path(path, "vignettes")
-  list.files(vig_path, ".Rmd", full.names = TRUE)
+  vigs <- list.files(vig_path, ".Rmd", full.names = TRUE)
+  if(length(vigs) == 0){
+    rlang::warn("Vignette checks enabled but no vignettes detected")
+  }
+  vigs
 }
 
 #' Get exports

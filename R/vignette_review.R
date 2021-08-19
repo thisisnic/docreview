@@ -2,8 +2,15 @@
 #'
 #' @param path Path to package
 #' @param checks Checks to run
-vignette_review <- function(path, checks = get_config()$vignettes) {
+vignette_review <- function(path, checks) {
+
   vig_paths <- find_vignettes(path)
+
+  # some checks require built docs - if this is the case, check the html exists
+  if (html_required(checks)) {
+    check_vignettes_built(path)
+  }
+
   detailed_results <- lapply(vig_paths, analyse_vignette, checks = checks)
   names(detailed_results) <- basename(vig_paths)
 
@@ -12,10 +19,11 @@ vignette_review <- function(path, checks = get_config()$vignettes) {
   list(failures = comments$fail, warnings = comments$warn, details = detailed_results)
 }
 
-vignettes_get_comments <- function(results, checks = get_config()$vignettes) {
+vignettes_get_comments <- function(results, checks) {
+
   comments <- list(fail = 0, warn = 0)
 
-  if (checks$`flesch-kincaid`$active) {
+  if (!is.null(checks$`flesch-kincaid`) && checks$`flesch-kincaid`$active) {
     # Count failures and warnings for Flesch Kincaid scores
     fk_scores <- map(results, "flesch_kincaid")
     fk_thresholds <- checks$`flesch-kincaid`$thresholds$poor_readbility
@@ -27,7 +35,7 @@ vignettes_get_comments <- function(results, checks = get_config()$vignettes) {
     comments$warn <- comments$warn + fk_warns
   }
 
-  if (checks$length$active) {
+  if (!is.null(checks$length) && checks$length$active) {
     # Count failures and warnings for lengths
     length_scores <- map(results, "length")
     long_thresholds <- checks$length$thresholds$too_long
@@ -43,6 +51,22 @@ vignettes_get_comments <- function(results, checks = get_config()$vignettes) {
     comments$warn <- comments$warn + long_warns + short_warns
   }
 
+  if (!is.null(checks$image_alt_text) && checks$image_alt_text$active) {
+    alt_checks <- checks$image_alt_text
+
+    imgs <- unlist(map(results, "image_alt_text"))
+    imgs[is.na(imgs)] <- ""
+
+    failed_images <- imgs[nchar(imgs) < alt_checks$min_chars]
+    n_fail <- length(failed_images)
+
+    if (n_fail > alt_checks$fail) {
+      comments$fail <- comments$fail + n_fail
+    } else if (n_fail < alt_checks$fail & n_fail > alt_checks$warn) {
+      comments$warn <- comments$warn + n_fail
+    }
+  }
+
   comments
 }
 
@@ -50,9 +74,8 @@ vignettes_get_comments <- function(results, checks = get_config()$vignettes) {
 #'
 #' @param vig_path Path to directory where vignette is
 #' @keywords internal
-analyse_vignette <- function(vig_path, checks = get_config()$vignettes) {
-  tryCatch(
-    {
+analyse_vignette <- function(vig_path, checks) {
+
       parsed_vig <- parse_vignette(vig_path)
 
       out <- list()
@@ -72,18 +95,29 @@ analyse_vignette <- function(vig_path, checks = get_config()$vignettes) {
         out$problem_words <- pws
       }
 
+      if (checks$image_alt_text$active) {
+        out$image_alt_text <- check_image_alt_text(vig_path)
+      }
+
       out
-    },
-    error = function(e) {
-      rlang::warn(
-        c(
-          paste("Could not parse vignette at path:", vig_path),
-          x = e$message
-        )
-      )
-      list()
-    }
-  )
+}
+
+#' Check each image for an alt text description
+#'
+#' @param vig_path Path to vignette
+#' @keywords internal
+check_image_alt_text <- function(vig_path) {
+
+  # Get path to it
+  compiled_vig_path <- stringr::str_replace_all(vig_path, ".Rmd$", ".html")
+
+  # Read it in and get images and alt text
+  vig_html <- rvest::read_html(compiled_vig_path)
+
+  images <- rvest::html_elements(vig_html, "img")
+  alt_text <- rvest::html_attr(images, "alt")
+
+  alt_text
 }
 
 detect_problem_words <- function(md) {
@@ -210,10 +244,15 @@ parse_vignette <- function(vig_path) {
   out <- list(raw = not_cleaned, cleaned = cleaned)
 
   out
-
 }
 
-divide_by_section <- function(md_text){
+#' Divide by section
+#'
+#' Split a markdown document based on '<SECTION'> tags added a a previous stage
+#'
+#' @param md_text Markdown text
+#' @keywords internal
+divide_by_section <- function(md_text) {
   no_vignette_headers <- stringr::str_remove_all(md_text, "---.*?---")
   divided <- stringr::str_split(no_vignette_headers, "<SECTION>")[[1]]
 
