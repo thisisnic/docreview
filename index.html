@@ -91,17 +91,13 @@
 <p>If you’d like access to the most up-to-date features, you can install the development version from GitHhub.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"thisisnic/docreview"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"thisisnic/docreview"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://thisisnic.github.io/docreview/">docreview</a></span><span class="op">)</span>
-<span class="va">pkg_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testpkg"</span>, package <span class="op">=</span> <span class="st">"docreview"</span><span class="op">)</span>
-<span class="fu"><a href="reference/package_review.html">package_review</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">pkg_path</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/load_all.html">load_all</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">pkg_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testpkg"</span>, package <span class="op">=</span> <span class="st">"docreview"</span><span class="op">)</span>
 <span class="fu"><a href="reference/package_review.html">package_review</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">pkg_path</span><span class="op">)</span></code></pre></div>
 <p>See <a href="https://thisisnic.github.io/docreview/articles/docreview.html">the vignette</a> for more detailed usage guides.</p>
@@ -114,7 +110,6 @@
 <li>Vignettes have no fewer than 100 words (warn) or 0 words (fail)</li>
 <li>Vignettes have a Flesch-Kincaid readability score lower than 50 (warn) or 30 (fail)</li>
 <li>All exported functions have examples in their documentation</li>
-<li>All images in vignettes contain alt text</li>
 </ul>
 </div>
 </div>
