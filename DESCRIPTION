@@ -12,13 +12,16 @@ URL: https://thisisnic.github.io/docreview/
 BugReports: https://github.com/thisisnic/docreview/issues/
 Imports: 
     cli,
+    devtools,
     purrr,
     quanteda,
     quanteda.textstats,
     rlang,
+    rvest,
     stringr,
     tools,
     utils,
+    withr,
     yaml
 Suggests:
     knitr,

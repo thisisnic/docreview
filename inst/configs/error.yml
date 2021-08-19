@@ -27,6 +27,8 @@ vignettes:
         approval: "high"
   problem_words:
     active: false
+  image_alt_text:
+    active: false
 
 functions:
   active: true
