@@ -6,7 +6,6 @@ vignette_review <- function(path, checks = get_config()$vignettes) {
   vig_paths <- find_vignettes(path)
   detailed_results <- lapply(vig_paths, analyse_vignette, checks = checks)
   names(detailed_results) <- basename(vig_paths)
-
   comments <- vignettes_get_comments(detailed_results, checks)
 
   list(failures = comments$fail, warnings = comments$warn, details = detailed_results)
@@ -43,6 +42,22 @@ vignettes_get_comments <- function(results, checks = get_config()$vignettes) {
     comments$warn <- comments$warn + long_warns + short_warns
   }
 
+  if (checks$image_alt_text$active) {
+    alt_checks <- checks$image_alt_text
+
+    imgs <- unlist(map(results, "image_alt_text"))
+    imgs[is.na(imgs)] <- ""
+
+    failed_images <- imgs[nchar(imgs) < alt_checks$min_chars]
+    n_fail <- length(failed_images)
+
+    if (n_fail > alt_checks$fail) {
+      comments$fail <- comments$fail + n_fail
+    } else if (n_fail < alt_checks$fail & n_fail > alt_checks$warn) {
+      comments$warn <- comments$warn + n_fail
+    }
+  }
+
   comments
 }
 
@@ -72,6 +87,10 @@ analyse_vignette <- function(vig_path, checks = get_config()$vignettes) {
         out$problem_words <- pws
       }
 
+      if (checks$image_alt_text$active) {
+        out$image_alt_text <- check_image_alt_text(vig_path)
+      }
+
       out
     },
     error = function(e) {
@@ -84,6 +103,29 @@ analyse_vignette <- function(vig_path, checks = get_config()$vignettes) {
       list()
     }
   )
+}
+
+#' Check each image for an alt text description
+#'
+#' @param vig_path Path to vignette
+#' @keywords internal
+check_image_alt_text <- function(vig_path) {
+  # Build vignette in temporary directory
+  td <- tempfile()
+  dir.create(td)
+  tools::buildVignette(vig_path, dir = td)
+
+  # Get path to it
+  compiled_vig_path <- stringr::str_replace_all(basename(vig_path), ".Rmd$", ".html")
+  full_path <- file.path(td, compiled_vig_path)
+
+  # Read it in and get images and alt text
+  vig_html <- rvest::read_html(full_path)
+
+  images <- rvest::html_elements(vig_html, "img")
+  alt_text <- rvest::html_attr(images, "alt")
+
+  alt_text
 }
 
 detect_problem_words <- function(md) {
@@ -210,10 +252,9 @@ parse_vignette <- function(vig_path) {
   out <- list(raw = not_cleaned, cleaned = cleaned)
 
   out
-
 }
 
-divide_by_section <- function(md_text){
+divide_by_section <- function(md_text) {
   no_vignette_headers <- stringr::str_remove_all(md_text, "---.*?---")
   divided <- stringr::str_split(no_vignette_headers, "<SECTION>")[[1]]
 
