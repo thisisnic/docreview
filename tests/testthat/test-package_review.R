@@ -29,9 +29,16 @@ test_that("package_review can set custom thresholds", {
   thresholds <- get_config(system.file(package = "docreview", "configs/thresholds.yml"))
 
   res <- suppressMessages(package_review(pkg_path, thresholds))
-
   expect_equal(res$functions$failures, 0)
   expect_equal(res$functions$warnings, 1)
+  expect_equal(res$vignettes$failures, 2)
+  expect_equal(res$vignettes$warnings, 2)
+})
+
+test_that("package_review default thresholds", {
+  res <- suppressMessages(package_review(pkg_path))
+  expect_equal(res$functions$failures, 1)
+  expect_equal(res$functions$warnings, 0)
   expect_equal(res$vignettes$failures, 3)
-  expect_equal(res$vignettes$warnings, 1)
+  expect_equal(res$vignettes$warnings, 2)
 })
