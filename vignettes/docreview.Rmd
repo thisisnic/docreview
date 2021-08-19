@@ -51,7 +51,7 @@ package_review(path = pkg_path, config = get_config(func_only_config))
 
 You might not agree with the thresholds set for review checks resulting in failures or warnings.  That's OK!  You can set your own custom thresholds.
 
-```{r}
+```{r, basic}
 stricter_thresholds <- system.file("configs/thresholds.yml", package = "docreview")
 package_review(path = pkg_path, config = get_config(stricter_thresholds))
 ```
