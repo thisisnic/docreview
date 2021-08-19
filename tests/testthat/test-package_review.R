@@ -1,18 +1,18 @@
-pkg_path <- system.file("testpkg", package = "docreview")
+pkg_path <- system.file("testpkg", package = "docreview", mustWork = TRUE)
 
 test_that("package_review can exclude sections from review", {
-  just_func <- get_config(system.file(package = "docreview", "configs/just_functions.yml"))
+  just_func <- get_config(system.file(package = "docreview", "configs", "just_functions.yml", mustWork = TRUE))
   pr1 <- suppressMessages(package_review(pkg_path, just_func))
   expect_named(pr1, "functions")
 
-  just_vignettes <- get_config(system.file(package = "docreview", "configs/just_vignettes.yml"))
+  just_vignettes <- get_config(system.file(package = "docreview", "configs", "just_vignettes.yml", mustWork = TRUE))
   pr2 <- suppressMessages(package_review(pkg_path, just_vignettes))
   expect_named(pr2, "vignettes")
 })
 
 test_that("package_review can raise errors", {
-  error <- get_config(system.file(package = "docreview", "configs/error.yml"))
-  warn <- get_config(system.file(package = "docreview", "configs/warn.yml"))
+  error <- get_config(system.file(package = "docreview", "configs", "error.yml", mustWork = TRUE))
+  warn <- get_config(system.file(package = "docreview", "configs", "warn.yml", mustWork = TRUE))
 
   expect_error(
     suppressMessages(package_review(pkg_path, error)),
@@ -26,7 +26,7 @@ test_that("package_review can raise errors", {
 })
 
 test_that("package_review can set custom thresholds", {
-  thresholds <- get_config(system.file(package = "docreview", "configs/thresholds.yml"))
+  thresholds <- get_config(system.file(package = "docreview", "configs", "thresholds.yml", mustWork = TRUE))
 
   res <- suppressMessages(package_review(pkg_path, thresholds))
   expect_equal(res$functions$failures, 0)

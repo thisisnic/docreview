@@ -4,7 +4,7 @@
 \alias{vignette_review}
 \title{Review vignettes}
 \usage{
-vignette_review(path, checks = get_config()$vignettes)
+vignette_review(path, checks)
 }
 \arguments{
 \item{path}{Path to package}
