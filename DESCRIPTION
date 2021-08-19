@@ -20,6 +20,7 @@ Imports:
     stringr,
     tools,
     utils,
+    withr,
     yaml
 Suggests:
     knitr,
