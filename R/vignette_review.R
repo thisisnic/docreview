@@ -3,7 +3,14 @@
 #' @param path Path to package
 #' @param checks Checks to run
 vignette_review <- function(path, checks) {
+
   vig_paths <- find_vignettes(path)
+
+  # some checks require built docs - if this is the case, check the html exists
+  if (html_required(checks)) {
+    check_vignettes_built(path)
+  }
+
   detailed_results <- lapply(vig_paths, analyse_vignette, checks = checks)
   names(detailed_results) <- basename(vig_paths)
 
@@ -100,20 +107,12 @@ analyse_vignette <- function(vig_path, checks) {
 #' @param vig_path Path to vignette
 #' @keywords internal
 check_image_alt_text <- function(vig_path) {
-  # Build vignette in temporary directory
-  td <- tempfile()
-  dir.create(td)
-
-  withr::with_options(list(knitr.duplicate.label = "allow"), {
-    rmarkdown::render(input = vig_path, output_dir = td, quiet = TRUE)
-  })
 
   # Get path to it
-  compiled_vig_path <- stringr::str_replace_all(basename(vig_path), ".Rmd$", ".html")
-  full_path <- file.path(td, compiled_vig_path)
+  compiled_vig_path <- stringr::str_replace_all(vig_path, ".Rmd$", ".html")
 
   # Read it in and get images and alt text
-  vig_html <- rvest::read_html(full_path)
+  vig_html <- rvest::read_html(compiled_vig_path)
 
   images <- rvest::html_elements(vig_html, "img")
   alt_text <- rvest::html_attr(images, "alt")
@@ -247,6 +246,12 @@ parse_vignette <- function(vig_path) {
   out
 }
 
+#' Divide by section
+#'
+#' Split a markdown document based on '<SECTION'> tags added a a previous stage
+#'
+#' @param md_text Markdown text
+#' @keywords internal
 divide_by_section <- function(md_text) {
   no_vignette_headers <- stringr::str_remove_all(md_text, "---.*?---")
   divided <- stringr::str_split(no_vignette_headers, "<SECTION>")[[1]]

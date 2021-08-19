@@ -30,6 +30,14 @@ This list of checks, as well as the metrics used to assess them, is likely to gr
 
 You can use docreview to check your documentation locally, and also on your CI - see below for how to raise an error when a documentation review check fails.
 
+Note that some vignette checks require you to have compiled the HTML versions.  You can use `tools::buildVignettes()` to do this.
+
+```{r, eval = FALSE}
+# ensure you have rebuilt your vignettes if you want to run checks requiring the HTML files
+tools::buildVignettes(dir = "./path_to_package/")
+```
+
+
 ## Basic usage
 ```{r}
 library(docreview)

@@ -32,6 +32,7 @@ vignettes:
     fail: 1
     warn: 1
     min_chars: 10
+    html_required: true
 
 functions:
   active: true
