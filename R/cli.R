@@ -12,7 +12,7 @@ vignette_results_display <- function(results, config = get_config()$vignettes) {
       cli_h3("No vignettes detected")
     } else {
       if (config$`flesch-kincaid`$active) {
-        cli_h3("Flesch Kincaid reading complexity scores")
+        cli_h3("Flesch Kincaid reading complexity scores:")
 
         fk_thresholds <- config$`flesch-kincaid`$thresholds$poor_readbility
         fk_scores <- map_dbl(results, "flesch_kincaid")
@@ -49,14 +49,6 @@ vignette_results_display <- function(results, config = get_config()$vignettes) {
 
         cli_bullets(bullet_vals)
       }
-
-      if (config$image_alt_text$active) {
-        cli_h3("Image alt text")
-
-        alt_checks <- config$image_alt_text
-
-        iwalk(results, get_image_vignette_cli, min_chars = alt_checks$min_chars)
-      }
     }
   })
 }
@@ -85,35 +77,5 @@ function_results_display <- function(results, config) {
         cli_bullets(exports)
       }
     })
-  }
-}
-
-get_image_vignette_cli <- function(vignette_res, name, min_chars) {
-  imgs <- vignette_res$image_alt_text
-  n_imgs <- length(imgs)
-
-  cli_text(
-    paste(
-      "Total # images in", name, ":", length(imgs)
-    )
-  )
-
-  if (n_imgs > 0) {
-    failed_images <- imgs[nchar(imgs) < min_chars]
-    cli_text(
-      paste(
-        "Total # images in", name, "containing alt text: ", n_imgs - length(failed_images)
-      )
-    )
-
-    # Blank field is as bad as no field
-    imgs[is.na(imgs)] <- ""
-
-    bullet_names <- map_chr(imgs, ~ ifelse(.x > min_chars, "v", "x"))
-
-    bullets <- paste("Image", seq_along(imgs))
-    names(bullets) <- bullet_names
-
-    cli_bullets(bullets)
   }
 }
