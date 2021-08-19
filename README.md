@@ -48,12 +48,6 @@ pkg_path <- system.file("testpkg", package = "docreview")
 package_review(path = pkg_path)
 ```
 
-``` r
-devtools::load_all()
-pkg_path <- system.file("testpkg", package = "docreview")
-package_review(path = pkg_path)
-```
-
 See [the
 vignette](https://thisisnic.github.io/docreview/articles/docreview.html)
 for more detailed usage guides.
@@ -65,4 +59,3 @@ for more detailed usage guides.
 -   Vignettes have a Flesch-Kincaid readability score lower than 50
     (warn) or 30 (fail)
 -   All exported functions have examples in their documentation
--   All images in vignettes contain alt text

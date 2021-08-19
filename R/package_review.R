@@ -66,6 +66,6 @@ check_results <- function(results, config) {
 #' @examples
 #' # Get default configuration
 #' get_config()
-get_config <- function(config_path = system.file("configs", "docreview.yml", package = "docreview", mustWork = TRUE)) {
+get_config <- function(config_path = system.file("configs/docreview.yml", package = "docreview", mustWork = TRUE)) {
   read_yaml(config_path)
 }

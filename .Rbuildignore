@@ -7,5 +7,3 @@ inst/pkg_bad_vignettes/*
 ^cran-comments\.md$
 ^CRAN-RELEASE$
 ^README\.Rmd$
-^doc$
-^Meta$
