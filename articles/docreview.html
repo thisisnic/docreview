@@ -93,94 +93,35 @@
 <div id="basic-usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-usage" class="anchor"></a>Basic usage</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(docreview)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="op">&gt;</span><span class="st"> </span>pkg_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"testpkg"</span>, <span class="dt">package =</span> <span class="st">"docreview"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">package_review</span>(<span class="dt">path =</span> pkg_path)</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a>── docreview Results ───────────────────────────────────────────────────────────</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>── Function Documentation ──</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a>── Exported functions containing examples <span class="cf">in</span> their documentation<span class="op">:</span><span class="st">  </span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>✔ add</span>
-<span id="cb1-11"><a href="#cb1-11"></a>✖ deduct</span>
-<span id="cb1-12"><a href="#cb1-12"></a></span>
-<span id="cb1-13"><a href="#cb1-13"></a>── Vignettes ──</span>
-<span id="cb1-14"><a href="#cb1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15"></a>── Flesch Kincaid reading complexity scores<span class="op">:</span><span class="st"> </span></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="op">!</span><span class="st"> </span>testpkg.Rmd<span class="op">:</span><span class="st"> </span><span class="fl">38.21</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="op">!</span><span class="st"> </span>testpkg2.Rmd<span class="op">:</span><span class="st"> </span><span class="fl">38.04</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a>── Length scores </span>
-<span id="cb1-20"><a href="#cb1-20"></a>✔ testpkg.Rmd<span class="op">:</span><span class="st"> </span><span class="dv">366</span> words.</span>
-<span id="cb1-21"><a href="#cb1-21"></a>✔ testpkg2.Rmd<span class="op">:</span><span class="st"> </span><span class="dv">185</span> words.</span></code></pre></div>
+<p>library(docreview)pkg_path &lt;- system.file(“testpkg”, package = “docreview”)package_review(path = pkg_path) ── docreview Results ───────────────────────────────────────────────────────────</p>
+<p>── Function Documentation ──</p>
+<p>── Exported functions containing examples in their documentation:<br>
+✔ add ✖ deduct</p>
+<p>── Vignettes ──</p>
+<p>── Flesch Kincaid reading complexity scores ! testpkg.Rmd: 41.53 ! testpkg2.Rmd: 37.28</p>
+<p>── Length scores ✔ testpkg.Rmd: 382 words. ✔ testpkg2.Rmd: 182 words.</p>
+<p>── Image alt text Total # images in testpkg.Rmd : 5 Total # images in testpkg.Rmd containing alt text: 2 ✖ Image 1 ✖ Image 2 ✔ Image 3 ✖ Image 4 ✔ Image 5 Total # images in testpkg2.Rmd : 0</p>
 </div>
 <div id="choose-what-to-review" class="section level2">
 <h2 class="hasAnchor">
 <a href="#choose-what-to-review" class="anchor"></a>Choose what to review</h2>
 <p>You can choose which components of documentation to review.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">&gt;</span><span class="st"> </span>func_only_config &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"configs/just_functions.yml"</span>, <span class="dt">package =</span> <span class="st">"docreview"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">package_review</span>(<span class="dt">path =</span> pkg_path, <span class="dt">config =</span> <span class="kw">get_config</span>(func_only_config))</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a>── docreview Results ───────────────────────────────────────────────────────────</span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a>── Function Documentation ──</span>
-<span id="cb2-7"><a href="#cb2-7"></a></span>
-<span id="cb2-8"><a href="#cb2-8"></a>── Exported functions containing examples <span class="cf">in</span> their documentation<span class="op">:</span><span class="st">  </span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>✔ add</span>
-<span id="cb2-10"><a href="#cb2-10"></a>✖ deduct</span></code></pre></div>
+<p>func_only_config &lt;- system.file(“configs/just_functions.yml”, package = “docreview”)package_review(path = pkg_path, config = get_config(func_only_config))## ## ── docreview Results ─────────────────────────────────────────────────────────── ## ## ── Function Documentation ── ## ## ── Exported functions containing examples in their documentation:<br>
+## ✔ add ## ✖ deduct</p>
 </div>
 <div id="set-custom-thresholds-for-review-check-failures-and-warnings" class="section level2">
 <h2 class="hasAnchor">
 <a href="#set-custom-thresholds-for-review-check-failures-and-warnings" class="anchor"></a>Set custom thresholds for review check failures and warnings</h2>
 <p>You might not agree with the thresholds set for review checks resulting in failures or warnings. That’s OK! You can set your own custom thresholds.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">&gt;</span><span class="st"> </span>stricter_thresholds &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"configs/thresholds.yml"</span>, <span class="dt">package =</span> <span class="st">"docreview"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">package_review</span>(<span class="dt">path =</span> pkg_path, <span class="dt">config =</span> <span class="kw">get_config</span>(stricter_thresholds))</span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a>── docreview Results ───────────────────────────────────────────────────────────</span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a>── Function Documentation ──</span>
-<span id="cb3-7"><a href="#cb3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8"></a>── Exported functions containing examples <span class="cf">in</span> their documentation<span class="op">:</span><span class="st">  </span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>✔ add</span>
-<span id="cb3-10"><a href="#cb3-10"></a>✖ deduct</span>
-<span id="cb3-11"><a href="#cb3-11"></a></span>
-<span id="cb3-12"><a href="#cb3-12"></a>── Vignettes ──</span>
-<span id="cb3-13"><a href="#cb3-13"></a></span>
-<span id="cb3-14"><a href="#cb3-14"></a>── Flesch Kincaid reading complexity scores<span class="op">:</span><span class="st"> </span></span>
-<span id="cb3-15"><a href="#cb3-15"></a>✖ testpkg.Rmd<span class="op">:</span><span class="st"> </span><span class="fl">38.21</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a>✖ testpkg2.Rmd<span class="op">:</span><span class="st"> </span><span class="fl">38.04</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a></span>
-<span id="cb3-18"><a href="#cb3-18"></a>── Length scores </span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="op">!</span><span class="st"> </span>testpkg.Rmd<span class="op">:</span><span class="st"> </span><span class="dv">366</span> words.</span>
-<span id="cb3-20"><a href="#cb3-20"></a>✖ testpkg2.Rmd<span class="op">:</span><span class="st"> </span><span class="dv">185</span> words.</span></code></pre></div>
+<p>stricter_thresholds &lt;- system.file(“configs/thresholds.yml”, package = “docreview”)package_review(path = pkg_path, config = get_config(stricter_thresholds))## ## ── docreview Results ─────────────────────────────────────────────────────────── ## ## ── Function Documentation ── ## ## ── Exported functions containing examples in their documentation:<br>
+## ✔ add ## ✖ deduct ## ## ── Vignettes ── ## ## ── Flesch Kincaid reading complexity scores ## ! testpkg.Rmd: 41.53 ## ✖ testpkg2.Rmd: 37.28 ## ## ── Length scores ## ! testpkg.Rmd: 382 words. ## ✖ testpkg2.Rmd: 182 words.</p>
 </div>
 <div id="raise-an-error-when-review-checks-produce-failures-or-warnings" class="section level2">
 <h2 class="hasAnchor">
 <a href="#raise-an-error-when-review-checks-produce-failures-or-warnings" class="anchor"></a>Raise an error when review checks produce failures or warnings</h2>
 <p>If you’re using docreview as part of your CI, you may want to raise an error when the review checks produce a failure or warning.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">&gt;</span><span class="st"> </span>error &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"configs/error.yml"</span>, <span class="dt">package =</span> <span class="st">"docreview"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="op">&gt;</span><span class="st"> </span>docreview<span class="op">::</span><span class="kw">package_review</span>(<span class="dt">path =</span> pkg_path, <span class="kw">get_config</span>(error))</span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a>── docreview Results ───────────────────────────────────────────────────────────</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a>── Function Documentation ──</span>
-<span id="cb4-7"><a href="#cb4-7"></a></span>
-<span id="cb4-8"><a href="#cb4-8"></a>── Exported functions containing examples <span class="cf">in</span> their documentation<span class="op">:</span><span class="st">  </span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>✔ add</span>
-<span id="cb4-10"><a href="#cb4-10"></a>✖ deduct</span>
-<span id="cb4-11"><a href="#cb4-11"></a></span>
-<span id="cb4-12"><a href="#cb4-12"></a>── Vignettes ──</span>
-<span id="cb4-13"><a href="#cb4-13"></a></span>
-<span id="cb4-14"><a href="#cb4-14"></a>── Flesch Kincaid reading complexity scores<span class="op">:</span><span class="st"> </span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="op">!</span><span class="st"> </span>testpkg.Rmd<span class="op">:</span><span class="st"> </span><span class="fl">38.21</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="op">!</span><span class="st"> </span>testpkg2.Rmd<span class="op">:</span><span class="st"> </span><span class="fl">38.04</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a></span>
-<span id="cb4-18"><a href="#cb4-18"></a>── Length scores </span>
-<span id="cb4-19"><a href="#cb4-19"></a>✔ testpkg.Rmd<span class="op">:</span><span class="st"> </span><span class="dv">366</span> words.</span>
-<span id="cb4-20"><a href="#cb4-20"></a>✔ testpkg2.Rmd<span class="op">:</span><span class="st"> </span><span class="dv">185</span> words.</span>
-<span id="cb4-21"><a href="#cb4-21"></a>Error <span class="cf">in</span> <span class="ot">FALSE</span><span class="op">:</span><span class="st"> </span></span>
-<span id="cb4-22"><a href="#cb4-22"></a>Failures found by docreview<span class="op">:</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<p>error &lt;- system.file(“configs/error.yml”, package = “docreview”)docreview::package_review(path = pkg_path, get_config(error))## ## ── docreview Results ─────────────────────────────────────────────────────────── ## ## ── Function Documentation ── ## ## ── Exported functions containing examples in their documentation:<br>
+## ✔ add ## ✖ deduct ## ## ── Vignettes ── ## ## ── Flesch Kincaid reading complexity scores ## ! testpkg.Rmd: 41.53 ## ! testpkg2.Rmd: 37.28 ## ## ── Length scores ## ✔ testpkg.Rmd: 382 words. ## ✔ testpkg2.Rmd: 182 words. ## Error in FALSE: ## Failures found by docreview: 1</p>
 </div>
   </div>
 
