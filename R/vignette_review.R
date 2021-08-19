@@ -2,19 +2,21 @@
 #'
 #' @param path Path to package
 #' @param checks Checks to run
-vignette_review <- function(path, checks = get_config()$vignettes) {
+vignette_review <- function(path, checks) {
   vig_paths <- find_vignettes(path)
   detailed_results <- lapply(vig_paths, analyse_vignette, checks = checks)
   names(detailed_results) <- basename(vig_paths)
+
   comments <- vignettes_get_comments(detailed_results, checks)
 
   list(failures = comments$fail, warnings = comments$warn, details = detailed_results)
 }
 
-vignettes_get_comments <- function(results, checks = get_config()$vignettes) {
+vignettes_get_comments <- function(results, checks) {
+
   comments <- list(fail = 0, warn = 0)
 
-  if (checks$`flesch-kincaid`$active) {
+  if (!is.null(checks$`flesch-kincaid`) && checks$`flesch-kincaid`$active) {
     # Count failures and warnings for Flesch Kincaid scores
     fk_scores <- map(results, "flesch_kincaid")
     fk_thresholds <- checks$`flesch-kincaid`$thresholds$poor_readbility
@@ -26,7 +28,7 @@ vignettes_get_comments <- function(results, checks = get_config()$vignettes) {
     comments$warn <- comments$warn + fk_warns
   }
 
-  if (checks$length$active) {
+  if (!is.null(checks$length) && checks$length$active) {
     # Count failures and warnings for lengths
     length_scores <- map(results, "length")
     long_thresholds <- checks$length$thresholds$too_long
@@ -42,7 +44,7 @@ vignettes_get_comments <- function(results, checks = get_config()$vignettes) {
     comments$warn <- comments$warn + long_warns + short_warns
   }
 
-  if (checks$image_alt_text$active) {
+  if (!is.null(checks$image_alt_text) && checks$image_alt_text$active) {
     alt_checks <- checks$image_alt_text
 
     imgs <- unlist(map(results, "image_alt_text"))
@@ -65,9 +67,8 @@ vignettes_get_comments <- function(results, checks = get_config()$vignettes) {
 #'
 #' @param vig_path Path to directory where vignette is
 #' @keywords internal
-analyse_vignette <- function(vig_path, checks = get_config()$vignettes) {
-  tryCatch(
-    {
+analyse_vignette <- function(vig_path, checks) {
+
       parsed_vig <- parse_vignette(vig_path)
 
       out <- list()
@@ -92,17 +93,6 @@ analyse_vignette <- function(vig_path, checks = get_config()$vignettes) {
       }
 
       out
-    },
-    error = function(e) {
-      rlang::warn(
-        c(
-          paste("Could not parse vignette at path:", vig_path),
-          x = e$message
-        )
-      )
-      list()
-    }
-  )
 }
 
 #' Check each image for an alt text description
@@ -113,7 +103,10 @@ check_image_alt_text <- function(vig_path) {
   # Build vignette in temporary directory
   td <- tempfile()
   dir.create(td)
-  tools::buildVignette(vig_path, dir = td)
+
+  withr::with_options(list(knitr.duplicate.label = "allow"), {
+    tools::buildVignette(vig_path, dir = td)
+  })
 
   # Get path to it
   compiled_vig_path <- stringr::str_replace_all(basename(vig_path), ".Rmd$", ".html")
