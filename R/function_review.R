@@ -41,16 +41,7 @@ function_get_comments <- function(results, checks) {
 #' @param rd_path Path to RD file
 #' @keywords internal
 get_example <- function(rd_path) {
-  rd <- tools::parse_Rd(rd_path)
+
   get_example_code_from_rd(rd)
 }
 
-#' Get example code from parsed RD
-#'
-#' @keywords internal
-#' @import utils
-get_example_code_from_rd <- utils::getFromNamespace(".Rd_get_example_code", "tools")
-
-rd_get_name <- utils::getFromNamespace(".Rd_get_name", "tools")
-
-rd_get_argument_name <- utils::getFromNamespace(".Rd_get_argument_names", "tools")

@@ -7,25 +7,26 @@ find_exports_without_examples <- function(path = ".") {
 
   rd_paths <- find_rd_files(path)
   rd_files <- map(rd_paths, tools::parse_Rd)
-  names(rd_files) <- basename(rd_paths)
+  names(rd_files) <- gsub(".Rd", "", basename(rd_paths))
   rds <- map(rd_files, extract_rd_components)
 
-  group_by_all
+  exports <- find_exported_functions(path)
 
+  exported_rds <- rds[names(rds) %in% exports]
 
-  # length(rd_files)
-  #
-  # examples <- find_examples(path)
-  #
-  # # TODO: refactor so we're not assuming every Rd filename matches given that some .Rds contain multiple functions
-  # names(examples) <- gsub(".Rd", "", names(examples))
-  #
-  # has_examples <- map_lgl(examples, ~ length(.x) > 0)
-  #
-  # exports <- find_exported_functions(path)
-  #
-  # has_examples[names(has_examples) %in% exports]
+  has_examples <- map_lgl(exported_rds, ~length(.x$examples) > 0)
+
 }
+
+#' Get RD files from a package
+#'
+#' @param path Path to package
+#' @noRd
+find_rd_files <- function(path = ".") {
+  man_path <- file.path(path, "man")
+  list.files(man_path, ".Rd", full.names = TRUE)
+}
+
 
 #' Find vignettes
 #'
