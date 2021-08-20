@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# docreview
+# docreview 📝🔎
 
 <!-- badges: start -->
 
@@ -14,25 +14,24 @@
 *An opinionated package for enhancing your R package documentation.*
 
 When writing R packages, high quality documentation can make for a great
-experience for your users.
+experience for your users 📦📝🌟🙂
 
 You can use **docreview** to check that your R package documentation
 passes a number of checks relating to function documentation and
-vignette quality.
+vignette quality. ✅ ✅ ❌
 
 ## Installation
 
-You can install docreview from CRAN
+You can install docreview from CRAN.
 
 ``` r
 install.packages("docreview")
 ```
 
 If you’d like access to the most up-to-date features, you can install
-the development version from GitHhub.
+the development version from GitHhub. 👩🏽‍🔧
 
 ``` r
-# install.packages("devtools")
 devtools::install_github("thisisnic/docreview")
 ```
 
@@ -55,9 +54,13 @@ for more detailed usage guides.
 
 ## Current default review checks
 
--   Vignettes have no more than 2000 words (warn) or 3000 words (fail)
--   Vignettes have no fewer than 100 words (warn) or 0 words (fail)
--   Vignettes have a Flesch-Kincaid readability score lower than 50
-    (warn) or 30 (fail)
--   All exported functions have examples in their documentation
--   All images in vignettes contain alt text
+🎯 Vignettes have no more than 2000 words (warn) or 3000 words (fail)
+
+🎯 Vignettes have no fewer than 100 words (warn) or 0 words (fail)
+
+🎯 Vignettes have a Flesch-Kincaid readability score lower than 50 (warn)
+or 30 (fail)
+
+🎯 All exported functions have examples in their documentation
+
+🎯 All images in vignettes contain alt text
