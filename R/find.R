@@ -4,7 +4,6 @@
 #' @return Logical vector of whether exported functions have examples
 #' @keywords internal
 find_exports_without_examples <- function(path = ".") {
-
   rd_paths <- find_rd_files(path)
   rd_files <- map(rd_paths, tools::parse_Rd)
   names(rd_files) <- gsub(".Rd", "", basename(rd_paths))
@@ -14,8 +13,7 @@ find_exports_without_examples <- function(path = ".") {
 
   exported_rds <- rds[names(rds) %in% exports]
 
-  has_examples <- map_lgl(exported_rds, ~length(.x$examples) > 0)
-
+  has_examples <- map_lgl(exported_rds, ~ length(.x$examples) > 0)
 }
 
 #' Get RD files from a package
@@ -37,7 +35,7 @@ find_rd_files <- function(path = ".") {
 find_vignettes <- function(path = ".") {
   vig_path <- file.path(path, "vignettes")
   vigs <- list.files(vig_path, ".Rmd", full.names = TRUE)
-  if(length(vigs) == 0){
+  if (length(vigs) == 0) {
     rlang::warn("Vignette checks enabled but no vignettes detected")
   }
   vigs

@@ -41,7 +41,5 @@ function_get_comments <- function(results, checks) {
 #' @param rd_path Path to RD file
 #' @keywords internal
 get_example <- function(rd_path) {
-
   get_example_code_from_rd(rd)
 }
-

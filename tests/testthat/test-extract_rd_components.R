@@ -1,17 +1,16 @@
 dplyr_arrange <-
-    tools::parse_Rd("./example_rd_files/arrange.Rd")
+  tools::parse_Rd("./example_rd_files/arrange.Rd")
 
 dplyr_filter_joins <-
-    tools::parse_Rd("./example_rd_files/filter-joins.Rd")
+  tools::parse_Rd("./example_rd_files/filter-joins.Rd")
 
 dplyr_mj <-
-    tools::parse_Rd("./example_rd_files/mutate-joins.Rd")
+  tools::parse_Rd("./example_rd_files/mutate-joins.Rd")
 
 dplyr_gba <-
-    tools::parse_Rd("./example_rd_files/group_by_all.Rd")
+  tools::parse_Rd("./example_rd_files/group_by_all.Rd")
 
 test_that("extract_rd_components parses examples section correctly", {
-
   skip("Need to finish work on parsing examples and properly dealing with donttest etc")
 
   rd_components_arr <- extract_rd_components(dplyr_arrange)
@@ -80,12 +79,9 @@ test_that("extract_rd_components parses examples section correctly", {
       "iris %>% group_by(across(where(is.factor), as.character))"
     )
   )
-
-
 })
 
 test_that("extract_rd_components parses sections correctly", {
-
   rd_components_arr <- extract_rd_components(dplyr_arrange)
   rd_components_fj <- extract_rd_components(dplyr_filter_joins)
   rd_components_mj <- extract_rd_components(dplyr_mj)
@@ -117,8 +113,10 @@ test_that("extract_rd_components parses sections correctly", {
     )
   )
 
-  expect_identical(rd_components$args,
-                   c("x", "y", "by", "copy", "...", "na_matches"))
+  expect_identical(
+    rd_components$args,
+    c("x", "y", "by", "copy", "...", "na_matches")
+  )
 
 
 
@@ -150,8 +148,10 @@ test_that("extract_rd_components parses sections correctly", {
     )
   )
 
-  expect_identical(rd_components$args,
-                   c("x", "y", "by", "copy", "suffix", "...", "keep", "na_matches"))
+  expect_identical(
+    rd_components$args,
+    c("x", "y", "by", "copy", "suffix", "...", "keep", "na_matches")
+  )
 
   rd_components <- extract_rd_components(dplyr_gba)
   expect_identical(
@@ -163,14 +163,14 @@ test_that("extract_rd_components parses sections correctly", {
     )
   )
 
-  expect_identical(rd_components$aliases,
-                   c("group_by_all", "group_by_at", "group_by_if"))
+  expect_identical(
+    rd_components$aliases,
+    c("group_by_all", "group_by_at", "group_by_if")
+  )
 
 
   expect_identical(
     rd_components$args,
     c(".tbl", ".funs", "...", ".add", ".drop", ".vars", ".predicate")
   )
-
-
 })

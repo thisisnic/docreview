@@ -1,6 +1,6 @@
 #' Extract the various components from an .Rd file
 #' @noRd
-extract_rd_components <- function(rd){
+extract_rd_components <- function(rd) {
   list(
     name = rd_get_name(rd),
     aliases = rd_get_aliases(rd),
@@ -10,10 +10,10 @@ extract_rd_components <- function(rd){
   )
 }
 
-rd_get_examples <- function(rd){
+rd_get_examples <- function(rd) {
   examples <- rd_get_example_code(rd)
   # Add back in this functionality when we've worked out how to handle e.g. dplyr::explain where there is \donttest
-  #paste(rlang::parse_exprs(examples))
+  # paste(rlang::parse_exprs(examples))
   examples
 }
 
@@ -27,7 +27,7 @@ rd_get_section <- utils::getFromNamespace(".Rd_get_section", "tools")
 
 rd_get_text <- utils::getFromNamespace(".Rd_get_text", "tools")
 
-rd_get_usage <- function(rd){
+rd_get_usage <- function(rd) {
   usage <- rd_get_section(rd, "usage")
   one_string <- paste(as.character(usage), collapse = "")
   no_start <- gsub("^\\\\usage\\{", "", one_string)
@@ -38,7 +38,7 @@ rd_get_usage <- function(rd){
   as.character(exprs)
 }
 
-rd_get_aliases <- function(rd){
+rd_get_aliases <- function(rd) {
   x <- rd[tools:::RdTags(rd) == "\\alias"]
   unlist(x)
 }

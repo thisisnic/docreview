@@ -3,7 +3,6 @@
 #' @param path Path to package
 #' @param checks Checks to run
 vignette_review <- function(path, checks) {
-
   vig_paths <- find_vignettes(path)
 
   # some checks require built docs - if this is the case, check the html exists
@@ -20,7 +19,6 @@ vignette_review <- function(path, checks) {
 }
 
 vignettes_get_comments <- function(results, checks) {
-
   comments <- list(fail = 0, warn = 0)
 
   if (!is.null(checks$`flesch-kincaid`) && checks$`flesch-kincaid`$active) {
@@ -75,31 +73,30 @@ vignettes_get_comments <- function(results, checks) {
 #' @param vig_path Path to directory where vignette is
 #' @keywords internal
 analyse_vignette <- function(vig_path, checks) {
+  parsed_vig <- parse_vignette(vig_path)
 
-      parsed_vig <- parse_vignette(vig_path)
+  out <- list()
 
-      out <- list()
+  if (checks$`flesch-kincaid`$active) {
+    fk <- get_fk_score(parsed_vig$cleaned)
+    out$flesch_kincaid <- fk$overall
+  }
 
-      if (checks$`flesch-kincaid`$active) {
-        fk <- get_fk_score(parsed_vig$cleaned)
-        out$flesch_kincaid <- fk$overall
-      }
+  if (checks$`length`$active) {
+    lengths <- get_length(parsed_vig$cleaned)
+    out$length <- lengths$overall
+  }
 
-      if (checks$`length`$active) {
-        lengths <- get_length(parsed_vig$cleaned)
-        out$length <- lengths$overall
-      }
+  if (checks$`problem_words`$active) {
+    pws <- detect_problem_words(parsed_vig$cleaned)
+    out$problem_words <- pws
+  }
 
-      if (checks$`problem_words`$active) {
-        pws <- detect_problem_words(parsed_vig$cleaned)
-        out$problem_words <- pws
-      }
+  if (checks$image_alt_text$active) {
+    out$image_alt_text <- check_image_alt_text(vig_path)
+  }
 
-      if (checks$image_alt_text$active) {
-        out$image_alt_text <- check_image_alt_text(vig_path)
-      }
-
-      out
+  out
 }
 
 #' Check each image for an alt text description
