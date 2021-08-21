@@ -6,25 +6,18 @@ vignettes:
   active: true
   flesch-kincaid:
     active: true
-    thresholds:
-      poor_readbility:
-        active: true
-        warn: 50
-        fail: 30
-        approval: "high"
+    warn: 50
+    fail: 30
   length:
     active: true
-    thresholds:
-      too_long:
-        active: true
-        warn: 2000
-        fail: 3000
-        approval: "low"
-      too_short:
-        active: true
-        warn: 100
-        fail: 0
-        approval: "high"
+    too_long:
+      active: true
+      warn: 2000
+      fail: 3000
+    too_short:
+      active: true
+      warn: 100
+      fail: 0
   problem_words:
     active: false
   image_alt_text:
@@ -38,8 +31,7 @@ functions:
   active: true
   exports_without_examples:
     active: true
-    missing_examples:
-      active: true
-      warn: 1
-      fail: 1
-      approval: "low"
+    warn: 1
+    fail: 1
+    # Min number of argument a function should have to be included here
+    min_arity: 1

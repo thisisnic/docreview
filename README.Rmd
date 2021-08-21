@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# docreview 
+# docreview 📝🔎
 
 <!-- badges: start -->
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/docreview)](https://cran.r-project.org/package=docreview)
@@ -23,22 +23,21 @@ knitr::opts_chunk$set(
 
 _An opinionated package for enhancing your R package documentation._
 
-When writing R packages, high quality documentation can make for a great experience for your users.  
+When writing R packages, high quality documentation can make for a great experience for your users 📦📝🌟🙂
 
-You can use __docreview__ to check that your R package documentation passes a number of checks relating to function documentation and vignette quality.
+You can use __docreview__ to check that your R package documentation passes a number of checks relating to function documentation and vignette quality. ✅  ✅  ❌
 
 ## Installation
 
-You can install docreview from CRAN
+You can install docreview from CRAN.
 
 ```{r, eval=FALSE}
 install.packages("docreview")
 ```
 
-If you'd like access to the most up-to-date features, you can install the development version from GitHhub.
+If you'd like access to the most up-to-date features, you can install the development version from GitHhub. 👩🏽‍🔧
 
 ```{r, eval=FALSE}
-# install.packages("devtools")
 devtools::install_github("thisisnic/docreview")
 ```
 
@@ -69,8 +68,13 @@ package_review(path = pkg_path)
 See [the vignette](https://thisisnic.github.io/docreview/articles/docreview.html) for more detailed usage guides.
 
 ## Current default review checks
-* Vignettes have no more than 2000 words (warn) or 3000 words (fail)
-* Vignettes have no fewer than 100 words (warn) or 0 words (fail)
-* Vignettes have a Flesch-Kincaid readability score lower than 50 (warn) or 30 (fail)
-* All exported functions have examples in their documentation
-* All images in vignettes contain alt text
+
+🎯 Vignettes have no more than 2000 words (warn) or 3000 words (fail)
+
+🎯 Vignettes have no fewer than 100 words (warn) or 0 words (fail)
+
+🎯 Vignettes have a Flesch-Kincaid readability score lower than 50 (warn) or 30 (fail)
+
+🎯 All exported functions have examples in their documentation
+
+🎯 All images in vignettes contain alt text

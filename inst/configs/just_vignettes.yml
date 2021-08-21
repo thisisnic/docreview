@@ -6,25 +6,18 @@ vignettes:
   active: true
   flesch-kincaid:
     active: true
-    thresholds:
-      poor_readbility:
-        active: true
-        warn: 50
-        fail: 30
-        approval: "high"
+    warn: 50
+    fail: 30
   length:
     active: true
-    thresholds:
-      too_long:
-        active: true
-        warn: 2000
-        fail: 3000
-        approval: "low"
-      too_short:
-        active: true
-        warn: 100
-        fail: 0
-        approval: "high"
+    too_long:
+      active: true
+      warn: 2000
+      fail: 3000
+    too_short:
+      active: true
+      warn: 100
+      fail: 0
   problem_words:
     active: false
   image_alt_text:

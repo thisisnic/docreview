@@ -3,7 +3,6 @@
 #' @param path Path to package
 #' @param checks Checks to run
 vignette_review <- function(path, checks) {
-
   vig_paths <- find_vignettes(path)
 
   # some checks require built docs - if this is the case, check the html exists
@@ -20,26 +19,27 @@ vignette_review <- function(path, checks) {
 }
 
 vignettes_get_comments <- function(results, checks) {
-
   comments <- list(fail = 0, warn = 0)
 
-  if (!is.null(checks$`flesch-kincaid`) && checks$`flesch-kincaid`$active) {
+  fk <- checks$`flesch-kincaid`
+
+  if (!is.null(fk) && fk$active) {
     # Count failures and warnings for Flesch Kincaid scores
     fk_scores <- map(results, "flesch_kincaid")
-    fk_thresholds <- checks$`flesch-kincaid`$thresholds$poor_readbility
 
-    fk_fails <- length(fk_scores[fk_scores <= fk_thresholds$fail])
-    fk_warns <- length(fk_scores[fk_scores > fk_thresholds$fail & fk_scores <= fk_thresholds$warn])
+    fk_fails <- length(fk_scores[fk_scores <= fk$fail])
+    fk_warns <- length(fk_scores[fk_scores > fk$fail & fk_scores <= fk$warn])
 
     comments$fail <- comments$fail + fk_fails
     comments$warn <- comments$warn + fk_warns
   }
 
-  if (!is.null(checks$length) && checks$length$active) {
+  cl <- checks$length
+  if (!is.null(cl) && cl$active) {
     # Count failures and warnings for lengths
     length_scores <- map(results, "length")
-    long_thresholds <- checks$length$thresholds$too_long
-    short_thresholds <- checks$length$thresholds$too_short
+    long_thresholds <- cl$too_long
+    short_thresholds <- cl$too_short
 
     long_fails <- length(length_scores[length_scores >= long_thresholds$fail])
     long_warns <- length(length_scores[length_scores < long_thresholds$fail & length_scores >= long_thresholds$warn])
@@ -75,31 +75,30 @@ vignettes_get_comments <- function(results, checks) {
 #' @param vig_path Path to directory where vignette is
 #' @keywords internal
 analyse_vignette <- function(vig_path, checks) {
+  parsed_vig <- parse_vignette(vig_path)
 
-      parsed_vig <- parse_vignette(vig_path)
+  out <- list()
 
-      out <- list()
+  if (checks$`flesch-kincaid`$active) {
+    fk <- get_fk_score(parsed_vig$cleaned)
+    out$flesch_kincaid <- fk$overall
+  }
 
-      if (checks$`flesch-kincaid`$active) {
-        fk <- get_fk_score(parsed_vig$cleaned)
-        out$flesch_kincaid <- fk$overall
-      }
+  if (checks$`length`$active) {
+    lengths <- get_length(parsed_vig$cleaned)
+    out$length <- lengths$overall
+  }
 
-      if (checks$`length`$active) {
-        lengths <- get_length(parsed_vig$cleaned)
-        out$length <- lengths$overall
-      }
+  if (checks$`problem_words`$active) {
+    pws <- detect_problem_words(parsed_vig$cleaned)
+    out$problem_words <- pws
+  }
 
-      if (checks$`problem_words`$active) {
-        pws <- detect_problem_words(parsed_vig$cleaned)
-        out$problem_words <- pws
-      }
+  if (checks$image_alt_text$active) {
+    out$image_alt_text <- check_image_alt_text(vig_path)
+  }
 
-      if (checks$image_alt_text$active) {
-        out$image_alt_text <- check_image_alt_text(vig_path)
-      }
-
-      out
+  out
 }
 
 #' Check each image for an alt text description

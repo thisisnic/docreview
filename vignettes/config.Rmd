@@ -1,0 +1,58 @@
+---
+title: "config"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{config}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# docreview configuration
+
+## check
+
+An aspect of the documentation that is to be reviewed, and its associated attributes.
+
+For example, `flesch-kincaid` checks a vignette's readability.
+
+```
+flesch-kincaid:
+  active: true
+  warn: 50
+  fail: 30
+```
+
+Its attributes are:
+* `active` - whether this check is currently active or not
+* `warn` - scores more extreme than this value will result in a warning
+* `fail` - scores more extreme than this value will result in a failure
+
+
+## subcheck
+
+A check which has been further divided into subcomponents.
+
+For example, `length` checks a vignette's word length.  It has 2 subchecks - 
+`too_long` and `too_short`.  You can configure whether these subchecks run at 
+the check level or at the subcheck level.  If `active` is set to `FALSE` at the 
+check level, this will override any subchecks which have `active` set to `TRUE`.
+
+```
+length:
+  active: true
+  too_long:
+    active: true
+    warn: 2000
+    fail: 3000
+  too_short:
+    active: true
+    warn: 100
+    fail: 0
+```
