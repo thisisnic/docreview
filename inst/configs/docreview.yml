@@ -11,7 +11,6 @@ vignettes:
         active: true
         warn: 50
         fail: 30
-        approval: "high"
   length:
     active: true
     thresholds:
@@ -19,12 +18,10 @@ vignettes:
         active: true
         warn: 2000
         fail: 3000
-        approval: "low"
       too_short:
         active: true
         warn: 100
         fail: 0
-        approval: "high"
   problem_words:
     active: false
   image_alt_text:
@@ -42,4 +39,5 @@ functions:
       active: true
       warn: 1
       fail: 1
-      approval: "low"
+      # Min number of argument a function should have to be included here
+      min_arity: 1
