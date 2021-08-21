@@ -32,13 +32,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages(c('remotes', 'rvest', 'purrr', 'withr', 'remotes', 'rlang'))
-        shell: Rscript {0}
+          install.packages(c('remotes', 'rvest', 'purrr', 'withr', 'remotes', 'rlang', 'devtools'))
+        shell: Rscript {0},
 
 
       - name: Check docreview against recently updated r-lib packages
         run: |
-          devtools::load_all()
           library(rvest)
           links <- read_html("https://github.com/orgs/r-lib/repositories?q=&type=&language=r&sort=") %>%
             html_nodes(".wb-break-all .d-inline-block") %>%
@@ -71,7 +70,7 @@ jobs:
           }
 
           purrr::walk(links, build_and_review)
-          install.packages("devtools")
+
           devtools::load_all()
           tools::buildVignettes(dir = ".")
           docreview::package_review(config = get_config(system.file(package="docreview", "configs", "error.yml", mustWork = TRUE)))
