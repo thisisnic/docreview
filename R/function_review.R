@@ -11,7 +11,7 @@ function_review <- function(path, checks = get_config()$functions) {
     exports <- rds[names(rds) %in% exports_names]
 
     # Use max here in case this param isn't set
-    arity <- max(0, checks$exports_without_examples$missing_examples$min_arity, na.rm = TRUE)
+    arity <- max(0, checks$exports_without_examples$min_arity, na.rm = TRUE)
 
     detailed_results$exports_examples <- map_lgl(
       exports,
@@ -53,9 +53,9 @@ function_get_comments <- function(results, checks) {
     # Count failures and warnings for exports without examples
     need_examples <- sum(!results$exports_examples)
 
-    if (need_examples >= checks$exports_without_examples$missing_examples$fail) {
+    if (need_examples >= checks$exports_without_examples$fail) {
       comments$fail <- comments$fail + need_examples
-    } else if (need_examples >= checks$exports_without_examples$missing_examples$warn) {
+    } else if (need_examples >= checks$exports_without_examples$warn) {
       comments$warn <- comments$warn + need_examples
     }
   }

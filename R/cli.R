@@ -11,37 +11,36 @@ vignette_results_display <- function(results, config) {
     if (length(results) == 0) {
       cli_h3("No vignettes detected")
     } else {
-      if (config$`flesch-kincaid`$active) {
+      fk <- config$`flesch-kincaid`
+      if (!is.null(fk) && fk$active) {
         cli_h3("Flesch Kincaid reading complexity scores")
-
-        fk_thresholds <- config$`flesch-kincaid`$thresholds$poor_readbility
         fk_scores <- map_dbl(results, "flesch_kincaid")
 
         bullet_vals <- paste0(names(fk_scores), ": ", round(fk_scores, 2))
 
         bullet_names <- rep(" ", length(fk_scores))
-        bullet_names[fk_scores <= fk_thresholds$fail] <- "x"
-        bullet_names[fk_scores > fk_thresholds$fail & fk_scores <= fk_thresholds$warn] <- "!"
-        bullet_names[fk_scores > fk_thresholds$warn] <- "v"
+        bullet_names[fk_scores <= fk$fail] <- "x"
+        bullet_names[fk_scores > fk$fail & fk_scores <= fk$warn] <- "!"
+        bullet_names[fk_scores > fk$warn] <- "v"
 
         names(bullet_vals) <- bullet_names
 
         cli_bullets(bullet_vals)
       }
 
-      if (config$length$active) {
+      lg <- config$length
+      if (!is.null(lg) && lg$active) {
         cli_h3("Length scores")
 
-        length_thresholds <- config$length$thresholds
         length_scores <- map_dbl(results, "length")
 
         bullet_vals <- paste0(names(length_scores), ": ", length_scores, " words.")
 
         bullet_names <- rep(" ", length(length_scores))
-        bullet_names[length_scores >= length_thresholds$too_long$fail | length_scores <= length_thresholds$too_short$fail] <- "x"
+        bullet_names[length_scores >= lg$too_long$fail | length_scores <= lg$too_short$fail] <- "x"
 
-        bullet_names[(length_scores < length_thresholds$too_long$fail & length_scores >= length_thresholds$too_long$warn) |
-          (length_scores > length_thresholds$too_short$fail & length_scores <= length_thresholds$too_short$warn)] <- "!"
+        bullet_names[(length_scores < lg$too_long$fail & length_scores >= lg$too_long$warn) |
+          (length_scores > lg$too_short$fail & length_scores <= lg$too_short$warn)] <- "!"
 
         bullet_names[bullet_names == " "] <- "v"
 
@@ -50,11 +49,9 @@ vignette_results_display <- function(results, config) {
         cli_bullets(bullet_vals)
       }
 
-      if (config$image_alt_text$active) {
+      alt_checks <- config$image_alt_text
+      if (!is.null(alt_checks) && alt_checks$active) {
         cli_h3("Image alt text")
-
-        alt_checks <- config$image_alt_text
-
         iwalk(results, get_image_vignette_cli, min_chars = alt_checks$min_chars)
       }
     }

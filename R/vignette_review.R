@@ -24,7 +24,7 @@ vignettes_get_comments <- function(results, checks) {
   if (!is.null(checks$`flesch-kincaid`) && checks$`flesch-kincaid`$active) {
     # Count failures and warnings for Flesch Kincaid scores
     fk_scores <- map(results, "flesch_kincaid")
-    fk_thresholds <- checks$`flesch-kincaid`$thresholds$poor_readbility
+    fk_thresholds <- checks$`flesch-kincaid`
 
     fk_fails <- length(fk_scores[fk_scores <= fk_thresholds$fail])
     fk_warns <- length(fk_scores[fk_scores > fk_thresholds$fail & fk_scores <= fk_thresholds$warn])

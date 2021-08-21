@@ -9,3 +9,4 @@ inst/pkg_bad_vignettes/*
 ^README\.Rmd$
 ^doc$
 ^Meta$
+^vignettes/articles$
