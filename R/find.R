@@ -3,17 +3,12 @@
 #' @param path Path to package
 #' @return Logical vector of whether exported functions have examples
 #' @keywords internal
-find_exports_without_examples <- function(path = ".") {
+analyse_rds <- function(path = ".") {
   rd_paths <- find_rd_files(path)
   rd_files <- map(rd_paths, tools::parse_Rd)
   names(rd_files) <- gsub(".Rd", "", basename(rd_paths))
-  rds <- map(rd_files, extract_rd_components)
+  map(rd_files, extract_rd_components)
 
-  exports <- find_exported_functions(path)
-
-  exported_rds <- rds[names(rds) %in% exports]
-
-  has_examples <- map_lgl(exported_rds, ~ length(.x$examples) > 0)
 }
 
 #' Get RD files from a package
