@@ -21,23 +21,25 @@ vignette_review <- function(path, checks) {
 vignettes_get_comments <- function(results, checks) {
   comments <- list(fail = 0, warn = 0)
 
-  if (!is.null(checks$`flesch-kincaid`) && checks$`flesch-kincaid`$active) {
+  fk <- checks$`flesch-kincaid`
+
+  if (!is.null(fk) && fk$active) {
     # Count failures and warnings for Flesch Kincaid scores
     fk_scores <- map(results, "flesch_kincaid")
-    fk_thresholds <- checks$`flesch-kincaid`
 
-    fk_fails <- length(fk_scores[fk_scores <= fk_thresholds$fail])
-    fk_warns <- length(fk_scores[fk_scores > fk_thresholds$fail & fk_scores <= fk_thresholds$warn])
+    fk_fails <- length(fk_scores[fk_scores <= fk$fail])
+    fk_warns <- length(fk_scores[fk_scores > fk$fail & fk_scores <= fk$warn])
 
     comments$fail <- comments$fail + fk_fails
     comments$warn <- comments$warn + fk_warns
   }
 
-  if (!is.null(checks$length) && checks$length$active) {
+  cl <- checks$length
+  if (!is.null(cl) && cl$active) {
     # Count failures and warnings for lengths
     length_scores <- map(results, "length")
-    long_thresholds <- checks$length$thresholds$too_long
-    short_thresholds <- checks$length$thresholds$too_short
+    long_thresholds <- cl$too_long
+    short_thresholds <- cl$too_short
 
     long_fails <- length(length_scores[length_scores >= long_thresholds$fail])
     long_warns <- length(length_scores[length_scores < long_thresholds$fail & length_scores >= long_thresholds$warn])
