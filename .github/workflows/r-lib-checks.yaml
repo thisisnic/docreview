@@ -75,5 +75,5 @@ jobs:
 
           pkgload::load_all()
           tools::buildVignettes(dir = ".")
-          docreview::package_review(config = get_config(system.file(package="docreview", "configs", "error.yml", mustWork = TRUE)))
+          docreview::package_review()
         shell: Rscript {0}
