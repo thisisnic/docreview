@@ -30,8 +30,6 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install dependencies
         run: |
-          install.packages(c('remotes', 'rvest', 'purrr', 'withr', 'remotes', 'rlang', 'devtools'))
-        shell: Rscript {0}
       - name: Check docreview against recently updated r-lib packages
         run: |
           library(rvest)
@@ -67,7 +65,7 @@ jobs:
 
           purrr::walk(links, build_and_review)
 
-          devtools::load_all()
+          pkgload::load_all()
           tools::buildVignettes(dir = ".")
           docreview::package_review(config = get_config(system.file(package="docreview", "configs", "error.yml", mustWork = TRUE)))
         shell: Rscript {0}
