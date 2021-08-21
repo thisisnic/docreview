@@ -60,7 +60,7 @@ jobs:
               pkg <- gsub("/r-lib/", "", link)
               path <- file.path(td, pkg)
               # vignettes call library(pkg) so the packages need installing first
-              remotes::install_local(path = path, build_vignettes = TRUE, upgrade = "always")
+              remotes::install_local(path = path, build_vignettes = TRUE, upgrade = "never", quiet = TRUE)
               tools::buildVignettes(dir=path)
               package_review(path)
             },
