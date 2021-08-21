@@ -30,6 +30,9 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install dependencies
         run: |
+          install.packages(c('remotes', 'rvest', 'purrr', 'withr', 'remotes',
+          'rlang', 'pkgload', 'curl', 'httr'))
+        shell: Rscript {0}
       - name: Check docreview against recently updated r-lib packages
         run: |
           library(rvest)
