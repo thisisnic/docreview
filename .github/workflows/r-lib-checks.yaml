@@ -32,11 +32,10 @@ jobs:
         run: sudo apt install -y libcurl4-openssl-dev
       - name: Install R dependencies
         run: |
-          deps <- c('remotes', 'rvest', 'purrr', 'withr', 'remotes',
-          'rlang', 'pkgload', 'curl')
-          install.packages(dep)
+          deps <- c('remotes', 'rvest', 'purrr', 'withr', 'remotes','rlang', 'pkgload', 'curl')
+          install.packages(deps)
           # call require so errors more clearly if can't be installed
-          walk(deps, require, character.only = TRUE
+          purrr::walk(deps, require, character.only = TRUE)
       - name: Check docreview against recently updated r-lib packages
         run: |
           library(rvest)
