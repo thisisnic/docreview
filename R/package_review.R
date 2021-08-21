@@ -14,12 +14,18 @@ package_review <- function(path = ".", config = get_config()) {
   if (config$functions$active) {
     function_checks <- config$functions
     results$functions <- function_review(path, function_checks)
-    function_results_display(results$functions$details, function_checks)
   }
 
   if (config$vignettes$active) {
     vignette_checks <- config$vignette
     results$vignettes <- vignette_review(path, vignette_checks)
+  }
+
+  if (config$functions$active) {
+    function_results_display(results$functions$details, function_checks)
+  }
+
+  if (config$vignettes$active) {
     vignette_results_display(results$vignettes$details, vignette_checks)
   }
 
