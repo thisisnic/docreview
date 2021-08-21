@@ -27,6 +27,9 @@ rd_get_section <- utils::getFromNamespace(".Rd_get_section", "tools")
 
 rd_get_text <- utils::getFromNamespace(".Rd_get_text", "tools")
 
+rd_get_tags <- utils::getFromNamespace("RdTags", "tools")
+
+
 rd_get_usage <- function(rd) {
   usage <- rd_get_section(rd, "usage")
   one_string <- paste(as.character(usage), collapse = "")
@@ -39,6 +42,6 @@ rd_get_usage <- function(rd) {
 }
 
 rd_get_aliases <- function(rd) {
-  x <- rd[tools:::RdTags(rd) == "\\alias"]
+  x <- rd[rd_get_tags(rd) == "\\alias"]
   unlist(x)
 }
