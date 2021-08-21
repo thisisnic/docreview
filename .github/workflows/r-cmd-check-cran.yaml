@@ -69,6 +69,7 @@ jobs:
         run: |
           install.packages("devtools")
           devtools::load_all()
+          tools::buildVignettes(dir = ".")
           docreview::package_review(config = get_config(system.file(package="docreview", "configs", "error.yml", mustWork = TRUE)))
         shell: Rscript {0}
 
