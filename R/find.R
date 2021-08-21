@@ -8,7 +8,6 @@ analyse_rds <- function(path = ".") {
   rd_files <- map(rd_paths, tools::parse_Rd)
   names(rd_files) <- gsub(".Rd", "", basename(rd_paths))
   map(rd_files, extract_rd_components)
-
 }
 
 #' Get RD files from a package

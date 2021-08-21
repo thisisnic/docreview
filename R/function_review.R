@@ -6,13 +6,12 @@ function_review <- function(path, checks = get_config()$functions) {
   detailed_results <- list()
 
   if (checks$exports_without_examples$active) {
-
     rds <- analyse_rds(path)
     exports_names <- find_exported_functions(path)
     exports <- rds[names(rds) %in% exports_names]
 
     # Use max here in case this param isn't set
-    arity = max(0, checks$exports_without_examples$missing_examples$min_arity, na.rm = TRUE)
+    arity <- max(0, checks$exports_without_examples$missing_examples$min_arity, na.rm = TRUE)
 
     detailed_results$exports_examples <- map_lgl(
       exports,
@@ -37,7 +36,7 @@ function_review <- function(path, checks = get_config()$functions) {
 #' @param min_arity Only return `TRUE` when no examples if arity >= `min_arity`
 #' @return `TRUE` if function has sufficient examples or `FALSE` if not
 #' @noRd
-check_examples_arity <- function(func, min_arity){
+check_examples_arity <- function(func, min_arity) {
   !(length(func$examples) == 0 && length(func$args) >= min_arity)
 }
 
