@@ -28,7 +28,7 @@ jobs:
         with:
           r-version: latest
       - uses: r-lib/actions/setup-pandoc@v1
-      - name: Install dydtem dependencies
+      - name: Install system dependencies
         run: sudo apt install -y libcurl4-openssl-dev
       - name: Install R dependencies
         run: |
@@ -36,6 +36,8 @@ jobs:
           install.packages(deps)
           # call require so errors more clearly if can't be installed
           purrr::walk(deps, require, character.only = TRUE)
+        shell: Rscript {0}
+
       - name: Check docreview against recently updated r-lib packages
         run: |
           library(rvest)
