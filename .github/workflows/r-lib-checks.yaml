@@ -28,11 +28,15 @@ jobs:
         with:
           r-version: latest
       - uses: r-lib/actions/setup-pandoc@v1
-      - name: Install dependencies
+      - name: Install dydtem dependencies
+        runL sudo apt install -y libcurl4-openssl-dev
+      - name: Install R dependencies
         run: |
-          install.packages(c('remotes', 'rvest', 'purrr', 'withr', 'remotes',
-          'rlang', 'pkgload', 'curl', 'httr'))
-        shell: Rscript {0}
+          deps <- c('remotes', 'rvest', 'purrr', 'withr', 'remotes',
+          'rlang', 'pkgload', 'curl')
+          install.packages(dep)
+          # call require so errors more clearly if can't be installed
+          walk(deps, require, character.only = TRUE
       - name: Check docreview against recently updated r-lib packages
         run: |
           library(rvest)
