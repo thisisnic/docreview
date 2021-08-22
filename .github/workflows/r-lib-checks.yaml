@@ -9,6 +9,10 @@ on:
 
 name: r-lib checks
 
+concurrency:
+  group: ${{ github.repository }}-${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   r-libs-check:
     runs-on: ubuntu-latest
