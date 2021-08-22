@@ -61,10 +61,10 @@ jobs:
               tools::buildVignettes(dir=path)
             },
             error = function(e){
+              unlink(path, recursive = TRUE)
               rlang::warn(
                 paste("Could not build vignettes for package:", pkg, ":\n", e$message)
               )
-              unlink(path, recursive = TRUE)
             })
           }
 
