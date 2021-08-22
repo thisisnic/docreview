@@ -7,7 +7,7 @@
 #' pkg_path <- system.file("testpkg", package = "docreview")
 #' package_review(pkg_path)
 package_review <- function(path = ".", config = get_config()) {
-  cli_h1("docreview Results")
+  cli_h1(paste("docreview results for", basename(normalizePath(path, mustWork = TRUE))))
 
   results <- list()
 
