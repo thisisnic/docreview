@@ -34,6 +34,7 @@ jobs:
         run: mkdir -p packages
       - name: Install R dependencies
         run: |
+          remotes::install_deps(upgrade = "never")
           deps <- c('remotes', 'rvest', 'purrr', 'withr', 'remotes','rlang', 'pkgload', 'curl')
           install.packages(deps)
           # call require so errors more clearly if can't be installed
@@ -93,12 +94,10 @@ jobs:
           purrr::walk(pkg_dirs, install_and_build_docs)
 
         shell: Rscript {0}
-      - uses: actions/checkout@v2
       - name: Run docreview against recently updated r-lib packages
         run: |
           # run docreview
-          built_dirs <- list.files("packages", full.names =  TRUE)
-          remotes::install_deps(upgrade = "never")
           devtools::load_all()
+          built_dirs <- list.files("packages", full.names =  TRUE)
           purrr::walk(built_dirs, docreview::package_review)
         shell: Rscript {0}
