@@ -115,7 +115,7 @@
 <span id="cb2-2"><a href="#cb2-2"></a><span class="op">&gt;</span><span class="st"> </span>pkg_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"testpkg"</span>, <span class="dt">package =</span> <span class="st">"docreview"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">package_review</span>(<span class="dt">path =</span> pkg_path)</span>
 <span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>── docreview Results ───────────────────────────────────────────────────────────</span>
+<span id="cb2-5"><a href="#cb2-5"></a>── docreview results <span class="cf">for</span> testpkg ───────────────────────────────────────────────</span>
 <span id="cb2-6"><a href="#cb2-6"></a></span>
 <span id="cb2-7"><a href="#cb2-7"></a>── Function Documentation ──</span>
 <span id="cb2-8"><a href="#cb2-8"></a></span>
@@ -150,7 +150,7 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">&gt;</span><span class="st"> </span>func_only_config &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"configs/just_functions.yml"</span>, <span class="dt">package =</span> <span class="st">"docreview"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">package_review</span>(<span class="dt">path =</span> pkg_path, <span class="dt">config =</span> <span class="kw">get_config</span>(func_only_config))</span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a>── docreview Results ───────────────────────────────────────────────────────────</span>
+<span id="cb3-4"><a href="#cb3-4"></a>── docreview results <span class="cf">for</span> testpkg ───────────────────────────────────────────────</span>
 <span id="cb3-5"><a href="#cb3-5"></a></span>
 <span id="cb3-6"><a href="#cb3-6"></a>── Function Documentation ──</span>
 <span id="cb3-7"><a href="#cb3-7"></a></span>
@@ -165,7 +165,7 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">&gt;</span><span class="st"> </span>stricter_thresholds &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"configs/thresholds.yml"</span>, <span class="dt">package =</span> <span class="st">"docreview"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">package_review</span>(<span class="dt">path =</span> pkg_path, <span class="dt">config =</span> <span class="kw">get_config</span>(stricter_thresholds))</span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a>── docreview Results ───────────────────────────────────────────────────────────</span>
+<span id="cb4-4"><a href="#cb4-4"></a>── docreview results <span class="cf">for</span> testpkg ───────────────────────────────────────────────</span>
 <span id="cb4-5"><a href="#cb4-5"></a></span>
 <span id="cb4-6"><a href="#cb4-6"></a>── Function Documentation ──</span>
 <span id="cb4-7"><a href="#cb4-7"></a></span>
@@ -190,7 +190,7 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="op">&gt;</span><span class="st"> </span>error &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"configs/error.yml"</span>, <span class="dt">package =</span> <span class="st">"docreview"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="op">&gt;</span><span class="st"> </span>docreview<span class="op">::</span><span class="kw">package_review</span>(<span class="dt">path =</span> pkg_path, <span class="kw">get_config</span>(error))</span>
 <span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a>── docreview Results ───────────────────────────────────────────────────────────</span>
+<span id="cb5-4"><a href="#cb5-4"></a>── docreview results <span class="cf">for</span> testpkg ───────────────────────────────────────────────</span>
 <span id="cb5-5"><a href="#cb5-5"></a></span>
 <span id="cb5-6"><a href="#cb5-6"></a>── Function Documentation ──</span>
 <span id="cb5-7"><a href="#cb5-7"></a></span>

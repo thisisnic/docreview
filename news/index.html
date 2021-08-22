@@ -129,6 +129,29 @@
       <small>Source: <a href='https://github.com/thisisnic/docreview/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="docreview-010" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.0">
+<a href="#docreview-010" class="anchor"></a>docreview 0.1.0<small> Unreleased </small>
+</h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>Added a check for if vignette images have alt text</li>
+<li>Added a vignette explaining docreview config files</li>
+</ul>
+</div>
+<div id="improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#improvements" class="anchor"></a>Improvements</h2>
+<ul>
+<li>All checks now run before results are rendered, so if there’s an error, it’s clearer</li>
+<li>Default config file has been updated to remove redundant lines and unnecessary components in their hierarchy</li>
+<li>Checks are now skipped if they are missing from the config file (previously resulted in an error)</li>
+<li>The check for exports without examples now only checks function with number of arguments greater than or equal to a specified value (default is 1)</li>
+</ul>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
