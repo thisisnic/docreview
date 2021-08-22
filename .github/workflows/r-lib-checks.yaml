@@ -38,11 +38,9 @@ jobs:
         run: mkdir -p packages
       - name: Install R dependencies
         run: |
-          remotes::install_deps(upgrade = "never")
           deps <- c('remotes', 'rvest', 'purrr', 'withr', 'remotes','rlang', 'pkgload', 'curl')
           install.packages(deps)
-          # call require so errors more clearly if can't be installed
-          purrr::walk(deps, require, character.only = TRUE)
+          remotes::install_deps(upgrade = "never")
 
         shell: Rscript {0}
       - name: Fetch packages to test out
