@@ -37,43 +37,42 @@ jobs:
           # call require so errors more clearly if can't be installed
           purrr::walk(deps, require, character.only = TRUE)
         shell: Rscript {0}
-
-      - name: Check docreview against recently updated r-lib packages
+      - name: setup packages directory
+        run: mkdir -p packages
+      - name: Install dependencies and build vignettes
         run: |
           library(rvest)
           links <- read_html("https://github.com/orgs/r-lib/repositories?q=&type=&language=r&sort=") %>%
             html_nodes(".wb-break-all .d-inline-block") %>%
             html_attr("href")
 
-          build_and_review <- function(link){
-            td <- tempfile()
-            dir.create(td)
-            on.exit(unlink(td))
-
+          build_and_review <- function(link, dir){
             tryCatch({
               clone_url <- paste("https://github.com", link, ".git", sep="")
               withr::with_dir(
-                td,
+                "packages",
                 system(paste("git clone ", clone_url, sep = ""))
               )
 
               pkg <- gsub("/r-lib/", "", link)
-              path <- file.path(td, pkg)
+              path <- file.path("packages", pkg)
               # vignettes call library(pkg) so the packages need installing first
               remotes::install_local(path = path, build_vignettes = TRUE, upgrade = "never", quiet = TRUE)
               tools::buildVignettes(dir=path)
-              package_review(path)
             },
             error = function(e){
               rlang::warn(
                 paste("Could not build vignettes for package:", pkg, ":\n", e$message)
               )
+              unlink(path, recursive = TRUE)
             })
           }
 
           purrr::walk(links, build_and_review)
-
-          pkgload::load_all()
-          tools::buildVignettes(dir = ".")
-          docreview::package_review()
+        shell: Rscript {0}
+      - name: Run docreview against recently updated r-lib packages
+        run: |
+          pkg_dirs <- list.files("packages", full.names =  TRUE)
+          print(paste(basename(pkg_dirs), collapse = ", "))
+          purrr::walk(pkg_dirs, docreview::package_review)
         shell: Rscript {0}
