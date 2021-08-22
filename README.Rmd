@@ -38,7 +38,7 @@ install.packages("docreview")
 If you'd like access to the most up-to-date features, you can install the development version from GitHhub. 👩🏽‍🔧
 
 ```{r, eval=FALSE}
-devtools::install_github("thisisnic/docreview")
+remotes::install_github("thisisnic/docreview")
 ```
 
 ## Usage
