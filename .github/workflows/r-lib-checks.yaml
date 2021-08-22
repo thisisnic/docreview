@@ -32,7 +32,7 @@ jobs:
         run: sudo apt install -y libcurl4-openssl-dev
       - name: setup packages directory
         run: mkdir -p packages
-      - name: Install R dependencies and fetch packages to scan
+      - name: Install R dependencies
         run: |
           deps <- c('remotes', 'rvest', 'purrr', 'withr', 'remotes','rlang', 'pkgload', 'curl')
           install.packages(deps)
