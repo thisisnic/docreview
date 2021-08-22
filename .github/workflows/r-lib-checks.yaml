@@ -30,49 +30,72 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install system dependencies
         run: sudo apt install -y libcurl4-openssl-dev
-      - name: Install R dependencies
+      - name: setup packages directory
+        run: mkdir -p packages
+      - name: Install R dependencies and fetch packages to scan
         run: |
           deps <- c('remotes', 'rvest', 'purrr', 'withr', 'remotes','rlang', 'pkgload', 'curl')
           install.packages(deps)
           # call require so errors more clearly if can't be installed
           purrr::walk(deps, require, character.only = TRUE)
+
         shell: Rscript {0}
-      - name: setup packages directory
-        run: mkdir -p packages
-      - name: Install dependencies and build vignettes
+      - name: Fetch packages to test out
         run: |
           library(rvest)
           links <- read_html("https://github.com/orgs/r-lib/repositories?q=&type=&language=r&sort=") %>%
             html_nodes(".wb-break-all .d-inline-block") %>%
             html_attr("href")
 
-          build_and_review <- function(link, dir){
+          fetch_packages <- function(link, dir){
             tryCatch({
               clone_url <- paste("https://github.com", link, ".git", sep="")
               withr::with_dir(
-                "packages",
+                dir,
                 system(paste("git clone ", clone_url, sep = ""))
               )
-
-              pkg <- gsub("/r-lib/", "", link)
-              path <- file.path("packages", pkg)
-              # vignettes call library(pkg) so the packages need installing first
-              remotes::install_local(path = path, build_vignettes = TRUE, upgrade = "never", quiet = TRUE)
-              tools::buildVignettes(dir=path)
             },
             error = function(e){
+              pkg <- basename(link)
+              path <- file.path(dir, pkg)
               unlink(path, recursive = TRUE)
               rlang::warn(
-                paste("Could not build vignettes for package:", pkg, ":\n", e$message)
+                paste("Could not fetch package:", pkg, ":\n", e$message)
               )
             })
           }
 
-          purrr::walk(links, build_and_review)
+          purrr::walk(links, fetch_packages, dir = "packages")
+
+        shell: Rscript {0}
+
+      - name: Install dependencies and build vignettes
+        run: |
+          install_and_build_docs <- function(path){
+            tryCatch({
+              # vignettes call library(pkg) so the packages need installing first
+              print(paste("installing and building docs for: ", basename(path)))
+              remotes::install_local(path = path, upgrade = "never", quiet = TRUE)
+              vig_path <- file.path(path, "vignettes")
+              vigs <- list.files(vig_path, ".Rmd", full.names = TRUE)
+              purrr::map(vigs, rmarkdown::render, output_dir = vig_path)
+
+            },
+            error = function(e){
+              unlink(path, recursive = TRUE)
+              rlang::warn(
+                paste("Could not build vignettes for package:", basename(path), ":\n", e$message)
+              )
+            })
+          }
+          # install and build docs
+          pkg_dirs <- list.files("packages", full.names =  TRUE)
+          purrr::walk(pkg_dirs, install_and_build_docs)
+
         shell: Rscript {0}
       - name: Run docreview against recently updated r-lib packages
         run: |
-          pkg_dirs <- list.files("packages", full.names =  TRUE)
-          print(paste(basename(pkg_dirs), collapse = ", "))
-          purrr::walk(pkg_dirs, docreview::package_review)
+          # run docreview
+          built_dirs <- list.files("packages", full.names =  TRUE)
+          purrr::walk(built_dirs, docreview::package_review)
         shell: Rscript {0}
