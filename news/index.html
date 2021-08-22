@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Review package documentation — package_review • docreview</title>
+<title>Changelog • docreview</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,7 @@
 
 
 
-<meta property="og:title" content="Review package documentation — package_review" />
-<meta property="og:description" content="Review package documentation" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -59,7 +58,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -126,65 +125,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Review package documentation</h1>
-    <small class="dont-index">Source: <a href='https://github.com/thisisnic/docreview/blob/master/R/package_review.R'><code>R/package_review.R</code></a></small>
-    <div class="hidden name"><code>package_review.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/thisisnic/docreview/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>Review package documentation</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>package_review</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"."</span>, config <span class='op'>=</span> <span class='fu'><a href='get_config.html'>get_config</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>path</th>
-      <td><p>Path to package</p></td>
-    </tr>
-    <tr>
-      <th>config</th>
-      <td><p>Review check configuration</p></td>
-    </tr>
-    </table>
-
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>pkg_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"testpkg"</span>, package <span class='op'>=</span> <span class='st'>"docreview"</span><span class='op'>)</span>
-<span class='fu'>package_review</span><span class='op'>(</span><span class='va'>pkg_path</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>──</span> <span style='font-weight: bold;'>docreview Results</span> <span style='color: #00BBBB;'>───────────────────────────────────────────────────────────</span></span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>── <span style='font-weight: bold;'>Function Documentation</span> ──</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>── Exported functions containing examples in their documentation:  </span>
-#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> add</span>
-#&gt; <span class='message'><span style='color: #BB0000;'>✖</span> deduct</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>── <span style='font-weight: bold;'>Vignettes</span> ──</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>── Flesch Kincaid reading complexity scores </span>
-#&gt; <span class='message'><span style='color: #BBBB00;'>!</span> testpkg.Rmd: 41.53</span>
-#&gt; <span class='message'><span style='color: #BBBB00;'>!</span> testpkg2.Rmd: 37.28</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>── Length scores </span>
-#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> testpkg.Rmd: 382 words.</span>
-#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> testpkg2.Rmd: 182 words.</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>── Image alt text </span>
-#&gt; <span class='message'>Total # images in testpkg.Rmd : 5</span>
-#&gt; <span class='message'>Total # images in testpkg.Rmd containing alt text: 2</span>
-#&gt; <span class='message'><span style='color: #BB0000;'>✖</span> Image 1</span>
-#&gt; <span class='message'><span style='color: #BB0000;'>✖</span> Image 2</span>
-#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Image 3</span>
-#&gt; <span class='message'><span style='color: #BB0000;'>✖</span> Image 4</span>
-#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Image 5</span>
-#&gt; <span class='message'>Total # images in testpkg2.Rmd : 0</span></div></pre>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
