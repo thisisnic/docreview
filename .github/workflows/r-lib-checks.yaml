@@ -93,9 +93,12 @@ jobs:
           purrr::walk(pkg_dirs, install_and_build_docs)
 
         shell: Rscript {0}
+      - uses: actions/checkout@v2
       - name: Run docreview against recently updated r-lib packages
         run: |
           # run docreview
           built_dirs <- list.files("packages", full.names =  TRUE)
+          remotes::install_deps(upgrade = "never")
+          devtools::load_all()
           purrr::walk(built_dirs, docreview::package_review)
         shell: Rscript {0}
