@@ -1,0 +1,105 @@
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+name: r-lib checks
+
+concurrency:
+  group: ${{ github.repository }}-${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  r-libs-check:
+    runs-on: ubuntu-latest
+
+    name: r-libs-check
+
+    strategy:
+      fail-fast: false
+    env:
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: latest
+      - uses: r-lib/actions/setup-pandoc@v1
+      - name: Install system dependencies
+        run: sudo apt install -y libcurl4-openssl-dev
+      - name: setup packages directory
+        run: mkdir -p packages
+      - name: Install R dependencies
+        run: |
+          deps <- c('remotes', 'rvest', 'purrr', 'withr', 'remotes','rlang', 'pkgload', 'curl')
+          install.packages(deps)
+          remotes::install_deps(upgrade = "never")
+
+        shell: Rscript {0}
+      - name: Fetch packages to test out
+        run: |
+          library(rvest)
+          links <- read_html("https://github.com/orgs/r-lib/repositories?q=&type=&language=r&sort=") %>%
+            html_nodes(".wb-break-all .d-inline-block") %>%
+            html_attr("href")
+
+          fetch_packages <- function(link, dir){
+            tryCatch({
+              clone_url <- paste("https://github.com", link, ".git", sep="")
+              withr::with_dir(
+                dir,
+                system(paste("git clone ", clone_url, sep = ""))
+              )
+            },
+            error = function(e){
+              pkg <- basename(link)
+              path <- file.path(dir, pkg)
+              unlink(path, recursive = TRUE)
+              rlang::warn(
+                paste("Could not fetch package:", pkg, ":\n", e$message)
+              )
+            })
+          }
+
+          purrr::walk(links, fetch_packages, dir = "packages")
+
+        shell: Rscript {0}
+
+      - name: Install dependencies and build vignettes
+        run: |
+          install_and_build_docs <- function(path){
+            tryCatch({
+              # vignettes call library(pkg) so the packages need installing first
+              print(paste("installing and building docs for: ", basename(path)))
+              remotes::install_local(path = path, upgrade = "never", quiet = TRUE)
+              vig_path <- file.path(path, "vignettes")
+              vigs <- list.files(vig_path, ".Rmd", full.names = TRUE)
+              purrr::map(vigs, rmarkdown::render, output_dir = vig_path)
+
+            },
+            error = function(e){
+              unlink(path, recursive = TRUE)
+              rlang::warn(
+                paste("Could not build vignettes for package:", basename(path), ":\n", e$message)
+              )
+            })
+          }
+          # install and build docs
+          pkg_dirs <- list.files("packages", full.names =  TRUE)
+          purrr::walk(pkg_dirs, install_and_build_docs)
+
+        shell: Rscript {0}
+      - name: Run docreview against recently updated r-lib packages
+        run: |
+          # run docreview
+          devtools::load_all()
+          built_dirs <- list.files("packages", full.names =  TRUE)
+          purrr::walk(built_dirs, docreview::package_review)
+        shell: Rscript {0}

@@ -6,6 +6,10 @@ on:
 
 name: test-coverage
 
+concurrency:
+  group: ${{ github.repository }}-${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   test-coverage:
     runs-on: macOS-latest

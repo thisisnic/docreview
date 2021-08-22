@@ -7,19 +7,25 @@
 #' pkg_path <- system.file("testpkg", package = "docreview")
 #' package_review(pkg_path)
 package_review <- function(path = ".", config = get_config()) {
-  cli_h1("docreview Results")
+  cli_h1(paste("docreview results for", basename(normalizePath(path, mustWork = TRUE))))
 
   results <- list()
 
   if (config$functions$active) {
     function_checks <- config$functions
     results$functions <- function_review(path, function_checks)
-    function_results_display(results$functions$details, function_checks)
   }
 
   if (config$vignettes$active) {
     vignette_checks <- config$vignette
     results$vignettes <- vignette_review(path, vignette_checks)
+  }
+
+  if (config$functions$active) {
+    function_results_display(results$functions$details, function_checks)
+  }
+
+  if (config$vignettes$active) {
     vignette_results_display(results$vignettes$details, vignette_checks)
   }
 

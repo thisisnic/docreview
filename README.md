@@ -32,7 +32,7 @@ If you’d like access to the most up-to-date features, you can install
 the development version from GitHhub. 👩🏽‍🔧
 
 ``` r
-devtools::install_github("thisisnic/docreview")
+remotes::install_github("thisisnic/docreview")
 ```
 
 ## Usage
