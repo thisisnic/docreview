@@ -42,7 +42,7 @@ find_vignettes <- function(path = ".") {
 #' @return Exported functions, character vector
 find_exported_functions <- function(path = ".") {
   ns_path <- file.path(path, "NAMESPACE")
-  ns <- readLines(ns_path)
+  ns <- readLines(ns_path, warn = FALSE)
   exports <- ns[grep("export", ns)]
   return(gsub("(export\\()|())", "", exports))
 }

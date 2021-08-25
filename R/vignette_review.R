@@ -218,7 +218,7 @@ remove_code <- function(chunk) {
 #' @return List of length 1 character vectors containing contents of each markdown section
 #' @keywords internal
 parse_vignette <- function(vig_path) {
-  vig_lines <- readLines(vig_path)
+  vig_lines <- readLines(vig_path, warn = FALSE)
 
   no_headers <- stringr::str_replace_all(
     vig_lines,
