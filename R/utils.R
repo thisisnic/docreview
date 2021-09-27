@@ -21,10 +21,12 @@ check_vignettes_built <- function(path) {
     gsub(".html", "", html_files)
   )
 
+  length_error_msg <- "There must be a 1:1 mapping between `.html` and `.Rmd` files in vignette directory of target package."
+
   if (length(too_many_html) > 0) {
     rlang::abort(
       message = c(
-        "There must be a 1:1 mapping between `.html` and `.Rmd` files in vignette directory of target package.",
+        length_error_msg,
         x = paste("Extra HTML files: ", paste(paste0(too_many_html, ".html"), collapse = ", "))
       )
     )
@@ -33,7 +35,7 @@ check_vignettes_built <- function(path) {
   if (length(not_enough_html) > 0) {
     rlang::abort(
       message = c(
-        "There must be a 1:1 mapping between `.html` and `.Rmd` files in vignette directory of target package.",
+        length_error_msg,
         x = paste("Rmd files without html files: ", paste(paste0(not_enough_html, ".Rmd"), collapse = ", "))
       )
     )

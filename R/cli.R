@@ -52,7 +52,7 @@ vignette_results_display <- function(results, config) {
       alt_checks <- config$image_alt_text
       if (!is.null(alt_checks) && alt_checks$active) {
         cli_h3("Image alt text")
-        iwalk(results, get_image_vignette_cli, min_chars = alt_checks$min_chars)
+        iwalk(results, vignette_image_results_display, min_chars = alt_checks$min_chars)
       }
     }
   })
@@ -85,7 +85,7 @@ function_results_display <- function(results, config) {
   }
 }
 
-get_image_vignette_cli <- function(vignette_res, name, min_chars) {
+vignette_image_results_display <- function(vignette_res, name, min_chars) {
   imgs <- vignette_res$image_alt_text
   n_imgs <- length(imgs)
 
