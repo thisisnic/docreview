@@ -1,7 +1,7 @@
 #' Parse Vignette Results
 #'
 #' @param vignette_results Output of calling vignette analysis function
-#' @param error_on_failure Raise an error on any negative reviews
+#' @param config list containing config settings
 #'
 #' @keywords internal
 vignette_results_display <- function(results, config) {

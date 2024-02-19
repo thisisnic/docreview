@@ -44,7 +44,7 @@ check_examples_arity <- function(func, min_arity) {
 #' Count failures and warnings for function review
 #'
 #' @param results Results of function review
-#' @param thresholds List of thresholds that result in fails or warnings
+#' @param checks List of checks to run
 #' @keywords internal
 function_get_comments <- function(results, checks) {
   comments <- list(fail = 0, warn = 0)

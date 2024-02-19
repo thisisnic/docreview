@@ -9,9 +9,7 @@ check_results(results, config)
 \arguments{
 \item{results}{List of docreview results}
 
-\item{error_on_failure}{Raise error on review failures?}
-
-\item{error_on_warning}{Raise error on review warnings?}
+\item{config}{List containing logical values \code{error_on_warning} and \code{error_on_failure}}
 }
 \description{
 Inspired by testthat

@@ -7,9 +7,9 @@
 vignette_results_display(results, config)
 }
 \arguments{
-\item{vignette_results}{Output of calling vignette analysis function}
+\item{config}{list containing config settings}
 
-\item{error_on_failure}{Raise an error on any negative reviews}
+\item{vignette_results}{Output of calling vignette analysis function}
 }
 \description{
 Parse Vignette Results

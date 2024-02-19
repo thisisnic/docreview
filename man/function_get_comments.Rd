@@ -9,7 +9,7 @@ function_get_comments(results, checks)
 \arguments{
 \item{results}{Results of function review}
 
-\item{thresholds}{List of thresholds that result in fails or warnings}
+\item{checks}{List of checks to run}
 }
 \description{
 Count failures and warnings for function review

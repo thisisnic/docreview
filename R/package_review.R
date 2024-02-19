@@ -37,8 +37,7 @@ package_review <- function(path = ".", config = get_config()) {
 #' Inspired by testthat
 #'
 #' @param results List of docreview results
-#' @param error_on_failure Raise error on review failures?
-#' @param error_on_warning Raise error on review warnings?
+#' @param config List containing logical values `error_on_warning` and `error_on_failure`
 #'
 #' @keywords internal
 check_results <- function(results, config) {
