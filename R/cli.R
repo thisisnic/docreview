@@ -1,6 +1,6 @@
 #' Parse Vignette Results
 #'
-#' @param vignette_results Output of calling vignette analysis function
+#' @param results Output of calling vignette analysis function
 #' @param config list containing config settings
 #'
 #' @keywords internal

@@ -7,9 +7,9 @@
 vignette_results_display(results, config)
 }
 \arguments{
-\item{config}{list containing config settings}
+\item{results}{Output of calling vignette analysis function}
 
-\item{vignette_results}{Output of calling vignette analysis function}
+\item{config}{list containing config settings}
 }
 \description{
 Parse Vignette Results
